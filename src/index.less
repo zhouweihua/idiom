@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@import '../common/index.less';
+@import url('./index.pc.less') screen and (min-width: 601px);
+@import url('./index.h5.less') screen and (max-width: 600px);
+
+input::-webkit-input-placeholder { 
+    /* WebKit browsers */ 
+    color: #ccc; 
+} 
+input:-moz-placeholder { 
+    /* Mozilla Firefox 4 to 18 */ 
+    color: #ccc; 
+} 
+input::-moz-placeholder { 
+    /* Mozilla Firefox 19+ */ 
+    color: #ccc; 
+} 
+input:-ms-input-placeholder { 
+    /* Internet Explorer 10+ */ 
+    color: #ccc; 
+}

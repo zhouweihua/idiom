@@ -1,0 +1,157 @@
+@rate: 2;
+@comWidth: 1200px / @rate;
+
+.idiomListHome {
+  width: 100%;
+  .idiomTitleCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .idiomTilte {
+      width: @comWidth;
+      height: 150px / @rate;
+      background-color: #ffffff;
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      .idiomIcon {
+        background-color: red;
+        width: 326px / @rate;
+        height: 53px / @rate;
+      }
+      .idiomLink {
+        display: flex;
+        justify-content: center;
+        .idiomLinkItem {
+          font-size: 24px / @rate;
+          font-weight: normal;
+          font-stretch: normal;
+          letter-spacing: 0px / @rate;
+          color: #4b5a6a;
+          margin-left: 20px / @rate;
+          &.act {
+            color: #14b1bb;
+          }
+        }
+      }
+    }
+  }
+  .idiomSearchCon {
+    width: 100%;
+    height: 125px / @rate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid 1px #e9e9e9;
+    border-bottom: solid 1px #e9e9e9;
+    .idiomSearch {
+      width: @comWidth;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .searchInputCon {
+        width: 100%;
+        height: 76px / @rate;
+        border-radius: 5px / @rate;
+        border: solid 2px/@rate #14b1bb;
+        display: flex;
+        .searchInput {
+          width: 80%;
+          height: 70px / @rate;
+          border: none;
+          outline-style: none;
+
+          font-size: 24px / @rate;
+          font-weight: bold;
+          padding-left: 10px / @rate;
+        }
+        .searchButton {
+          width: 20%;
+          height: 76px / @rate;
+          background-color: #14b1bb;
+          border-radius: 5px / @rate;
+          font-size: 36px / @rate;
+          font-weight: normal;
+          font-stretch: normal;
+          letter-spacing: 0px / @rate;
+          color: #ffffff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+  
+  .idiomDeatailsCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 36px / @rate;
+    padding-bottom: 36px / @rate;
+    .idiomDeatails {
+      width: @comWidth;
+      display: flex;
+      flex-direction: column;
+      border-bottom: solid 1px #e9e9e9;
+      .idiomDeatailItem {
+        padding: 34px / @rate 40px / @rate;
+        border-left: solid 1px #e9e9e9;
+        border-right: solid 1px #e9e9e9;
+        border-top: solid 1px #e9e9e9;
+        .idiomSymbols, .idiomExplanation, .idiomInterpret {
+          display: flex;
+          margin-top: 10px / @rate;
+          .textLeft {
+            width: 35%;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 24px / @rate;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 40px / @rate;
+            letter-spacing: 0px / @rate;
+            color: #4b5a6a;
+          }
+          .textRight {
+            width: 65%;
+            font-size: 24px / @rate;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 40px / @rate;
+            letter-spacing: 0px / @rate;
+            color: #4b5a6a;
+          }
+        }
+        .idiomSymbols {
+          .textRight {
+            font-weight: bold;
+          }
+        }
+        .idiomEdit {
+          display: flex;
+          justify-content: flex-end;
+          font-size: 26px / @rate;
+          font-weight: normal;
+          font-stretch: normal;
+          line-height: 24px / @rate;
+          letter-spacing: 0px / @rate;
+          color: #14b1bb;
+
+        }
+      }
+    }
+  }
+  .idiomPaginationCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 56px / @rate;
+    .idiomPagination {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

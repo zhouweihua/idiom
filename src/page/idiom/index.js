@@ -54,7 +54,7 @@ export default class Idiom extends React.Component {
               {
                 this.state.ABCList.map((item, index) => {
                   return (
-                    <div className="ABCItem" onClick={() => this.handleABCClick(item)} >
+                    <div className="ABCItem" onClick={() => this.handleABCClick(item)} key={"abc" + index}>
                       <div className="ABCItemCon act">
                         {item}
                       </div>

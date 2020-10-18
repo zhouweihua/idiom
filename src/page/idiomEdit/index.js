@@ -3,14 +3,25 @@ import React from 'react'
 
 export default class IdiomEdit extends React.Component {
   state = {
-    reflashFlag: false
+    reflashFlag: false,
+    symbols: '',
+    explanation: '',
+    interpretation: '',
   }
 
   componentDidMount() {
   }
 
-  handleABCClick = item => {
-    console.log(item)
+  handleChangeSymbols = e => {
+    this.setState({
+      symbols: e.target.value,
+    })
+  }
+
+  handleSubmit = () => {
+    console.log("symbols -->" + this.state.symbols);
+    console.log("explanation -->" + this.state.explanation);
+    console.log("interpretation -->" + this.state.interpretation);
   }
 
   render() {
@@ -47,7 +58,7 @@ export default class IdiomEdit extends React.Component {
               <div className="editMainTitle">
                 Chinese phonetic symbols
               </div>
-              <input className="editCont" />
+              <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
             </div>
             <div className="editItem">
               <div className="editMainTitle">
@@ -66,7 +77,7 @@ export default class IdiomEdit extends React.Component {
 
         <div className="idiomSubmitCon">
           <div className="idiomSubmit">
-            <div className="submitButton">
+            <div className="submitButton" onClick={this.handleSubmit}>
               SUBMIT
             </div>
           </div>

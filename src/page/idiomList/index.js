@@ -2,6 +2,8 @@ import './index.less'
 import React from 'react'
 import { Pagination } from 'antd';
 
+import Sorry from '../compnent/Sorry'
+import IdiomItem from "../compnent/IdiomItem";
 export default class idiomList extends React.Component {
   state = {
     reflashFlag: false,
@@ -10,16 +12,38 @@ export default class idiomList extends React.Component {
     idiomStyle: "idiomLinkItem act",
     buzzwordsStyle: "idiomLinkItem",
     searchValue: '',
+    searchFlag: 2, // 0 搜索中 1 搜索成功 2 搜索失败
+    searchRes: [],
+  }
+  componentWillUnmount =() =>{
+
   }
 
-  componentDidMount() {
+  componentDidMount =() =>{
+    
   }
 
   handleABCClick = item => {
     console.log(item)
   }
 
+  getShowSection = () => {
+    const { pageFlag, searchFlag, searchRes } = this.state
+    if (searchFlag === 2) {
+      return <Sorry />
+    } else if (searchFlag === 1) {
+      return <IdiomItem />
+    } else {
+      return  (<div className="idiomSearchingCon">
+                <div className="idiomSearching">
+                  Searching
+                </div>
+              </div>)
+    }
+  }
+
   render() {
+    const { pageFlag, searchFlag, searchRes } = this.state
     return (
       <div className="idiomListHome">
         <div className="idiomTitleCon">
@@ -43,34 +67,14 @@ export default class idiomList extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="idiomDeatailsCon">
-          <div className="idiomDeatails">
-            <div className="idiomDeatailItem">
-              <div className="idiomSymbols">
-                <div className="textLeft">Chinese phonetic symbols：</div>
-                <div className="textRight">
-                  zhǐ   xǔ   zhōu   guān   fàng   huǒ，bù   xǔ   bǎi   xìng   diǎn   dēng 只   许  州  官   放  火，不   许  百  姓  点  灯
-                </div>
-              </div>
-              <div className="idiomExplanation">
-                <div className="textLeft">Chinese explanation：</div>
-                <div className="textRight">比泰山还要安稳，形容非常平安稳固，不可动摇，比泰山还要安稳，形容非常
-                平安稳固，不可动摇</div>
-              </div>
-              <div className="idiomInterpret">
-                <div className="textLeft">English interpretation：</div>
-                <div className="textRight">Even more stable than Mount Tai, it describes a very safe and stable, unshakable</div>
-              </div>
-              <div className="idiomEdit">Edit</div>
+        {this.getShowSection()}
+        {searchFlag === 1 ? (
+          <div className="idiomPaginationCon">
+            <div className="idiomPagination">
+              <Pagination defaultCurrent={1} total={50} showQuickJumper/>
             </div>
           </div>
-        </div>
-        <div className="idiomPaginationCon">
-          <div className="idiomPagination">
-            <Pagination defaultCurrent={1} total={50} showQuickJumper/>
-          </div>
-        </div>
+        ) : null}
       </div>
     )
   }

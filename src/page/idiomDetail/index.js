@@ -6,7 +6,8 @@ export default class IdiomDetail extends React.Component {
     reflashFlag: false
   }
 
-  componentDidMount() {
+  componentDidMount =() =>{
+    
   }
 
   handleABCClick = item => {

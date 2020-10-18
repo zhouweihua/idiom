@@ -9,7 +9,8 @@ export default class IdiomEdit extends React.Component {
     interpretation: '',
   }
 
-  componentDidMount() {
+  componentDidMount =() =>{
+    
   }
 
   handleChangeSymbols = e => {

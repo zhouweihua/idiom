@@ -7,7 +7,8 @@ export default class IdiomSorry extends React.Component {
     idiom: '',
   }
 
-  componentDidMount() {
+  componentDidMount =() =>{
+    
   }
 
   handleChangeIdiom = e => {
@@ -23,28 +24,6 @@ export default class IdiomSorry extends React.Component {
   render() {
     return (
       <div className="idiomSorryHome">
-        <div className="idiomTitleCon">
-          <div className="idiomTilte">
-            <div className="idiomIcon" /> 
-            <div className="idiomLink">
-              <div className="idiomLinkItem act">Idiom</div>
-              <div className="idiomLinkItem">buzzwords</div>
-              <div className="idiomLinkItem">Q and A list</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="idiomSearchCon">
-          <div className="idiomSearch">
-            <div className="searchInputCon">
-              <input className="searchInput" placeholder="Enter Your Idiom" />
-              <div className="searchButton">
-                Serch
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="idiomSorryCon">
           <div className="idiomSorry">
             <div className="sorryMainDes">Sorry, We Didn't Find The Idiom</div>
@@ -66,7 +45,6 @@ export default class IdiomSorry extends React.Component {
             </div>
           </div>
         </div>
-
       </div>
     )
   }

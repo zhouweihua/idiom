@@ -6,7 +6,8 @@ export default class Idiom extends React.Component {
     reflashFlag: false,
   }
 
-  componentDidMount() {
+  componentDidMount =() =>{
+    
   }
 
 

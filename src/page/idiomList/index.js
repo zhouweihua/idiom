@@ -79,7 +79,7 @@ export default class idiomList extends React.Component {
   getShowSection = () => {
     const { pageFlag, searchFlag, searchRes } = this.state
     if (searchFlag === 2) {
-      return <Sorry />
+      return <Sorry pageFlag={pageFlag}/>
     } else if (searchFlag === 1) {
       if (pageFlag === "buzzwords") {
       return (

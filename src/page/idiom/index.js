@@ -52,16 +52,16 @@ export default class Idiom extends React.Component {
   handleSearch = () => {
     const { searchValue, pageFlag } = this.state
     if (searchValue) {
-      window.location.href = "/idiomList?type="+ pageFlag +"&searchValue=" + searchValue
+      window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
       message.info("请输入需要查询的内容")
     }
   }
 
   handleABCClick = item => {
-    console.log(item)
+    const { pageFlag } = this.state
+    window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + item
   }
-
 
   render() {
     const { idiomStyle, buzzwordsStyle, placeholder, searchValue, ABCList } = this.state

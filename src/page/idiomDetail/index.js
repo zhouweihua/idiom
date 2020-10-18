@@ -36,11 +36,6 @@ export default class IdiomDetail extends React.Component {
     }
   }
 
-
-  handleABCClick = item => {
-    console.log(item)
-  }
-
   getShowSection = () => {
     const { pageFlag } = this.state
     if (pageFlag === "buzzwords") {

@@ -76,12 +76,14 @@ export default class IdiomEdit extends React.Component {
               </div>
               <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
             </div>
-            <div className="editItem">
-              <div className="editMainTitle">
-                Chinese explanation
+            {pageFlag ==="buzzwords" ? null : (
+              <div className="editItem">
+                <div className="editMainTitle">
+                  Chinese explanation
+                </div>
+                <input className="editCont" />
               </div>
-              <input className="editCont" />
-            </div>
+            )}
             <div className="editItem">
               <div className="editMainTitle">
                 English interpretation

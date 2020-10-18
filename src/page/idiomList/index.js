@@ -39,14 +39,41 @@ export default class idiomList extends React.Component {
         placeholder: 'Enter Your Buzzwords',
       })
     }
+    this.getResoure(pageFlag, searchValue)
   }
 
   componentDidMount =() =>{
     
   }
 
-  handleABCClick = item => {
-    console.log(item)
+  handleGoIdiom = () => {
+    console.log("idiom")
+    this.setState({
+      pageFlag: 'idiom',
+      idiomStyle: "idiomLinkItem act",
+      buzzwordsStyle: "idiomLinkItem",
+      placeholder: 'Enter Your Idiom',
+    })
+  }
+  
+  handleGoBuzzwords = () => {
+    console.log("buzzwords")
+    this.setState({
+      pageFlag: 'buzzwords',
+      idiomStyle: "idiomLinkItem",
+      buzzwordsStyle: "idiomLinkItem act",
+      placeholder: 'Enter Your Buzzwords',
+    })
+  }
+
+  getResoure = (pageFlag, searchValue) => {
+    
+  }
+
+  handleClickEdit = itemId => {
+    const { pageFlag } = this.state
+    window.location.href = "/idiomEdit?pageFlag="+ pageFlag +"&itemId=" + itemId
+
   }
 
   getShowSection = () => {
@@ -58,7 +85,7 @@ export default class idiomList extends React.Component {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            <BuzzItem />
+            <BuzzItem handleClickEdit={() => this.handleClickEdit('111')}/>
           </div>
         </div>
       )
@@ -66,17 +93,19 @@ export default class idiomList extends React.Component {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            <IdiomItem />
+            <IdiomItem handleClickEdit={() => this.handleClickEdit('222')}/>
           </div>
         </div>
       )
       
     } else {
-      return  (<div className="idiomSearchingCon">
-                <div className="idiomSearching">
-                  Searching
-                </div>
-              </div>)
+      return  (
+        <div className="idiomSearchingCon">
+          <div className="idiomSearching">
+            Searching
+          </div>
+        </div>
+      )
     }
   }
 

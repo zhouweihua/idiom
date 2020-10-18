@@ -10,6 +10,9 @@ export default class IdiomItem extends React.Component {
     
   }
 
+  handleClickEdit = () =>{
+    this.props.handleClickEdit && this.props.handleClickEdit()
+  }
   render() {
     return (
       <div className="idiomDeatailItem">
@@ -28,7 +31,7 @@ export default class IdiomItem extends React.Component {
           <div className="textLeft">English interpretation：</div>
           <div className="textRight">Even more stable than Mount Tai, it describes a very safe and stable, unshakable</div>
         </div>
-        <div className="idiomEdit">Edit</div>
+        <div className="idiomEdit" onClick={this.handleClickEdit}>Edit</div>
       </div> 
     )
   }

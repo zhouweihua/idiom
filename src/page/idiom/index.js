@@ -1,6 +1,8 @@
 import './index.less'
 import React from 'react'
 import { message } from 'antd'
+import Header from "../compnent/header";
+import Nav from "../compnent/nav";
 
 export default class Idiom extends React.Component {
   state = {
@@ -65,16 +67,13 @@ export default class Idiom extends React.Component {
     const { idiomStyle, buzzwordsStyle, placeholder, searchValue, ABCList } = this.state
     return (
       <div className="idiomHome">
-        <div className="idiomTitleCon">
-          <div className="idiomTilte">
-            <div className="idiomIcon" /> 
-            <div className="idiomLink">
-              <div className={idiomStyle} onClick={this.handleGoIdiom}>Idiom</div>
-              <div className={buzzwordsStyle} onClick={this.handleGoBuzzwords}>Buzzwords</div>
-              <div className="idiomLinkItem" onClick={this.handleGoQA}>Q and A list</div>
-            </div>
-          </div>
-        </div>
+        <Header />
+        <Nav
+          idiomStyle={idiomStyle}
+          buzzwordsStyle={buzzwordsStyle}
+          handleGoIdiom={this.handleGoIdiom}
+          handleGoBuzzwords={this.handleGoBuzzwords}
+        />
         <div className="idiomSearchCon">
           <div className="idiomSearch">
             <div className="searchPic" />
@@ -93,7 +92,6 @@ export default class Idiom extends React.Component {
               </div>
             </div>
           </div>
-        
         </div>
         <div className="idiomABCCon">
           <div className="idiomABC">

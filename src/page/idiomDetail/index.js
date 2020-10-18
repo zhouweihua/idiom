@@ -1,43 +1,56 @@
 import './index.less'
 import React from 'react'
+import qs from 'qs'
+import Header from "../compnent/header";
+import Nav from "../compnent/nav";
+import HeaderSearch from "../compnent/headerSearch";
 
 export default class IdiomDetail extends React.Component {
   state = {
-    reflashFlag: false
+    reflashFlag: false,
+    pageFlag: 'idiom',
+    placeholder: 'Enter Your Idiom',
+    idiomStyle: "idiomLinkItem act",
+    buzzwordsStyle: "idiomLinkItem",
+    searchValue: ''
+  }
+  componentWillMount =() =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let searchValue = query && query.searchValue ? query.searchValue : ''
+    if (searchValue) {
+      this.setState({
+        searchValue
+      })
+    }
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
+    if (pageFlag ==="buzzwords") {
+      this.setState({
+        pageFlag: 'buzzwords',
+        idiomStyle: "idiomLinkItem",
+        buzzwordsStyle: "idiomLinkItem act",
+        placeholder: 'Enter Your Buzzwords',
+      })
+    }
   }
 
-  componentDidMount =() =>{
-    
-  }
 
   handleABCClick = item => {
     console.log(item)
   }
 
   render() {
+    const { pageFlag, idiomStyle, buzzwordsStyle, searchValue } = this.state
     return (
       <div className="IdiomDetailHome">
-        <div className="idiomTitleCon">
-          <div className="idiomTilte">
-            <div className="idiomIcon" /> 
-            <div className="idiomLink">
-              <div className="idiomLinkItem act">Idiom</div>
-              <div className="idiomLinkItem">buzzwords</div>
-              <div className="idiomLinkItem">Q and A list</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="idiomSearchCon">
-          <div className="idiomSearch">
-            <div className="searchInputCon">
-              <input className="searchInput" placeholder="Enter Your Idiom" />
-              <div className="searchButton">
-                Serch
-              </div>
-            </div>
-          </div>
-        </div>
+        <Header />
+        <Nav
+          idiomStyle={idiomStyle}
+          buzzwordsStyle={buzzwordsStyle}
+          handleGoIdiom={this.handleGoIdiom}
+          handleGoBuzzwords={this.handleGoBuzzwords}
+        />
+        <HeaderSearch searchValue={searchValue}/>
 
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">

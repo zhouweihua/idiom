@@ -7,11 +7,6 @@ import './index.less'
 
 ReactDOM.render(
   <div>
-    <div className="header">
-      <div className="headerContain">
-        <div className="login">login/Register</div>
-      </div>
-    </div>
     <Router history={history}>
       <Route path="/" component={CoreRouter} />
     </Router>

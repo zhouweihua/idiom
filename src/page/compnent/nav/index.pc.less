@@ -1,0 +1,37 @@
+@rate: 2;
+@comWidth: 1200px / @rate;
+@comColor: #14B1BB;
+.idiomNavCon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .idiomNav {
+    width: @comWidth;
+    height: 150px / @rate;
+    background-color: #ffffff;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    .idiomIcon {
+      width: 326px / @rate;
+      height: 53px / @rate;
+      background: url("./img/logo.png") no-repeat;
+      background-size: cover;
+    }
+    .idiomLink {
+      display: flex;
+      justify-content: center;
+      .idiomLinkItem {
+        font-size: 24px / @rate;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px / @rate;
+        color: #4b5a6a;
+        margin-left: 20px / @rate;
+        &.act {
+          color: #14b1bb;
+        }
+      }
+    }
+  }
+}

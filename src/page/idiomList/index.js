@@ -1,9 +1,14 @@
 import './index.less'
 import React from 'react'
 import { Pagination } from 'antd';
+import qs from 'qs'
+import Header from "../compnent/header";
+import Nav from "../compnent/nav";
+import HeaderSearch from "../compnent/headerSearch";
 
 import Sorry from '../compnent/Sorry'
 import IdiomItem from "../compnent/IdiomItem";
+
 export default class idiomList extends React.Component {
   state = {
     reflashFlag: false,
@@ -15,8 +20,24 @@ export default class idiomList extends React.Component {
     searchFlag: 2, // 0 搜索中 1 搜索成功 2 搜索失败
     searchRes: [],
   }
-  componentWillUnmount =() =>{
-
+  componentWillMount =() =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let searchValue = query && query.searchValue ? query.searchValue : ''
+    if (searchValue) {
+      this.setState({
+        searchValue
+      })
+    }
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
+    if (pageFlag ==="buzzwords") {
+      this.setState({
+        pageFlag: 'buzzwords',
+        idiomStyle: "idiomLinkItem",
+        buzzwordsStyle: "idiomLinkItem act",
+        placeholder: 'Enter Your Buzzwords',
+      })
+    }
   }
 
   componentDidMount =() =>{
@@ -43,30 +64,17 @@ export default class idiomList extends React.Component {
   }
 
   render() {
-    const { pageFlag, searchFlag, searchRes } = this.state
+    const { pageFlag, idiomStyle, buzzwordsStyle, searchFlag, searchValue, searchRes } = this.state
     return (
       <div className="idiomListHome">
-        <div className="idiomTitleCon">
-          <div className="idiomTilte">
-            <div className="idiomIcon" /> 
-            <div className="idiomLink">
-              <div className="idiomLinkItem act">Idiom</div>
-              <div className="idiomLinkItem">Buzzwords</div>
-              <div className="idiomLinkItem">Q and A list</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="idiomSearchCon">
-          <div className="idiomSearch">
-            <div className="searchInputCon">
-              <input className="searchInput" placeholder="Enter Your Idiom" />
-              <div className="searchButton">
-                Serch
-              </div>
-            </div>
-          </div>
-        </div>
+        <Header />
+        <Nav
+          idiomStyle={idiomStyle}
+          buzzwordsStyle={buzzwordsStyle}
+          handleGoIdiom={this.handleGoIdiom}
+          handleGoBuzzwords={this.handleGoBuzzwords}
+        />
+        <HeaderSearch searchValue={searchValue}/>
         {this.getShowSection()}
         {searchFlag === 1 ? (
           <div className="idiomPaginationCon">

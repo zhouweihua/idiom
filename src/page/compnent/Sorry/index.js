@@ -1,7 +1,7 @@
 import './index.less'
 import React from 'react'
 
-export default class IdiomSorry extends React.Component {
+export default class Sorry extends React.Component {
   state = {
     reflashFlag: false,
     idiom: '',

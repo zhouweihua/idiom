@@ -1,0 +1,163 @@
+@rate: 2;
+@comWidth: 1200px / @rate;
+
+.idiomSorryHome {
+  width: 100%;
+  .idiomTitleCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .idiomTilte {
+      width: @comWidth;
+      height: 150px / @rate;
+      background-color: #ffffff;
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      .idiomIcon {
+        width: 326px / @rate;
+        height: 53px / @rate;
+        background: url("./img/logo.png") no-repeat;
+        background-size: cover;
+      }
+      .idiomLink {
+        display: flex;
+        justify-content: center;
+        .idiomLinkItem {
+          font-size: 24px / @rate;
+          font-weight: normal;
+          font-stretch: normal;
+          letter-spacing: 0px / @rate;
+          color: #4b5a6a;
+          margin-left: 20px / @rate;
+          &.act {
+            color: #14b1bb;
+          }
+        }
+      }
+    }
+  }
+  .idiomSearchCon {
+    width: 100%;
+    height: 125px / @rate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid 1px #e9e9e9;
+    border-bottom: solid 1px #e9e9e9;
+    .idiomSearch {
+      width: @comWidth;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .searchInputCon {
+        width: 100%;
+        height: 76px / @rate;
+        border-radius: 5px / @rate;
+        border: solid 2px/@rate #14b1bb;
+        display: flex;
+        .searchInput {
+          width: 80%;
+          height: 70px / @rate;
+          border: none;
+          outline-style: none;
+
+          font-size: 24px / @rate;
+          font-weight: bold;
+          padding-left: 10px / @rate;
+        }
+        .searchButton {
+          width: 20%;
+          height: 74px / @rate;
+          background-color: #14b1bb;
+          border-radius: 5px / @rate;
+          font-size: 36px / @rate;
+          font-weight: normal;
+          font-stretch: normal;
+          letter-spacing: 0px / @rate;
+          color: #ffffff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+  
+  .idiomSorryCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 36px / @rate;
+    padding-bottom: 36px / @rate;
+    .idiomSorry {
+      width: @comWidth;
+      display: flex;
+      flex-direction: column;
+      .sorryMainDes {
+        font-size: 55px / @rate;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px / @rate;
+        color: #4b5a6a;
+        text-align: center;
+        margin-top: 80px / @rate;
+      }
+      .sorrySubDes {
+        font-size: 24px / @rate;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 38px / @rate;
+        letter-spacing: 0px / @rate;
+        color: #4b5a6a;
+        text-align: center;
+        margin-top: 20px / @rate;
+        margin-bottom: 40px / @rate;
+      }
+      .sorryItem {
+        margin-top: 60px / @rate;
+        .sorryMainTitle {
+          font-size: 24px / @rate;
+          font-weight: bold;
+          font-stretch: normal;
+          letter-spacing: 0px / @rate;
+          color: #4b5a6a;
+        }
+        .sorryCont {
+          width: 100%;
+          margin-top: 25px / @rate;
+          height: 71px / @rate;
+          background-color: #ffffff;
+          border: solid 1px rgba(75, 90, 106, 0.25);
+        }
+      }
+    }
+  }
+  .idiomSubmitCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 36px / @rate;
+    padding-bottom: 36px / @rate;
+    .idiomSubmit {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .submitButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        width: 220px / @rate;
+        height: 73px / @rate;
+        background-color: #14b1bb;
+
+        font-size: 30px / @rate;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #ffffff;
+      }
+    }
+  }
+}

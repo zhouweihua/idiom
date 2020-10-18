@@ -44,8 +44,7 @@ export default class IdiomDetail extends React.Component {
               <div className="idiomSymbols">
                 <div className="textLeft">Chinese phonetic symbols：</div>
                 <div className="textRight">
-                  <p>zhǐ   xǔ   zhōu   guān   fàng   huǒ，bù   xǔ   bǎi   xìng   diǎn   dēng</p>
-                  <p>只   许  州  官   放  火，不   许  百  姓  点  灯</p>
+                  zhǐ   xǔ   zhōu   guān   fàng   huǒ，bù   xǔ   bǎi   xìng   diǎn   dēng 只   许  州  官   放  火，不   许  百  姓  点  灯
                 </div>
               </div>
               <div className="idiomExplanation">

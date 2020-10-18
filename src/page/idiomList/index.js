@@ -8,6 +8,7 @@ import HeaderSearch from "../compnent/headerSearch";
 
 import Sorry from '../compnent/Sorry'
 import IdiomItem from "../compnent/IdiomItem";
+import BuzzItem from "../compnent/BuzzItem";
 
 export default class idiomList extends React.Component {
   state = {
@@ -17,7 +18,7 @@ export default class idiomList extends React.Component {
     idiomStyle: "idiomLinkItem act",
     buzzwordsStyle: "idiomLinkItem",
     searchValue: '',
-    searchFlag: 2, // 0 搜索中 1 搜索成功 2 搜索失败
+    searchFlag: 1, // 0 搜索中 1 搜索成功 2 搜索失败
     searchRes: [],
   }
   componentWillMount =() =>{
@@ -53,7 +54,23 @@ export default class idiomList extends React.Component {
     if (searchFlag === 2) {
       return <Sorry />
     } else if (searchFlag === 1) {
-      return <IdiomItem />
+      if (pageFlag === "buzzwords") {
+      return (
+        <div className="idiomDeatailsCon">
+          <div className="idiomDeatails">
+            <BuzzItem />
+          </div>
+        </div>
+      )
+      }
+      return (
+        <div className="idiomDeatailsCon">
+          <div className="idiomDeatails">
+            <IdiomItem />
+          </div>
+        </div>
+      )
+      
     } else {
       return  (<div className="idiomSearchingCon">
                 <div className="idiomSearching">

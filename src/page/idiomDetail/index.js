@@ -56,6 +56,22 @@ export default class IdiomDetail extends React.Component {
       )
       
   }
+
+  handleGoIdiom = () => {
+    window.location.href = "./idiom?pageFlag=idiom"
+  }
+  handleGoBuzzwords = () => {
+    window.location.href = "./idiom?pageFlag=buzzwords"
+  }
+  handleGoQA = () => {
+    window.location.href = "./qa"
+  }
+  
+  handleSearch = (searchValue) => {
+    const { pageFlag } = this.state
+    window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
+  }
+
   render() {
     const { pageFlag, idiomStyle, buzzwordsStyle, searchValue } = this.state
     return (
@@ -66,8 +82,12 @@ export default class IdiomDetail extends React.Component {
           buzzwordsStyle={buzzwordsStyle}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoQA={this.handleGoQA}
         />
-        <HeaderSearch searchValue={searchValue}/>
+        <HeaderSearch
+          searchValue={searchValue}
+          handleSearch={this.handleSearch}
+        />
         {this.getShowSection()}
       </div>
     )

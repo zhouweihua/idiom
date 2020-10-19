@@ -23,6 +23,7 @@ export default class HeaderSearch extends React.Component {
     this.setState({
       searchValue: e.target.value,
     })
+    this.props.handleChangeSearchValue && this.props.handleChangeSearchValue(e.target.value)
   }
 
   handleSearch = () => {

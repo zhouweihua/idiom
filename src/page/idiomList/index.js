@@ -65,15 +65,21 @@ export default class idiomList extends React.Component {
       placeholder: 'Enter Your Buzzwords',
     })
   }
+  handleGoQA = () => {
+    window.location.href = "./qa"
+  }
 
   getResoure = (pageFlag, searchValue) => {
-    
+    // TODO axios
   }
 
   handleClickEdit = itemId => {
     const { pageFlag } = this.state
     window.location.href = "/idiomEdit?pageFlag="+ pageFlag +"&itemId=" + itemId
-
+  }
+  handleSearch = (searchValue) => {
+    const { pageFlag } = this.state
+    this.getResoure(pageFlag, searchValue);
   }
 
   getShowSection = () => {
@@ -110,7 +116,7 @@ export default class idiomList extends React.Component {
   }
 
   render() {
-    const { pageFlag, idiomStyle, buzzwordsStyle, searchFlag, searchValue, searchRes } = this.state
+    const { idiomStyle, buzzwordsStyle, searchFlag, searchValue } = this.state
     return (
       <div className="idiomListHome">
         <Header />
@@ -119,8 +125,12 @@ export default class idiomList extends React.Component {
           buzzwordsStyle={buzzwordsStyle}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoQA={this.handleGoQA}
         />
-        <HeaderSearch searchValue={searchValue}/>
+        <HeaderSearch
+          searchValue={searchValue}
+          handleSearch={this.handleSearch}
+        />
         {this.getShowSection()}
         {searchFlag === 1 ? (
           <div className="idiomPaginationCon">

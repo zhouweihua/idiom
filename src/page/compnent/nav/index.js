@@ -21,15 +21,15 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const {idiomStyle, buzzwordsStyle} = this.props
+    const {idiomStyle, buzzwordsStyle, qaStyle} = this.props
     return (
       <div className="idiomNavCon">
         <div className="idiomNav">
           <div className="idiomIcon" /> 
           <div className="idiomLink">
-            <div className={idiomStyle} onClick={this.handleGoIdiom}>Idiom</div>
-            <div className={buzzwordsStyle} onClick={this.handleGoBuzzwords}>Buzzwords</div>
-            <div className="idiomLinkItem" onClick={this.handleGoQA}>Q and A list</div>
+            <div className={idiomStyle || "idiomLinkItem"} onClick={this.handleGoIdiom}>Idiom</div>
+            <div className={buzzwordsStyle || "idiomLinkItem"} onClick={this.handleGoBuzzwords}>Buzzwords</div>
+            <div className={qaStyle || "idiomLinkItem"} onClick={this.handleGoQA}>Q and A list</div>
           </div>
         </div>
       </div>

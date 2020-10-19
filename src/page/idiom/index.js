@@ -1,5 +1,6 @@
 import './index.less'
 import React from 'react'
+import qs from 'qs'
 import { message } from 'antd'
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
@@ -13,6 +14,20 @@ export default class Idiom extends React.Component {
     buzzwordsStyle: "idiomLinkItem",
     searchValue: '',
     ABCList: ['A', 'B', 'C', 'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',]
+  }
+
+  componentWillMount =() =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
+    if (pageFlag ==="buzzwords") {
+      this.setState({
+        pageFlag: 'buzzwords',
+        idiomStyle: "idiomLinkItem",
+        buzzwordsStyle: "idiomLinkItem act",
+        placeholder: 'Enter Your Buzzwords',
+      })
+    }
   }
 
   componentDidMount =() =>{
@@ -38,11 +53,10 @@ export default class Idiom extends React.Component {
     })
   }
 
-  resetAct = () => {
-  }
   handleGoQA = () => {
-    
+    window.location.href = "./qa"
   }
+
   handleChangeSearchValue = e => {
     this.setState({
       searchValue: e.target.value,
@@ -73,6 +87,7 @@ export default class Idiom extends React.Component {
           buzzwordsStyle={buzzwordsStyle}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoQA={this.handleGoQA}
         />
         <div className="idiomSearchCon">
           <div className="idiomSearch">

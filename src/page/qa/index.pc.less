@@ -1,0 +1,35 @@
+@rate: 2;
+@comWidth: 1200px / @rate;
+
+.idiomListHome {
+  width: 100%;
+  .idiomDeatailsCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 36px / @rate;
+    padding-bottom: 36px / @rate;
+    .idiomDeatails {
+      width: @comWidth;
+      display: flex;
+      flex-direction: column;
+      border-bottom: solid 1px #e9e9e9;
+      &:first-child {
+        border-top: solid 1px #14b1bb;
+        background: #eee;
+      }
+    }
+  }
+  .idiomPaginationCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 56px / @rate;
+    .idiomPagination {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

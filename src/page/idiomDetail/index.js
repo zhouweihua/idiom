@@ -73,7 +73,7 @@ export default class IdiomDetail extends React.Component {
   }
 
   render() {
-    const { pageFlag, idiomStyle, buzzwordsStyle, searchValue } = this.state
+    const { idiomStyle, buzzwordsStyle, searchValue } = this.state
     return (
       <div className="IdiomDetailHome">
         <Header />

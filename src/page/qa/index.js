@@ -7,6 +7,7 @@ import Nav from "../compnent/nav";
 export default class idiomList extends React.Component {
   state = {
     reflashFlag: false,
+    pageFlag: 'idiom',
     searchValue: '',
   }
   componentWillMount =() =>{
@@ -35,7 +36,7 @@ export default class idiomList extends React.Component {
 
 
   render() {
-    const { searchFlag, searchValue } = this.state
+    const { searchValue } = this.state
     return (
       <div className="idiomListHome">
         <Header />
@@ -48,7 +49,11 @@ export default class idiomList extends React.Component {
           searchValue={searchValue}
           handleSearch={this.handleSearch}
         />
-        qa
+        <div className="idiomQaCon">
+          <div className="idiomQa">
+            <div></div>
+          </div>
+        </div>
       </div>
     )
   }

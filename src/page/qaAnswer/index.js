@@ -5,7 +5,7 @@ import Header from "../compnent/header";
 import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 
-export default class Qa extends React.Component {
+export default class QaAnswer extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'idiom',
@@ -50,32 +50,12 @@ export default class Qa extends React.Component {
           searchValue={searchValue}
           handleSearch={this.handleSearch}
         />
-        <div className="idiomQaCon">
-          <div className="idiomQa">
-            <div className="qaMainSec">Questions And Answers</div>
-            <div className="qaSubSec">You can ask questions or answer them. This is our interaction area</div>
-            <div className="qaListSec">
-              <div className="qaListTitle">
-                <div className="qaListTitleIdiom act">Idiom</div>
-                <div className="qaListTitleBuzz">Buzzwords</div>
-              </div>
-              <div className="qaSecItem">
-                <div className="qaListTitleIdiom">光彩夺目</div>
-                <div className="qaListTitleBuzz">I want to answer</div>
-              </div>
-              <div className="qaSecItem">
-                <div className="qaListTitleIdiom">不入虎穴焉得虎子</div>
-                <div className="qaListTitleBuzz">I want to answer</div>
-              </div>
-            </div>
+        <div className="idiomQaAnswerCon">
+          <div className="idiomQaAnswer">
+            
           </div>
         </div>
 
-        <div className="idiomPaginationCon">
-          <div className="idiomPagination">
-            <Pagination defaultCurrent={1} total={50} showQuickJumper/>
-          </div>
-        </div>
       </div>
     )
   }

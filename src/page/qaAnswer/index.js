@@ -46,8 +46,49 @@ export default class QaAnswer extends React.Component {
     // TODO axios
   }
 
+  getShowSectionTitle = () => {
+    const { pageFlag } = this.state
+    return (
+      <div className="idiomQaAnswerTitleCon">
+        <div className="idiomQaAnswerTitle">
+          <div className="editName">
+            观察夺目
+          </div>
+          <div className="editQaCon">
 
-  getShowSectionHead = () => {
+          <div className="editSubTitle">
+            观察夺目
+          </div>
+          <div className="editSubUser">
+            User：allisfree4u@gmail.com
+          </div>
+            <div className="editItem">
+              <div className="editMainTitle">
+                Chinese phonetic symbols
+              </div>
+              <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
+            </div>
+            {pageFlag ==="buzzwords" ? null : (
+              <div className="editItem">
+                <div className="editMainTitle">
+                  Chinese explanation
+                </div>
+                <input className="editCont" />
+              </div>
+            )}
+            <div className="editItem">
+              <div className="editMainTitle">
+                English interpretation
+              </div>
+              <input className="editCont" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  getShowSectionBody = () => {
     const { pageFlag } = this.state
     if (pageFlag === "buzzwords") {
       return (
@@ -80,12 +121,14 @@ export default class QaAnswer extends React.Component {
         <HeaderSearch
           handleSearch={this.handleSearch}
         />
-        <div className="idiomQaAnswerCon">
-          <div className="idiomQaAnswer">
-            
+        <div className="idiomQaNameCon">
+          <div className="idiomQaName">
+            <div className="qaMainSec">Questions And Answers</div>
+            <div className="qaSubSec">You can ask questions or answer them. This is our interaction area</div>
           </div>
         </div>
-        {this.getShowSectionHead()}
+        {this.getShowSectionTitle()}
+        {this.getShowSectionBody()}
       </div>
     )
   }

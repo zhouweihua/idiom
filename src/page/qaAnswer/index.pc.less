@@ -3,6 +3,92 @@
 
 .idiomListHome {
   width: 100%;
+  .idiomQaNameCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 56px / @rate;
+    .idiomQaName {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .qaMainSec {
+        text-align: center;
+        font-size: 55px / @rate;
+        font-weight: bold;
+        color: #4b5a6a;
+        margin-top: 75px / @rate;
+      }
+      .qaSubSec {
+        text-align: center;
+        font-size: 24px / @rate;
+        color: #4b5a6a;
+        margin-top: 27px / @rate;
+      }
+    }
+  }
+
+  .idiomQaAnswerTitleCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .idiomQaAnswerTitle {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .editName {
+        width: @comWidth;
+        height: 148px / @rate;
+        border-top: solid 2px #14b1bb;
+        border-left: solid 1px #e9e9e9;
+        border-right: solid 1px #e9e9e9;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+	      font-size: 52px / @rate;
+        font-weight: bold;
+        color: #14b1bb;
+
+      }
+      .editQaCon {
+        width: 100%;
+        padding: 20px / @rate;
+        border-top: solid 1px #e9e9e9;
+        border-left: solid 1px #e9e9e9;
+        border-right: solid 1px #e9e9e9;
+        .editSubTitle {
+          font-size: 24px / @rate;
+          font-weight: bold;
+          color: #14b1bb;
+        }
+        .editSubUser {
+          font-size: 24px / @rate;
+          color: #14b1bb;
+        }
+        .editItem {
+          margin-top: 60px / @rate;
+          .editMainTitle {
+            font-size: 24px / @rate;
+            font-weight: bold;
+            color: #4b5a6a;
+          }
+          .editCont {
+            width: 100%;
+            margin-top: 25px / @rate;
+            height: 71px / @rate;
+            background-color: #ffffff;
+            border: solid 1px #e9e9e9;
+          }
+        }
+      }
+    }
+  }
   .idiomQaAnswerCon {
     width: 100%;
     display: flex;
@@ -14,6 +100,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      border-bottom: solid 1px #e9e9e9;
     }
   }
 }

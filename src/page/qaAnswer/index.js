@@ -82,6 +82,11 @@ export default class QaAnswer extends React.Component {
               </div>
               <input className="editCont" />
             </div>
+            <div className="editItemSubmitCon">
+              <div className="editItemSubmit" onClick={this.handleClickSubmit}>
+                Submit
+              </div>
+            </div>
           </div>
         </div>
       </div>

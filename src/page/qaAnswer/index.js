@@ -1,17 +1,28 @@
 import './index.less'
 import React from 'react'
+import qs from 'qs'
 import { Pagination } from 'antd';
 import Header from "../compnent/header";
 import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
+import IdiomQaItem from "../compnent/IdiomQaItem";
+import BuzzQaItem from "../compnent/BuzzQaItem";
 
 export default class QaAnswer extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'idiom',
-    searchValue: '',
   }
+
   componentWillMount =() =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
+    if (pageFlag ==="buzzwords") {
+      this.setState({
+        pageFlag: 'buzzwords',
+      })
+    }
   }
 
   componentDidMount =() =>{
@@ -36,8 +47,28 @@ export default class QaAnswer extends React.Component {
   }
 
 
+  getShowSectionHead = () => {
+    const { pageFlag } = this.state
+    if (pageFlag === "buzzwords") {
+      return (
+        <div className="idiomQaAnswerCon">
+          <div className="idiomQaAnswer">
+            <BuzzQaItem />
+          </div>
+        </div>
+      )
+      }
+      return (
+        <div className="idiomQaAnswerCon">
+          <div className="idiomQaAnswer">
+            <IdiomQaItem />
+          </div>
+        </div>
+      )
+      
+  }
+
   render() {
-    const { searchValue } = this.state
     return (
       <div className="idiomListHome">
         <Header />
@@ -47,7 +78,6 @@ export default class QaAnswer extends React.Component {
           handleGoBuzzwords={this.handleGoBuzzwords}
         />
         <HeaderSearch
-          searchValue={searchValue}
           handleSearch={this.handleSearch}
         />
         <div className="idiomQaAnswerCon">
@@ -55,7 +85,7 @@ export default class QaAnswer extends React.Component {
             
           </div>
         </div>
-
+        {this.getShowSectionHead()}
       </div>
     )
   }

@@ -66,7 +66,7 @@ export default class idiomList extends React.Component {
     })
   }
   handleGoQA = () => {
-    window.location.href = "./qa"
+    window.location.href = "./qa?pageFlag=" + this.state.pageFlag
   }
 
   getResoure = (pageFlag, searchValue) => {

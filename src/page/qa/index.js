@@ -1,5 +1,6 @@
 import './index.less'
 import React from 'react'
+import qs from 'qs'
 import { Pagination } from 'antd';
 import Header from "../compnent/header";
 import HeaderSearch from "../compnent/headerSearch";
@@ -9,9 +10,21 @@ export default class Qa extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'idiom',
-    searchValue: '',
+    idiomStyle: "qaListTitleIdiom act",
+    buzzwordsStyle: "qaListTitleBuzz",
   }
+
   componentWillMount =() =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
+    if (pageFlag ==="buzzwords") {
+      this.setState({
+        pageFlag: 'buzzwords',
+        idiomStyle: "qaListTitleIdiom",
+        buzzwordsStyle: "qaListTitleBuzz act",
+      })
+    }
   }
 
   componentDidMount =() =>{
@@ -31,13 +44,13 @@ export default class Qa extends React.Component {
     window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
   }
 
-  getResoure = (pageFlag, searchValue) => {
-    // TODO axios
+  hanldeGoAnswer= (qaId) => {
+    const { pageFlag } = this.state
+    window.location.href = "/qaAnswer?pageFlag="+ pageFlag +"&qaId=" + qaId
   }
 
-
   render() {
-    const { searchValue } = this.state
+    const { idiomStyle, buzzwordsStyle } = this.state
     return (
       <div className="idiomListHome">
         <Header />
@@ -47,7 +60,6 @@ export default class Qa extends React.Component {
           handleGoBuzzwords={this.handleGoBuzzwords}
         />
         <HeaderSearch
-          searchValue={searchValue}
           handleSearch={this.handleSearch}
         />
         <div className="idiomQaCon">
@@ -56,16 +68,16 @@ export default class Qa extends React.Component {
             <div className="qaSubSec">You can ask questions or answer them. This is our interaction area</div>
             <div className="qaListSec">
               <div className="qaListTitle">
-                <div className="qaListTitleIdiom act">Idiom</div>
-                <div className="qaListTitleBuzz">Buzzwords</div>
+                <div className={idiomStyle}>Idiom</div>
+                <div className={buzzwordsStyle}>Buzzwords</div>
               </div>
               <div className="qaSecItem">
                 <div className="qaListTitleIdiom">光彩夺目</div>
-                <div className="qaListTitleBuzz">I want to answer</div>
+                <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(1)}>I want to answer</div>
               </div>
               <div className="qaSecItem">
                 <div className="qaListTitleIdiom">不入虎穴焉得虎子</div>
-                <div className="qaListTitleBuzz">I want to answer</div>
+                <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(2)}>I want to answer</div>
               </div>
             </div>
           </div>

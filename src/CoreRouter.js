@@ -5,6 +5,7 @@ import IdiomList from './page/idiomList'
 import IdiomDetail from './page/idiomDetail'
 import IdiomEdit from './page/idiomEdit'
 import Qa from './page/qa'
+import QaAnswer from './page/qaAnswer'
 import Self from './page/self'
 
 export default class CoreRouter extends React.PureComponent {
@@ -16,6 +17,8 @@ export default class CoreRouter extends React.PureComponent {
         <Route exact component={IdiomDetail} path="/idiomDetail" />
         <Route exact component={IdiomEdit} path="/idiomEdit" />
         <Route exact component={Qa} path="/qa" />
+        <Route exact component={QaAnswer} path="/qaAnswer" />
+        
         <Route exact component={Self} path="/self" />
 
         {/* 跳的主页面 */}

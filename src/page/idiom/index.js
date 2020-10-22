@@ -54,7 +54,7 @@ export default class Idiom extends React.Component {
   }
 
   handleGoQA = () => {
-    window.location.href = "./qa"
+    window.location.href = "./qa?pageFlag=" + this.state.pageFlag
   }
 
   handleChangeSearchValue = e => {

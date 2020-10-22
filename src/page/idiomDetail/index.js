@@ -64,7 +64,7 @@ export default class IdiomDetail extends React.Component {
     window.location.href = "./idiom?pageFlag=buzzwords"
   }
   handleGoQA = () => {
-    window.location.href = "./qa"
+    window.location.href = "./qa?pageFlag=" + this.state.pageFlag
   }
   
   handleSearch = (searchValue) => {

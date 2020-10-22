@@ -14,7 +14,7 @@ export default class BuzzQaItem extends React.Component {
   }
   render() {
     return (
-      <div className="buzzDeatailItem">
+      <div className="buzzQaItemItem">
         <div className="buzzTitle">
           niú bī  牛逼
         </div>

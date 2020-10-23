@@ -3,18 +3,36 @@
 
 .userCenter {
   width: 100%;
-  .idiomQaNameCon {
+  .userCenterTitleCon {
     width: 100%;
+    height: 383px / @rate;
     display: flex;
     justify-content: center;
-    padding-bottom: 56px / @rate;
-    .idiomQaName {
+    background: url("./img/user-center1.jpg") no-repeat;
+    background-size: cover;
+    .userCenterTitle {
+      position: relative;
       width: @comWidth;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      
+      .ucTitleText {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        margin-top: 137px / @rate;
+        font-size: 60px / @rate;
+        font-weight: bold;
+        color: #ffffff;
+      }
+      .ucTitleHead {
+        position: absolute;
+        width: 211px / @rate;
+        height: 211px / @rate;
+        background: url("./img/user-center2.png") no-repeat;
+        background-size: cover;
+        left: 50%;
+        margin-left: -106px / @rate;
+        bottom: 0;
+        margin-bottom: -106px / @rate;
+      }
     }
   }
 }

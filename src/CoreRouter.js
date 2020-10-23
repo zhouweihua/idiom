@@ -7,6 +7,7 @@ import IdiomEdit from './page/idiomEdit'
 import Qa from './page/qa'
 import QaAnswer from './page/qaAnswer'
 import UserCenter from './page/userCenter'
+import LoginRegister from './page/loginRegister'
 
 export default class CoreRouter extends React.PureComponent {
   render() {
@@ -16,12 +17,13 @@ export default class CoreRouter extends React.PureComponent {
         <Route exact component={IdiomList} path="/idiomList" />
         <Route exact component={IdiomDetail} path="/idiomDetail" />
         <Route exact component={IdiomEdit} path="/idiomEdit" />
-        
+
         <Route exact component={Qa} path="/qa" />
         <Route exact component={QaAnswer} path="/qaAnswer" />
         
         <Route exact component={UserCenter} path="/userCenter" />
-
+        
+        <Route exact component={LoginRegister} path="/loginRegister" />
         {/* 跳的主页面 */}
         <Redirect to="/" />
       </Switch>

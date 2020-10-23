@@ -2,7 +2,7 @@ import './index.less'
 import React from 'react'
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
-export default class UserCenter extends React.Component {
+export default class LoginRegister extends React.Component {
   state = {
     reflashFlag: false,
   }
@@ -29,18 +29,15 @@ export default class UserCenter extends React.Component {
 
   render() {
     return (
-      <div className="userCenter">
+      <div className="loginRegister">
         <Header />
         <Nav
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzwords={this.handleGoBuzzwords}
           handleGoQA={this.handleGoQA}
         />
-        <div className="userCenterTitleCon">
-          <div className="userCenterTitle">
-            <div className="ucTitleText">User Center</div>
-            <div className="ucTitleHead" />
-          </div>
+        <div className="">
+        
         </div>
       </div>
     )

@@ -55,13 +55,12 @@ export default class QaAnswer extends React.Component {
             观察夺目
           </div>
           <div className="editQaCon">
-
-          <div className="editSubTitle">
-            观察夺目
-          </div>
-          <div className="editSubUser">
-            User：allisfree4u@gmail.com
-          </div>
+            <div className="editSubTitle">
+              观察夺目
+            </div>
+            <div className="editSubUser">
+              User：allisfree4u@gmail.com
+            </div>
             <div className="editItem">
               <div className="editMainTitle">
                 Chinese phonetic symbols

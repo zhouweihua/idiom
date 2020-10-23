@@ -15,6 +15,12 @@ export default class BuzzQaItem extends React.Component {
   render() {
     return (
       <div className="buzzQaItemItem">
+        <div className="editSubTitle">
+          观察夺目
+        </div>
+        <div className="editSubUser">
+          User：allisfree4u@gmail.com
+        </div>
         <div className="buzzTitle">
           niú bī  牛逼
         </div>

@@ -16,6 +16,12 @@ export default class IdiomQaItem extends React.Component {
   render() {
     return (
       <div className="idiomQaItem">
+        <div className="editSubTitle">
+          观察夺目
+        </div>
+        <div className="editSubUser">
+          User：allisfree4u@gmail.com
+        </div>
         <div className="idiomSymbols">
           <div className="textLeft">Chinese phonetic symbols：</div>
           <div className="textRight">

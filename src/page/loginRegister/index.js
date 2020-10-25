@@ -1,12 +1,14 @@
 import './index.less'
 import React from 'react'
 import qs from 'qs'
+import { Checkbox } from 'antd';
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 export default class LoginRegister extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'login',
+    checkboxFlag: false,
   }
 
   componentWillMount =() =>{
@@ -47,8 +49,16 @@ export default class LoginRegister extends React.Component {
     }
   }
 
+  handleCheckboxChange = e => {
+    console.log('Checkbox checked', e.target.value);
+    this.setState({
+      checkboxFlag: e.target.value,
+    });
+  }
+
   render() {
 
+    const { pageFlag } = this.state
     return (
       <div className="loginRegister">
         <Header />
@@ -73,24 +83,30 @@ export default class LoginRegister extends React.Component {
                 </div>
                 <input className="lrInformationInput"/>
               </div>
-              <div className="lrInformationItem">
+              {pageFlag === "register" || pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Identifying code
                 </div>
                 <input className="lrInformationInput"/>
-              </div>
+              </div> : null}
               <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Password
                 </div>
-                <input className="lrInformationInput"/>
+                <input className="lrInformationInput"  type="password"/>
               </div>
-              <div className="lrInformationItem">
+              {pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Confirm Password
                 </div>
-                <input className="lrInformationInput"/>
-              </div>
+                <input className="lrInformationInput" type="password"/>
+              </div> : null}
+              {pageFlag === "login" || pageFlag === "forgot" ? <div className="lrTerm">
+                <Checkbox value={this.state.checkboxFlag} onChange={this.handleCheckboxChange}>
+                  {pageFlag === "login" ? "Remember me": "I agree with the terms of use"}
+                </Checkbox>
+                <div className="lrTermForgot">Forget  password?</div>
+              </div> : null}
               <div className="lrInformationButtonItem">
                 <div className="lrInformationButton">Submit</div>
               </div>

@@ -8,18 +8,15 @@ export default class Header extends React.Component {
     userHead: '',
   }
   componentWillMount = () =>{
-  }
-  getinitialstate = () => {
-
+    // let loginFlag = window.localStorage.getItem("loginFlag")
+    // if (loginFlag !== "true") {
+    //   loginFlag = "false"
+    // }
+    // this.setState({
+    //   loginFlag
+    // })
   }
   componentDidMount = () =>{
-    let loginFlag = window.localStorage.getItem("loginFlag")
-    if (loginFlag !== "true") {
-      loginFlag = "false"
-    }
-    this.setState({
-      loginFlag
-    })
   }
 
   handleGoLogin = () => {

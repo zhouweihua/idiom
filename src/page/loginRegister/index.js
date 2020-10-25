@@ -1,12 +1,22 @@
 import './index.less'
 import React from 'react'
+import qs from 'qs'
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 export default class LoginRegister extends React.Component {
   state = {
     reflashFlag: false,
+    pageFlag: 'login',
   }
 
+  componentWillMount =() =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'login'
+    this.setState({
+      pageFlag
+    })
+  }
   componentDidMount =() =>{
     
   }
@@ -22,12 +32,23 @@ export default class LoginRegister extends React.Component {
     window.location.href = "./qa?pageFlag=" + this.state.pageFlag
   }
 
-  getResoure = (pageFlag, searchValue) => {
-    // TODO axios
+
+  getLrText = () => {
+    const { pageFlag } = this.state
+    switch (pageFlag) {
+      case "login":
+        return "LOGIN";
+      case "register":
+        return "REGISTER";
+      case "forgot":
+        return "FORGOT";
+      default:
+        return null;
+    }
   }
 
-
   render() {
+
     return (
       <div className="loginRegister">
         <Header />
@@ -36,8 +57,11 @@ export default class LoginRegister extends React.Component {
           handleGoBuzzwords={this.handleGoBuzzwords}
           handleGoQA={this.handleGoQA}
         />
-        <div className="">
         
+        <div className="loginRegisterTitleCon">
+          <div className="loginRegisterTitle">
+            <div className="lrTitleText">{this.getLrText()}</div>
+          </div>
         </div>
       </div>
     )

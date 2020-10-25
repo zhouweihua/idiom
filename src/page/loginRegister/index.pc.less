@@ -3,18 +3,25 @@
 
 .loginRegister {
   width: 100%;
-  .idiomQaNameCon {
+  .loginRegisterTitleCon {
     width: 100%;
+    height: 383px / @rate;
     display: flex;
     justify-content: center;
-    padding-bottom: 56px / @rate;
-    .idiomQaName {
+    background: url("./img/user-center1.jpg") no-repeat;
+    background-size: cover;
+    .loginRegisterTitle {
+      position: relative;
       width: @comWidth;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      
+      .lrTitleText {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        margin-top: 137px / @rate;
+        font-size: 60px / @rate;
+        font-weight: bold;
+        color: #ffffff;
+      }
     }
   }
 }

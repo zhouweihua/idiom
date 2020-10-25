@@ -63,6 +63,40 @@ export default class LoginRegister extends React.Component {
             <div className="lrTitleText">{this.getLrText()}</div>
           </div>
         </div>
+
+        <div className="lrInformationCon">
+          <div className="lrInformation">
+            <div className="lrInformationSec">
+              <div className="lrInformationItem">
+                <div className="lrInformationText">
+                  Username
+                </div>
+                <input className="lrInformationInput"/>
+              </div>
+              <div className="lrInformationItem">
+                <div className="lrInformationText">
+                  Identifying code
+                </div>
+                <input className="lrInformationInput"/>
+              </div>
+              <div className="lrInformationItem">
+                <div className="lrInformationText">
+                  Password
+                </div>
+                <input className="lrInformationInput"/>
+              </div>
+              <div className="lrInformationItem">
+                <div className="lrInformationText">
+                  Confirm Password
+                </div>
+                <input className="lrInformationInput"/>
+              </div>
+              <div className="lrInformationButtonItem">
+                <div className="lrInformationButton">Submit</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

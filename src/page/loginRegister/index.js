@@ -50,7 +50,7 @@ export default class LoginRegister extends React.Component {
   }
 
   handleCheckboxChange = e => {
-    console.log('Checkbox checked', e.target.value);
+    // console.log('Checkbox checked', e.target.value);
     this.setState({
       checkboxFlag: e.target.value,
     });

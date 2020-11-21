@@ -24,7 +24,6 @@ ReactDOM.render(
           </div>
           <div className="footerSection">
             <p>E-mail：yuqingjie2008@126.com</p>
-            <p>Wechat：yu_328931489</p>
             <p>ur address goes here,street.</p>
           </div>
         </div>

@@ -2,6 +2,7 @@ import './index.less'
 import React from 'react'
 import qs from 'qs'
 import { message } from 'antd'
+import axios from 'axios'
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 
@@ -13,7 +14,7 @@ export default class Idiom extends React.Component {
     idiomStyle: "idiomLinkItem act",
     buzzwordsStyle: "idiomLinkItem",
     searchValue: '',
-    ABCList: ['A', 'B', 'C', 'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',]
+    ABCList: ['A', 'B', 'C', 'D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z',]
   }
 
   componentWillMount =() =>{
@@ -31,7 +32,10 @@ export default class Idiom extends React.Component {
   }
 
   componentDidMount =() =>{
-    
+    axios.get('https://5b5e71c98e9f160014b88cc9.mockapi.io/api/v1/lists')
+    .then(function (response) {
+      console.log(response)
+    })
   }
 
   handleGoIdiom = () => {

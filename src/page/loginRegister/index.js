@@ -35,8 +35,8 @@ export default class LoginRegister extends React.Component {
     window.location.href = "./?pageFlag=idiom"
   }
   
-  handleGoBuzzwords = () => {
-    window.location.href = "./?pageFlag=buzzwords"
+  handleGoBuzzword = () => {
+    window.location.href = "./?pageFlag=buzzword"
   }
 
   handleGoQA = () => {
@@ -134,7 +134,7 @@ export default class LoginRegister extends React.Component {
         <Header />
         <Nav
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
           handleGoQA={this.handleGoQA}
         />
         

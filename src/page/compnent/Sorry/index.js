@@ -25,7 +25,7 @@ export default class Sorry extends React.Component {
     let mainDes = "Sorry, We Didn't Find The Idiom"
     let subDes = "You can upload your idiom below, and we will complete the translation for you"
     let mainTitle = "Chinese idiom"
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       mainDes = "Sorry, We Didn't Find The Buzzword"
       subDes = "You can upload your buzzword below, and we will complete the translation for you"
       mainTitle = "Buzzword"

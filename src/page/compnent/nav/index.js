@@ -12,8 +12,8 @@ export default class Nav extends React.Component {
     this.props.handleGoIdiom && this.props.handleGoIdiom()
   }
 
-  handleGoBuzzwords = () => {
-    this.props.handleGoBuzzwords && this.props.handleGoBuzzwords()
+  handleGoBuzzword = () => {
+    this.props.handleGoBuzzword && this.props.handleGoBuzzword()
   }
 
   handleGoQA = () => {
@@ -21,14 +21,14 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const {idiomStyle, buzzwordsStyle, qaStyle} = this.props
+    const {idiomStyle, buzzwordStyle, qaStyle} = this.props
     return (
       <div className="idiomNavCon">
         <div className="idiomNav">
           <div className="idiomIcon" /> 
           <div className="idiomLink">
             <div className={idiomStyle || "idiomLinkItem"} onClick={this.handleGoIdiom}>Idiom</div>
-            <div className={buzzwordsStyle || "idiomLinkItem"} onClick={this.handleGoBuzzwords}>Buzzwords</div>
+            <div className={buzzwordStyle || "idiomLinkItem"} onClick={this.handleGoBuzzword}>Buzzwords</div>
             <div className={qaStyle || "idiomLinkItem"} onClick={this.handleGoQA}>Q and A list</div>
           </div>
         </div>

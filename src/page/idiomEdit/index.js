@@ -14,7 +14,7 @@ export default class IdiomEdit extends React.Component {
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
     idiomStyle: "idiomLinkItem act",
-    buzzwordsStyle: "idiomLinkItem",
+    buzzwordStyle: "idiomLinkItem",
     searchValue: '',
   }
   componentWillMount =() =>{
@@ -27,11 +27,11 @@ export default class IdiomEdit extends React.Component {
       })
     }
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
         idiomStyle: "idiomLinkItem",
-        buzzwordsStyle: "idiomLinkItem act",
+        buzzwordStyle: "idiomLinkItem act",
         placeholder: 'Enter Your Buzzwords',
       })
     }
@@ -54,15 +54,15 @@ export default class IdiomEdit extends React.Component {
   }
 
   render() {
-    const { pageFlag, idiomStyle, buzzwordsStyle, searchValue } = this.state
+    const { pageFlag, idiomStyle, buzzwordStyle, searchValue } = this.state
     return (
       <div className="idiomEditHome">
         <Header />
         <Nav
           idiomStyle={idiomStyle}
-          buzzwordsStyle={buzzwordsStyle}
+          buzzwordStyle={buzzwordStyle}
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
         />
         <HeaderSearch searchValue={searchValue}/>
         <div className="idiomEditCon">
@@ -76,7 +76,7 @@ export default class IdiomEdit extends React.Component {
               </div>
               <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
             </div>
-            {pageFlag ==="buzzwords" ? null : (
+            {pageFlag ==="buzzword" ? null : (
               <div className="editItem">
                 <div className="editMainTitle">
                   Chinese explanation

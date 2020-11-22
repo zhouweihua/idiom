@@ -14,7 +14,7 @@ export default class Qa extends React.Component {
     reflashFlag: false,
     pageFlag: 'idiom',
     idiomStyle: "qaListTitleIdiom act",
-    buzzwordsStyle: "qaListTitleBuzz",
+    buzzwordStyle: "qaListTitleBuzz",
     searchRes: [],
     searchTotal: 0
     
@@ -24,11 +24,11 @@ export default class Qa extends React.Component {
     let queryObject = window.location.search
     let query = qs.parse(queryObject.slice(1))
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
         idiomStyle: "qaListTitleIdiom",
-        buzzwordsStyle: "qaListTitleBuzz act",
+        buzzwordStyle: "qaListTitleBuzz act",
       })
     }
     this.getResoure(pageFlag, 1)
@@ -38,8 +38,8 @@ export default class Qa extends React.Component {
     window.location.href = "./?pageFlag=idiom"
   }
   
-  handleGoBuzzwords = () => {
-    window.location.href = "./?pageFlag=buzzwords"
+  handleGoBuzzword = () => {
+    window.location.href = "./?pageFlag=buzzword"
   }
   
   handleSearch = (searchValue) => {
@@ -54,7 +54,7 @@ export default class Qa extends React.Component {
 
   getResoure = (pageFlag, page) => {
     let searchUrl = baseUrl;
-    if (pageFlag === "buzzwords") {
+    if (pageFlag === "buzzword") {
       searchUrl = searchUrl + '/api/buzzword/questions?limit=10&page=' + page
     } else {
       searchUrl = searchUrl + '/api/idiom/questions?limit=10&page=' + page
@@ -79,17 +79,17 @@ export default class Qa extends React.Component {
     })
   }
   handleSwitchTab = (pageFlag) => {
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
         idiomStyle: "qaListTitleIdiom",
-        buzzwordsStyle: "qaListTitleBuzz act",
+        buzzwordStyle: "qaListTitleBuzz act",
       })
     } else {
       this.setState({
         pageFlag: 'idiom',
         idiomStyle: "qaListTitleIdiom act",
-        buzzwordsStyle: "qaListTitleBuzz",
+        buzzwordStyle: "qaListTitleBuzz",
       })
     }
     this.getResoure(pageFlag, 1)
@@ -100,14 +100,14 @@ export default class Qa extends React.Component {
   }
 
   render() {
-    const { idiomStyle, buzzwordsStyle, pageFlag, searchRes } = this.state
+    const { idiomStyle, buzzwordStyle, pageFlag, searchRes } = this.state
     return (
       <div className="idiomListHome">
         <Header />
         <Nav
           qaStyle={"idiomLinkItem act"}
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
         />
         <HeaderSearch
           handleSearch={this.handleSearch}
@@ -119,7 +119,7 @@ export default class Qa extends React.Component {
             <div className="qaListSec">
               <div className="qaListTitle">
                 <div className={idiomStyle} onClick={()=> this.handleSwitchTab("idiom")}>Idiom</div>
-                <div className={buzzwordsStyle} onClick={()=> this.handleSwitchTab("buzzwords")}>Buzzwords</div>
+                <div className={buzzwordStyle} onClick={()=> this.handleSwitchTab("buzzword")}>Buzzword</div>
               </div>
               {searchRes ? searchRes.map((search, searchIndex) => {
                   return (<div className="qaSecItem" key={pageFlag + searchIndex}>

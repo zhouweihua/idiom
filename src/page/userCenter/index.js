@@ -4,6 +4,7 @@ import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 import IdiomUcItem from "../compnent/IdiomUcItem";
 import BuzzUcItem from "../compnent/BuzzUcItem";
+import { Pagination } from 'antd';
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'
@@ -12,7 +13,10 @@ export default class UserCenter extends React.Component {
   state = {
     reflashFlag: false,
     tabFlag: 'answer',
-    userInfo: null
+    userInfo: null,
+    answerList: [],
+    questionList: [],
+    searchTotal: 1
   }
 
   componentWillMount = () =>{
@@ -21,8 +25,9 @@ export default class UserCenter extends React.Component {
       this.setState({
         userInfo: JSON.parse(userInfo)
       })
+      this.getUserAnswer(1)
     } else {
-      window.location.href = "./loginRegister?pageFlag=login"
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
     }
   }
 
@@ -30,8 +35,8 @@ export default class UserCenter extends React.Component {
     window.location.href = "./?pageFlag=idiom"
   }
   
-  handleGoBuzzwords = () => {
-    window.location.href = "./?pageFlag=buzzwords"
+  handleGoBuzzword = () => {
+    window.location.href = "./?pageFlag=buzzword"
   }
 
   handleGoQA = () => {
@@ -54,8 +59,62 @@ export default class UserCenter extends React.Component {
       }
     })
     .then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
     })
+  }
+
+  getUserQuestion = page => {
+    axios.get(
+      baseUrl + '/api/user/questions?limit=10&page=' +page,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      // console.log(response.data)
+      if (response && response.data) {
+        this.setState({
+          questionList: response.data.data,
+          searchTotal:response.data.total
+        })
+      }
+    })
+  }
+
+  getUserAnswer = page => {
+    axios.get(
+      baseUrl + '/api/user/answers?limit=10&page=' +page,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      // console.log(response.data)
+      if (response && response.data) {
+        this.setState({
+          answerList: response.data.data,
+          searchTotal:response.data.total
+        })
+      }
+    })
+  }
+
+  onPageChange = current => {
+    const { tabFlag } = this.state
+    switch (tabFlag) {
+      case "answer":
+        this.getUserAnswer(current);
+        return;
+      case "question":
+        this.getUserQuestion(current);
+        return;
+      default:
+        return null;
+    }
   }
 
   getShowSectionBody = () => {
@@ -73,7 +132,7 @@ export default class UserCenter extends React.Component {
   }
 
   getAnswerSectionBody = (pageFlag) => {
-    if (pageFlag === "buzzwords") {
+    if (pageFlag === "buzzword") {
       return (
         <div className="ucAnswerCon">
           <div className="ucAnswer">
@@ -81,27 +140,30 @@ export default class UserCenter extends React.Component {
           </div>
         </div>
       )
-      }
-      return (
-        <div className="ucAnswerCon">
-          <div className="ucAnswer">
-            <IdiomUcItem />
-          </div>
+    }
+
+    return (
+      <div className="ucAnswerCon">
+        <div className="ucAnswer">
+          <IdiomUcItem />
         </div>
-      )
-      
+      </div>
+    )
   }
 
 
   getQuestionSectionBody = () => {
+    const { questionList } = this.state
     return (
       <div className="ucQuestionCon">
         <div className="ucQuestion">
         <div className="ucQuestionListSec">
-          <div className="ucQuestionSecItem">
-            <div className="ucQuestionSecText">不入虎穴焉得虎子</div>
-            <div className="ucQuestionSecLink" onClick={() => this.hanldeGoAnswer(1)}>View explanation</div>
-          </div>
+          {questionList ? questionList.map((question, questionIndex) => {
+                  return (<div className="ucQuestionSecItem" key={"question" + questionIndex}>
+                            <div className="ucQuestionSecText">{question.name}</div>
+                            <div className="ucQuestionSecLink">View explanation</div>
+                          </div>)
+                  }): null}
         </div>
         </div>
       </div>
@@ -155,8 +217,19 @@ export default class UserCenter extends React.Component {
   }
   handleChangeTab = tabFlag => {
     this.setState({
-      tabFlag
+      tabFlag,
+      searchTotal: 1
     })
+    switch (tabFlag) {
+      case "answer":
+        this.getUserAnswer(1);
+        return;
+      case "question":
+        this.getUserQuestion(1);
+        return;
+      default:
+        return null;
+    }
   }
   render() {
     const { tabFlag } = this.state
@@ -181,7 +254,7 @@ export default class UserCenter extends React.Component {
         <Header />
         <Nav
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
           handleGoQA={this.handleGoQA}
         />
         <div className="userCenterTitleCon">
@@ -199,6 +272,17 @@ export default class UserCenter extends React.Component {
           </div>
         </div>
         {this.getShowSectionBody()}
+
+        <div className="userCenterPaginationCon">
+          <div className="userCenterPagination">
+              <Pagination
+                defaultCurrent={1}
+                total={this.state.searchTotal}
+                showQuickJumper
+                onChange={current => this.onPageChange(current)}
+              />
+          </div>
+        </div>
       </div>
     )
   }

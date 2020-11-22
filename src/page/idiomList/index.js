@@ -19,7 +19,7 @@ export default class idiomList extends React.Component {
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
     idiomStyle: "idiomLinkItem act",
-    buzzwordsStyle: "idiomLinkItem",
+    buzzwordStyle: "idiomLinkItem",
     searchValue: '',
     searchFlag: 1, // 0 搜索中 1 搜索成功 2 搜索失败
     searchRes: [],
@@ -36,11 +36,11 @@ export default class idiomList extends React.Component {
       })
     }
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
         idiomStyle: "idiomLinkItem",
-        buzzwordsStyle: "idiomLinkItem act",
+        buzzwordStyle: "idiomLinkItem act",
         placeholder: 'Enter Your Buzzwords',
       })
     }
@@ -56,7 +56,7 @@ export default class idiomList extends React.Component {
     this.setState({
       pageFlag: 'idiom',
       idiomStyle: "idiomLinkItem act",
-      buzzwordsStyle: "idiomLinkItem",
+      buzzwordStyle: "idiomLinkItem",
       placeholder: 'Enter Your Idiom',
       searchRes: [],
     })
@@ -64,17 +64,17 @@ export default class idiomList extends React.Component {
     this.getResoure('idiom', this.state.searchValue,1);
   }
   
-  handleGoBuzzwords = () => {
-    // console.log("buzzwords")
+  handleGoBuzzword = () => {
+    // console.log("buzzword")
     this.setState({
-      pageFlag: 'buzzwords',
+      pageFlag: 'buzzword',
       idiomStyle: "idiomLinkItem",
-      buzzwordsStyle: "idiomLinkItem act",
+      buzzwordStyle: "idiomLinkItem act",
       placeholder: 'Enter Your Buzzwords',
       searchRes: [],
     })
 
-    this.getResoure('buzzwords', this.state.searchValue,1);
+    this.getResoure('buzzword', this.state.searchValue,1);
   }
 
   handleGoQA = () => {
@@ -89,7 +89,7 @@ export default class idiomList extends React.Component {
 
   getResoure = (pageFlag, searchValue, page) => {
     let searchUrl = baseUrl;
-    if (pageFlag === "buzzwords") {
+    if (pageFlag === "buzzword") {
       searchUrl = searchUrl + '/api/buzzword/search?limit=10&mode=full&key='+searchValue + '&page=' +page
     } else {
       searchUrl = searchUrl + '/api/idiom/search?limit=10&mode=full&key=' + searchValue + '&page=' +page
@@ -104,7 +104,6 @@ export default class idiomList extends React.Component {
       }
     })
     .then((response) => {
-      
       if (response && response.data) {
         this.setState({
           searchRes: response.data.data,
@@ -132,7 +131,7 @@ export default class idiomList extends React.Component {
     if (searchFlag === 2) {
       return <Sorry pageFlag={pageFlag}/>
     } else if (searchFlag === 1) {
-      if (pageFlag === "buzzwords") {
+      if (pageFlag === "buzzword") {
         return (
           <div className="idiomDeatailsCon">
             <div className="idiomDeatails">
@@ -171,15 +170,15 @@ export default class idiomList extends React.Component {
   }
 
   render() {
-    const { idiomStyle, buzzwordsStyle, searchFlag, searchValue } = this.state
+    const { idiomStyle, buzzwordStyle, searchFlag, searchValue } = this.state
     return (
       <div className="idiomListHome">
         <Header />
         <Nav
           idiomStyle={idiomStyle}
-          buzzwordsStyle={buzzwordsStyle}
+          buzzwordStyle={buzzwordStyle}
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
           handleGoQA={this.handleGoQA}
         />
         <HeaderSearch

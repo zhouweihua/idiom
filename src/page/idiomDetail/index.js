@@ -13,7 +13,7 @@ export default class IdiomDetail extends React.Component {
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
     idiomStyle: "idiomLinkItem act",
-    buzzwordsStyle: "idiomLinkItem",
+    buzzwordStyle: "idiomLinkItem",
     searchValue: ''
   }
   componentWillMount =() =>{
@@ -26,11 +26,11 @@ export default class IdiomDetail extends React.Component {
       })
     }
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
         idiomStyle: "idiomLinkItem",
-        buzzwordsStyle: "idiomLinkItem act",
+        buzzwordStyle: "idiomLinkItem act",
         placeholder: 'Enter Your Buzzwords',
       })
     }
@@ -38,7 +38,7 @@ export default class IdiomDetail extends React.Component {
 
   getShowSection = () => {
     const { pageFlag } = this.state
-    if (pageFlag === "buzzwords") {
+    if (pageFlag === "buzzword") {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
@@ -60,8 +60,8 @@ export default class IdiomDetail extends React.Component {
   handleGoIdiom = () => {
     window.location.href = "./idiom?pageFlag=idiom"
   }
-  handleGoBuzzwords = () => {
-    window.location.href = "./idiom?pageFlag=buzzwords"
+  handleGoBuzzword = () => {
+    window.location.href = "./idiom?pageFlag=buzzword"
   }
 
   handleGoQA = () => {
@@ -80,15 +80,15 @@ export default class IdiomDetail extends React.Component {
   }
 
   render() {
-    const { idiomStyle, buzzwordsStyle, searchValue } = this.state
+    const { idiomStyle, buzzwordStyle, searchValue } = this.state
     return (
       <div className="IdiomDetailHome">
         <Header />
         <Nav
           idiomStyle={idiomStyle}
-          buzzwordsStyle={buzzwordsStyle}
+          buzzwordStyle={buzzwordStyle}
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
           handleGoQA={this.handleGoQA}
         />
         <HeaderSearch

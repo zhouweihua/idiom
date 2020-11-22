@@ -18,9 +18,9 @@ export default class QaAnswer extends React.Component {
     let queryObject = window.location.search
     let query = qs.parse(queryObject.slice(1))
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
       })
     }
   }
@@ -33,8 +33,8 @@ export default class QaAnswer extends React.Component {
     window.location.href = "./?pageFlag=idiom"
   }
   
-  handleGoBuzzwords = () => {
-    window.location.href = "./?pageFlag=buzzwords"
+  handleGoBuzzword = () => {
+    window.location.href = "./?pageFlag=buzzword"
   }
   
   handleSearch = (searchValue) => {
@@ -67,7 +67,7 @@ export default class QaAnswer extends React.Component {
               </div>
               <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
             </div>
-            {pageFlag ==="buzzwords" ? null : (
+            {pageFlag ==="buzzword" ? null : (
               <div className="editItem">
                 <div className="editMainTitle">
                   Chinese explanation
@@ -94,7 +94,7 @@ export default class QaAnswer extends React.Component {
 
   getShowSectionBody = () => {
     const { pageFlag } = this.state
-    if (pageFlag === "buzzwords") {
+    if (pageFlag === "buzzword") {
       return (
         <div className="idiomQaAnswerCon">
           <div className="idiomQaAnswer">
@@ -120,7 +120,7 @@ export default class QaAnswer extends React.Component {
         <Nav
           qaStyle={"idiomLinkItem act"}
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
         />
         <HeaderSearch
           handleSearch={this.handleSearch}

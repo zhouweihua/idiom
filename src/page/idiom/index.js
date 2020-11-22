@@ -10,7 +10,7 @@ export default class Idiom extends React.Component {
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
     idiomStyle: "idiomLinkItem act",
-    buzzwordsStyle: "idiomLinkItem",
+    buzzwordStyle: "idiomLinkItem",
     searchValue: '',
     ABCList: ['A', 'B', 'C', 'D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z',]
   }
@@ -19,11 +19,11 @@ export default class Idiom extends React.Component {
     let queryObject = window.location.search
     let query = qs.parse(queryObject.slice(1))
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
-    if (pageFlag ==="buzzwords") {
+    if (pageFlag ==="buzzword") {
       this.setState({
-        pageFlag: 'buzzwords',
+        pageFlag: 'buzzword',
         idiomStyle: "idiomLinkItem",
-        buzzwordsStyle: "idiomLinkItem act",
+        buzzwordStyle: "idiomLinkItem act",
         placeholder: 'Enter Your Buzzwords',
       })
     }
@@ -36,16 +36,16 @@ export default class Idiom extends React.Component {
     this.setState({
       pageFlag: 'idiom',
       idiomStyle: "idiomLinkItem act",
-      buzzwordsStyle: "idiomLinkItem",
+      buzzwordStyle: "idiomLinkItem",
       placeholder: 'Enter Your Idiom',
     })
   }
-  handleGoBuzzwords = () => {
-    // console.log("buzzwords")
+  handleGoBuzzword = () => {
+    // console.log("buzzword")
     this.setState({
-      pageFlag: 'buzzwords',
+      pageFlag: 'buzzword',
       idiomStyle: "idiomLinkItem",
-      buzzwordsStyle: "idiomLinkItem act",
+      buzzwordStyle: "idiomLinkItem act",
       placeholder: 'Enter Your Buzzwords',
     })
   }
@@ -81,15 +81,15 @@ export default class Idiom extends React.Component {
   }
 
   render() {
-    const { idiomStyle, buzzwordsStyle, placeholder, searchValue, ABCList } = this.state
+    const { idiomStyle, buzzwordStyle, placeholder, searchValue, ABCList } = this.state
     return (
       <div className="idiomHome">
         <Header />
         <Nav
           idiomStyle={idiomStyle}
-          buzzwordsStyle={buzzwordsStyle}
+          buzzwordStyle={buzzwordStyle}
           handleGoIdiom={this.handleGoIdiom}
-          handleGoBuzzwords={this.handleGoBuzzwords}
+          handleGoBuzzword={this.handleGoBuzzword}
           handleGoQA={this.handleGoQA}
         />
         <div className="idiomSearchCon">

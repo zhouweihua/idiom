@@ -4,22 +4,30 @@ import qs from 'qs'
 import { Checkbox } from 'antd';
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
+
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
+
 export default class LoginRegister extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'login',
     checkboxFlag: false,
+    userValue: '',
     IDValue: '',
     pwValue: '',
     cpwValue: '',
+    redirUrl: './?pageFlag=idiom' // 默认首页
   }
 
   componentWillMount =() =>{
     let queryObject = window.location.search
     let query = qs.parse(queryObject.slice(1))
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'login'
+    let redirUrl = query && query.redirUrl ? decodeURIComponent(query.redirUrl) : 'login'
     this.setState({
-      pageFlag
+      pageFlag,
+      redirUrl
     })
   }
 
@@ -55,6 +63,11 @@ export default class LoginRegister extends React.Component {
       checkboxFlag: e.target.value,
     });
   }
+  handleChangeUserValue= e => {
+    this.setState({
+      userValue: e.target.value,
+    })
+  }
   handleChangeIDValue= e => {
     this.setState({
       IDValue: e.target.value,
@@ -71,10 +84,30 @@ export default class LoginRegister extends React.Component {
     })
   }
   handleGoConfirm = () => {
-    const { pageFlag,IDValue, pwValue, cpwValue } = this.state
+    const { pageFlag,userValue, IDValue, pwValue, cpwValue } = this.state
+    let params ={
+      "email": userValue,
+      "password": pwValue
+    }
     switch (pageFlag) {
       case "login":
-        console.log(IDValue + ' ' + pwValue)
+        // console.log(userValue + ' ' + pwValue)
+        axios.post(
+          baseUrl + '/api/user/login',
+          params,
+          {
+            headers: {
+            'X-Timestamp': Date.parse( new Date() ).toString(),
+            'X-Nonce': guid()
+          }
+        })
+        .then((response) => {
+          console.log(response.data)
+          if (response && response.data) {
+            this.setState({
+            })
+          }
+        })
         return;
       case "register":
         return;
@@ -87,7 +120,7 @@ export default class LoginRegister extends React.Component {
 
   render() {
 
-    const { pageFlag, IDValue, pwValue, cpwValue } = this.state
+    const { pageFlag, userValue, IDValue, pwValue, cpwValue } = this.state
     return (
       <div className="loginRegister">
         <Header />
@@ -110,7 +143,11 @@ export default class LoginRegister extends React.Component {
                 <div className="lrInformationText">
                   Username
                 </div>
-                <input className="lrInformationInput"/>
+                <input
+                  className="lrInformationInput"
+                  value={userValue}
+                  placeholder={'example@gimal.com'}
+                  onChange={this.handleChangeUserValue}/>
               </div>
               {pageFlag === "register" || pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">

@@ -9,6 +9,9 @@ export default class LoginRegister extends React.Component {
     reflashFlag: false,
     pageFlag: 'login',
     checkboxFlag: false,
+    IDValue: '',
+    pwValue: '',
+    cpwValue: '',
   }
 
   componentWillMount =() =>{
@@ -18,9 +21,6 @@ export default class LoginRegister extends React.Component {
     this.setState({
       pageFlag
     })
-  }
-  componentDidMount =() =>{
-    
   }
 
   handleGoIdiom = () => {
@@ -55,10 +55,39 @@ export default class LoginRegister extends React.Component {
       checkboxFlag: e.target.value,
     });
   }
+  handleChangeIDValue= e => {
+    this.setState({
+      IDValue: e.target.value,
+    })
+  }
+  handleChangePwValue= e => {
+    this.setState({
+      pwValue: e.target.value,
+    })
+  }
+  handleChangeCpwValue= e => {
+    this.setState({
+      cpwValue: e.target.value,
+    })
+  }
+  handleGoConfirm = () => {
+    const { pageFlag,IDValue, pwValue, cpwValue } = this.state
+    switch (pageFlag) {
+      case "login":
+        console.log(IDValue + ' ' + pwValue)
+        return;
+      case "register":
+        return;
+      case "forgot":
+        return;
+      default:
+        return;
+    }
+  }
 
   render() {
 
-    const { pageFlag } = this.state
+    const { pageFlag, IDValue, pwValue, cpwValue } = this.state
     return (
       <div className="loginRegister">
         <Header />
@@ -87,28 +116,41 @@ export default class LoginRegister extends React.Component {
                 <div className="lrInformationText">
                   Identifying code
                 </div>
-                <input className="lrInformationInput"/>
+                <input
+                  className="lrInformationInput" 
+                  value={IDValue}
+                  onChange={this.handleChangeIDValue}/>
               </div> : null}
               <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Password
                 </div>
-                <input className="lrInformationInput"  type="password"/>
+                <input
+                  className="lrInformationInput"
+                  type="password"
+                  value={pwValue}
+                  onChange={this.handleChangePwValue}
+                />
               </div>
               {pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Confirm Password
                 </div>
-                <input className="lrInformationInput" type="password"/>
+                <input
+                  className="lrInformationInput"
+                  type="password"
+                  value={cpwValue}
+                  onChange={this.handleChangeCpwValue}
+                />
               </div> : null}
-              {pageFlag === "login" || pageFlag === "forgot" ? <div className="lrTerm">
+              {pageFlag === "forgot" ? <div className="lrTerm">
                 <Checkbox value={this.state.checkboxFlag} onChange={this.handleCheckboxChange}>
-                  {pageFlag === "login" ? "Remember me": "I agree with the terms of use"}
+                  I agree with the terms of use
                 </Checkbox>
                 <div className="lrTermForgot">Forget  password?</div>
               </div> : null}
               <div className="lrInformationButtonItem">
-                <div className="lrInformationButton">Submit</div>
+                <div className="lrInformationButton" onClick={this.handleGoConfirm}>Submit</div>
               </div>
             </div>
           </div>

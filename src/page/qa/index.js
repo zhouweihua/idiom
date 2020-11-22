@@ -123,7 +123,7 @@ export default class Qa extends React.Component {
               </div>
               {searchRes ? searchRes.map((search, searchIndex) => {
                   return (<div className="qaSecItem" key={pageFlag + searchIndex}>
-                            <div className="qaListTitleIdiom">{search.idiom}</div>
+                            <div className="qaListTitleIdiom">{search.idiom || search.buzzword}</div>
                             <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(search.id)}>I want to answer</div>
                           </div>
                           )

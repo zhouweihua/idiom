@@ -6,6 +6,9 @@ import Header from "../compnent/header";
 import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
+
 export default class Qa extends React.Component {
   state = {
     reflashFlag: false,
@@ -49,6 +52,32 @@ export default class Qa extends React.Component {
     window.location.href = "/qaAnswer?pageFlag="+ pageFlag +"&qaId=" + qaId
   }
 
+  getResoure = (pageFlag, page) => {
+    let searchUrl = baseUrl;
+    if (pageFlag === "buzzwords") {
+      searchUrl = searchUrl + '/api/buzzword/questions?limit=10&page=' + page
+    } else {
+      searchUrl = searchUrl + '/api/idiom/questions?limit=10&page=' + page
+    }
+    // 发起接口
+    axios.get(
+      searchUrl,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      
+      if (response && response.data) {
+        this.setState({
+          searchRes: response.data.data,
+          searchTotal:response.data.total
+        })
+      }
+    })
+  }
   render() {
     const { idiomStyle, buzzwordsStyle } = this.state
     return (

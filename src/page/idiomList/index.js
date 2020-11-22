@@ -52,7 +52,7 @@ export default class idiomList extends React.Component {
   }
 
   handleGoIdiom = () => {
-    console.log("idiom")
+    // console.log("idiom")
     this.setState({
       pageFlag: 'idiom',
       idiomStyle: "idiomLinkItem act",
@@ -64,7 +64,7 @@ export default class idiomList extends React.Component {
   }
   
   handleGoBuzzwords = () => {
-    console.log("buzzwords")
+    // console.log("buzzwords")
     this.setState({
       pageFlag: 'buzzwords',
       idiomStyle: "idiomLinkItem",
@@ -155,7 +155,6 @@ export default class idiomList extends React.Component {
 
   onPageChange = current => {
     this.getResoure(this.state.pageFlag, this.state.searchValue, current);
-
   }
 
   render() {

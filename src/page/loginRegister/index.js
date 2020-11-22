@@ -1,7 +1,7 @@
 import './index.less'
 import React from 'react'
 import qs from 'qs'
-import { Checkbox } from 'antd';
+import { Checkbox, message } from 'antd';
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 
@@ -103,9 +103,11 @@ export default class LoginRegister extends React.Component {
         })
         .then((response) => {
           console.log(response.data)
-          if (response && response.data) {
-            this.setState({
-            })
+          if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
+            window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
+            window.location.href = this.state.redirUrl
+          } else {
+            message.info('登录失败')
           }
         })
         return;

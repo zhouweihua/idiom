@@ -4,14 +4,16 @@ import React from 'react'
 export default class Header extends React.Component {
   state = {
     reflashFlag: false,
-    loginInfo: "true",
+    userInfo: "true",
     userHead: '',
   }
   componentWillMount = () =>{
-    let loginInfo = window.localStorage.getItem("loginInfo")
-    this.setState({
-      loginInfo
-    })
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo) {
+      this.setState({
+        userInfo:JSON.parse(userInfo)
+      })
+    }
   }
   componentDidMount = () =>{
   }
@@ -26,20 +28,20 @@ export default class Header extends React.Component {
     window.location.href = "./userCenter"
   }
   handleLogout = () => {
-    window.localStorage.setItem("loginInfo", null)
+    window.localStorage.setItem("userInfo", null)
     this.setState({
-      loginInfo: null,
+      userInfo: null,
     })
   }
   render() {
-    const { loginInfo } =this.state
+    const { userInfo } =this.state
     return (
       <div className="header">
         <div className="headerContain"> 
-          {loginInfo ? (
+          {userInfo ? (
             <div className="login">
               <div className="userHeader"/>
-              <div className="userName" onClick={this.handleGoUserCenter}>xxx@qq.com</div>/
+          <div className="userName" onClick={this.handleGoUserCenter}>{userInfo.email}</div>/
               <div className="userLogout" onClick={this.handleLogout}> Sign out</div>
             </div>
           ) : (

@@ -4,14 +4,26 @@ import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 import IdiomUcItem from "../compnent/IdiomUcItem";
 import BuzzUcItem from "../compnent/BuzzUcItem";
+
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
+
 export default class UserCenter extends React.Component {
   state = {
     reflashFlag: false,
     tabFlag: 'answer',
+    userInfo: null
   }
 
-  componentDidMount =() =>{
-    
+  componentWillMount = () =>{
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo) {
+      this.setState({
+        userInfo: JSON.parse(userInfo)
+      })
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login"
+    }
   }
 
   handleGoIdiom = () => {
@@ -25,8 +37,18 @@ export default class UserCenter extends React.Component {
     window.location.href = "./qa?pageFlag=" + this.state.pageFlag
   }
 
-  getResoure = (pageFlag, searchValue) => {
-    // TODO axios
+  getUserInfo = () => {
+    axios.get(
+      baseUrl + '/api/user/info',
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      console.log(response.data)
+    })
   }
 
   getShowSectionBody = () => {
@@ -79,6 +101,7 @@ export default class UserCenter extends React.Component {
     )
   }
   getInformationSectionBody = () => {
+    const {userInfo} = this.state
     return (
       <div className="ucInformationCon">
         <div className="ucInformation">
@@ -88,19 +111,19 @@ export default class UserCenter extends React.Component {
               <div className="ucInformationText">
                 <span className="red">*</span> Name:
               </div>
-              <input className="ucInformationInput"/>
+              <input className="ucInformationInput" value={userInfo && userInfo.userName?userInfo.userName : null}/>
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
-                Telephone:
+                Mobile phone:
               </div>
-              <input className="ucInformationInput"/>
+              <input className="ucInformationInput" value={userInfo && userInfo.tel?userInfo.tel : null}/>
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 <span className="red">*</span> E-mail:
               </div>
-              <input className="ucInformationInput"/>
+              <input className="ucInformationInput" value={userInfo && userInfo.email?userInfo.email : null}/>
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">

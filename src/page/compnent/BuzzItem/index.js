@@ -7,7 +7,6 @@ export default class BuzzItem extends React.Component {
   }
   
   componentDidMount =() =>{
-    console.log("----------")
     console.log(this.props.search)
   }
   handleClickEdit = () =>{

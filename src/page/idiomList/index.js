@@ -23,6 +23,7 @@ export default class idiomList extends React.Component {
     searchValue: '',
     searchFlag: 1, // 0 搜索中 1 搜索成功 2 搜索失败
     searchRes: [],
+    searchTotal: 0
 
   }
   componentWillMount =() =>{
@@ -43,7 +44,7 @@ export default class idiomList extends React.Component {
         placeholder: 'Enter Your Buzzwords',
       })
     }
-    this.getResoure(pageFlag, searchValue)
+    this.getResoure(pageFlag, searchValue,1)
   }
 
   componentDidMount =() =>{
@@ -58,6 +59,8 @@ export default class idiomList extends React.Component {
       buzzwordsStyle: "idiomLinkItem",
       placeholder: 'Enter Your Idiom',
     })
+
+    this.getResoure('idiom', this.state.searchValue,1);
   }
   
   handleGoBuzzwords = () => {
@@ -68,14 +71,23 @@ export default class idiomList extends React.Component {
       buzzwordsStyle: "idiomLinkItem act",
       placeholder: 'Enter Your Buzzwords',
     })
+
+    this.getResoure('buzzwords', this.state.searchValue,1);
   }
   handleGoQA = () => {
     window.location.href = "./qa?pageFlag=" + this.state.pageFlag
   }
 
-  getResoure = (pageFlag, searchValue) => {
+  getResoure = (pageFlag, searchValue, page) => {
+    let searchUrl = baseUrl;
+    if (pageFlag === "buzzwords") {
+      searchUrl = searchUrl + '/api/buzzword/search?limit=10&mode=full&key='+searchValue + '&page=' +page
+    } else {
+      searchUrl = searchUrl + '/api/idiom/search?limit=10&mode=full&key=' + searchValue + '&page=' +page
+    }
+    // 发起接口
     axios.get(
-      baseUrl + '/api/idiom/list?page=1&limit=10',
+      searchUrl,
       {
         headers: {
         'X-Timestamp': Date.parse( new Date() ).toString(),
@@ -86,7 +98,8 @@ export default class idiomList extends React.Component {
       
       if (response && response.data) {
         this.setState({
-          searchRes: response.data.data
+          searchRes: response.data.data,
+          searchTotal:response.data.total
         })
       }
     })
@@ -98,7 +111,7 @@ export default class idiomList extends React.Component {
   }
   handleSearch = (searchValue) => {
     const { pageFlag } = this.state
-    this.getResoure(pageFlag, searchValue);
+    this.getResoure(pageFlag, searchValue, 1);
   }
 
   getShowSection = () => {
@@ -107,17 +120,16 @@ export default class idiomList extends React.Component {
       return <Sorry pageFlag={pageFlag}/>
     } else if (searchFlag === 1) {
       if (pageFlag === "buzzwords") {
-      return (
-        <div className="idiomDeatailsCon">
-          <div className="idiomDeatails">
-            {searchRes ? 
-              searchRes.map(search => {
-                console.log(search)
-                return <BuzzItem search={search} handleClickEdit={() => this.handleClickEdit(search.id)}/>
-              }): null}
+        return (
+          <div className="idiomDeatailsCon">
+            <div className="idiomDeatails">
+              {searchRes ? 
+                searchRes.map((search, buzzIndex) => {
+                  return <BuzzItem search={search}  key={"buzz" + buzzIndex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
+                }): null}
+            </div>
           </div>
-        </div>
-      )
+        )
       }
       return (
         <div className="idiomDeatailsCon">
@@ -141,6 +153,11 @@ export default class idiomList extends React.Component {
     }
   }
 
+  onPageChange = current => {
+    this.getResoure(this.state.pageFlag, this.state.searchValue, current);
+
+  }
+
   render() {
     const { idiomStyle, buzzwordsStyle, searchFlag, searchValue } = this.state
     return (
@@ -161,7 +178,12 @@ export default class idiomList extends React.Component {
         {searchFlag === 1 ? (
           <div className="idiomPaginationCon">
             <div className="idiomPagination">
-              <Pagination defaultCurrent={1} total={50} showQuickJumper/>
+              <Pagination
+                defaultCurrent={1}
+                total={this.state.searchTotal}
+                showQuickJumper
+                onChange={current => this.onPageChange(current)}
+              />
             </div>
           </div>
         ) : null}

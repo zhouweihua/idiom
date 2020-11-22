@@ -2,10 +2,8 @@ import './index.less'
 import React from 'react'
 import qs from 'qs'
 import { message } from 'antd'
-import axios from 'axios'
 import Header from "../compnent/header";
 import Nav from "../compnent/nav";
-
 export default class Idiom extends React.Component {
   state = {
     reflashFlag: false,
@@ -30,12 +28,7 @@ export default class Idiom extends React.Component {
       })
     }
   }
-
   componentDidMount =() =>{
-    axios.get('https://5b5e71c98e9f160014b88cc9.mockapi.io/api/v1/lists')
-    .then(function (response) {
-      console.log(response)
-    })
   }
 
   handleGoIdiom = () => {

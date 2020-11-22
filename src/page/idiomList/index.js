@@ -6,6 +6,9 @@ import Header from "../compnent/header";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
 
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
+
 import Sorry from '../compnent/Sorry'
 import IdiomItem from "../compnent/IdiomItem";
 import BuzzItem from "../compnent/BuzzItem";
@@ -20,6 +23,7 @@ export default class idiomList extends React.Component {
     searchValue: '',
     searchFlag: 1, // 0 搜索中 1 搜索成功 2 搜索失败
     searchRes: [],
+
   }
   componentWillMount =() =>{
     let queryObject = window.location.search
@@ -70,7 +74,22 @@ export default class idiomList extends React.Component {
   }
 
   getResoure = (pageFlag, searchValue) => {
-    // TODO axios
+    axios.get(
+      baseUrl + '/api/idiom/list?page=1&limit=10',
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      
+      if (response && response.data) {
+        this.setState({
+          searchRes: response.data.data
+        })
+      }
+    })
   }
 
   handleClickEdit = itemId => {
@@ -83,7 +102,7 @@ export default class idiomList extends React.Component {
   }
 
   getShowSection = () => {
-    const { pageFlag, searchFlag } = this.state
+    const { pageFlag, searchFlag, searchRes } = this.state
     if (searchFlag === 2) {
       return <Sorry pageFlag={pageFlag}/>
     } else if (searchFlag === 1) {
@@ -91,7 +110,11 @@ export default class idiomList extends React.Component {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            <BuzzItem handleClickEdit={() => this.handleClickEdit('111')}/>
+            {searchRes ? 
+              searchRes.map(search => {
+                console.log(search)
+                return <BuzzItem search={search} handleClickEdit={() => this.handleClickEdit(search.id)}/>
+              }): null}
           </div>
         </div>
       )
@@ -99,7 +122,10 @@ export default class idiomList extends React.Component {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            <IdiomItem handleClickEdit={() => this.handleClickEdit('222')}/>
+            {searchRes ? 
+              searchRes.map((search,idiomInex) => {
+                return <IdiomItem search={search} key={"idiom" + idiomInex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
+              }): null}
           </div>
         </div>
       )

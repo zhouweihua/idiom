@@ -5,14 +5,16 @@ export default class BuzzItem extends React.Component {
   state = {
     reflashFlag: false,
   }
-
+  
   componentDidMount =() =>{
-    
+    console.log("----------")
+    console.log(this.props.search)
   }
   handleClickEdit = () =>{
     this.props.handleClickEdit && this.props.handleClickEdit()
   }
   render() {
+
     return (
       <div className="buzzDeatailItem">
         <div className="buzzTitle">

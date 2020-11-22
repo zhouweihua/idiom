@@ -15,6 +15,9 @@ export default class Qa extends React.Component {
     pageFlag: 'idiom',
     idiomStyle: "qaListTitleIdiom act",
     buzzwordsStyle: "qaListTitleBuzz",
+    searchRes: [],
+    searchTotal: 0
+    
   }
 
   componentWillMount =() =>{
@@ -28,10 +31,7 @@ export default class Qa extends React.Component {
         buzzwordsStyle: "qaListTitleBuzz act",
       })
     }
-  }
-
-  componentDidMount =() =>{
-    
+    this.getResoure(pageFlag, 1)
   }
 
   handleGoIdiom = () => {
@@ -69,7 +69,7 @@ export default class Qa extends React.Component {
       }
     })
     .then((response) => {
-      
+      console.log(response.data)
       if (response && response.data) {
         this.setState({
           searchRes: response.data.data,
@@ -78,8 +78,29 @@ export default class Qa extends React.Component {
       }
     })
   }
+  handleSwitchTab = (pageFlag) => {
+    if (pageFlag ==="buzzwords") {
+      this.setState({
+        pageFlag: 'buzzwords',
+        idiomStyle: "qaListTitleIdiom",
+        buzzwordsStyle: "qaListTitleBuzz act",
+      })
+    } else {
+      this.setState({
+        pageFlag: 'idiom',
+        idiomStyle: "qaListTitleIdiom act",
+        buzzwordsStyle: "qaListTitleBuzz",
+      })
+    }
+    this.getResoure(pageFlag, 1)
+  }
+
+  onPageChange = current => {
+    this.getResoure(this.state.pageFlag, current);
+  }
+
   render() {
-    const { idiomStyle, buzzwordsStyle } = this.state
+    const { idiomStyle, buzzwordsStyle, pageFlag, searchRes } = this.state
     return (
       <div className="idiomListHome">
         <Header />
@@ -97,24 +118,28 @@ export default class Qa extends React.Component {
             <div className="qaSubSec">You can ask questions or answer them. This is our interaction area</div>
             <div className="qaListSec">
               <div className="qaListTitle">
-                <div className={idiomStyle}>Idiom</div>
-                <div className={buzzwordsStyle}>Buzzwords</div>
+                <div className={idiomStyle} onClick={()=> this.handleSwitchTab("idiom")}>Idiom</div>
+                <div className={buzzwordsStyle} onClick={()=> this.handleSwitchTab("buzzwords")}>Buzzwords</div>
               </div>
-              <div className="qaSecItem">
-                <div className="qaListTitleIdiom">光彩夺目</div>
-                <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(1)}>I want to answer</div>
-              </div>
-              <div className="qaSecItem">
-                <div className="qaListTitleIdiom">不入虎穴焉得虎子</div>
-                <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(2)}>I want to answer</div>
-              </div>
+              {searchRes ? searchRes.map((search, searchIndex) => {
+                  return (<div className="qaSecItem" key={pageFlag + searchIndex}>
+                            <div className="qaListTitleIdiom">{search.idiom}</div>
+                            <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(search.id)}>I want to answer</div>
+                          </div>
+                          )
+                }): null}
             </div>
           </div>
         </div>
 
         <div className="idiomPaginationCon">
           <div className="idiomPagination">
-            <Pagination defaultCurrent={1} total={50} showQuickJumper/>
+              <Pagination
+                defaultCurrent={1}
+                total={this.state.searchTotal}
+                showQuickJumper
+                onChange={current => this.onPageChange(current)}
+              />
           </div>
         </div>
       </div>

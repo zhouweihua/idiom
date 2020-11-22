@@ -58,6 +58,7 @@ export default class idiomList extends React.Component {
       idiomStyle: "idiomLinkItem act",
       buzzwordsStyle: "idiomLinkItem",
       placeholder: 'Enter Your Idiom',
+      searchRes: [],
     })
 
     this.getResoure('idiom', this.state.searchValue,1);
@@ -70,6 +71,7 @@ export default class idiomList extends React.Component {
       idiomStyle: "idiomLinkItem",
       buzzwordsStyle: "idiomLinkItem act",
       placeholder: 'Enter Your Buzzwords',
+      searchRes: [],
     })
 
     this.getResoure('buzzwords', this.state.searchValue,1);
@@ -111,6 +113,9 @@ export default class idiomList extends React.Component {
   }
   handleSearch = (searchValue) => {
     const { pageFlag } = this.state
+    this.setState({
+      searchValue
+    })
     this.getResoure(pageFlag, searchValue, 1);
   }
 

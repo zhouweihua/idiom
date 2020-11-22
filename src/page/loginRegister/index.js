@@ -38,10 +38,16 @@ export default class LoginRegister extends React.Component {
   handleGoBuzzwords = () => {
     window.location.href = "./?pageFlag=buzzwords"
   }
-  handleGoQA = () => {
-    window.location.href = "./qa?pageFlag=" + this.state.pageFlag
-  }
 
+  handleGoQA = () => {
+    let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo && userInfo !=='null') {
+      window.location.href = qaUrl
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+    }
+  }
 
   getLrText = () => {
     const { pageFlag } = this.state

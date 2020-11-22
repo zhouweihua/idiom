@@ -17,7 +17,7 @@ export default class UserCenter extends React.Component {
 
   componentWillMount = () =>{
     let userInfo = window.localStorage.getItem("userInfo")
-    if (userInfo) {
+    if (userInfo && userInfo !=='null') {
       this.setState({
         userInfo: JSON.parse(userInfo)
       })
@@ -33,8 +33,15 @@ export default class UserCenter extends React.Component {
   handleGoBuzzwords = () => {
     window.location.href = "./?pageFlag=buzzwords"
   }
+
   handleGoQA = () => {
-    window.location.href = "./qa?pageFlag=" + this.state.pageFlag
+    let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo && userInfo !=='null') {
+      window.location.href = qaUrl
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+    }
   }
 
   getUserInfo = () => {

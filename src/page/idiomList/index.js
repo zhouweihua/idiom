@@ -76,8 +76,15 @@ export default class idiomList extends React.Component {
 
     this.getResoure('buzzwords', this.state.searchValue,1);
   }
+
   handleGoQA = () => {
-    window.location.href = "./qa?pageFlag=" + this.state.pageFlag
+    let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo && userInfo !=='null') {
+      window.location.href = qaUrl
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+    }
   }
 
   getResoure = (pageFlag, searchValue, page) => {
@@ -111,6 +118,7 @@ export default class idiomList extends React.Component {
     const { pageFlag } = this.state
     window.location.href = "/idiomEdit?pageFlag="+ pageFlag +"&itemId=" + itemId
   }
+  
   handleSearch = (searchValue) => {
     const { pageFlag } = this.state
     this.setState({

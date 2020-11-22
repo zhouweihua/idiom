@@ -4,12 +4,12 @@ import React from 'react'
 export default class Header extends React.Component {
   state = {
     reflashFlag: false,
-    userInfo: "true",
+    userInfo: null,
     userHead: '',
   }
   componentWillMount = () =>{
     let userInfo = window.localStorage.getItem("userInfo")
-    if (userInfo) {
+    if (userInfo && userInfo !=='null') {
       this.setState({
         userInfo:JSON.parse(userInfo)
       })

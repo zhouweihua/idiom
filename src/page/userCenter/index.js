@@ -1,5 +1,6 @@
 import './index.less'
 import React from 'react'
+import qs from 'qs'
 import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
@@ -15,12 +16,21 @@ export default class UserCenter extends React.Component {
     reflashFlag: false,
     tabFlag: 'answer',
     userInfo: null,
+    pageFlag: 'idiom',
     answerList: [],
     questionList: [],
     searchTotal: 1
   }
 
   componentWillMount = () =>{
+    let queryObject = window.location.search
+    let query = qs.parse(queryObject.slice(1))
+    let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
+    if (pageFlag ==="buzzword") {
+      this.setState({
+        pageFlag: 'buzzword',
+      })
+    }
     let userInfo = window.localStorage.getItem("userInfo")
     if (userInfo && userInfo !=='null') {
       this.setState({

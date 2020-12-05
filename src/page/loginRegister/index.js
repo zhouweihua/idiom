@@ -13,11 +13,12 @@ export default class LoginRegister extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'login',
-    checkboxFlag: false,
-    userValue: '',
-    IDValue: '',
-    pwValue: '',
-    cpwValue: '',
+    loginCheckboxFlag: false,
+    registCheckboxFlag: false,
+    userValue: '', // 用户名 == email
+    IDValue: '', // 验证码
+    pwValue: '', // 密码
+    cpwValue: '',// 重复密码
     redirUrl: './?pageFlag=idiom' // 默认首页
   }
 
@@ -64,11 +65,18 @@ export default class LoginRegister extends React.Component {
     }
   }
 
-  handleCheckboxChange = e => {
-    // console.log('Checkbox checked', e.target.value);
+  handleloginCheckboxFlag = e => {
     this.setState({
-      checkboxFlag: e.target.value,
+      loginCheckboxFlag: !this.state.loginCheckboxFlag,
     });
+  }
+  handleregistCheckboxFlag = e => {
+    this.setState({
+      registCheckboxFlag: !this.state.registCheckboxFlag,
+    });
+  }
+  handleGoFogot = () => {
+    window.location.href = "./loginRegister?pageFlag=forgot"
   }
   handleChangeUserValue= e => {
     this.setState({
@@ -90,17 +98,47 @@ export default class LoginRegister extends React.Component {
       cpwValue: e.target.value,
     })
   }
+  
   handleGoConfirm = () => {
-    const { pageFlag,userValue, IDValue, pwValue, cpwValue } = this.state
-    let params ={
-      "email": userValue,
-      "password": pwValue
-    }
+
+    const { pageFlag, userValue, IDValue, pwValue, cpwValue, loginCheckboxFlag } = this.state
+    let params = {}
     switch (pageFlag) {
       case "login":
         // console.log(userValue + ' ' + pwValue)
+        if (loginCheckboxFlag) {
+          params.email = userValue
+          params.password = pwValue
+          axios.post(
+            baseUrl + '/api/user/login',
+            params,
+            {
+              headers: {
+              'X-Timestamp': Date.parse( new Date() ).toString(),
+              'X-Nonce': guid()
+            }
+          })
+          .then((response) => {
+            // console.log(response.data)
+            if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
+              window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
+              window.location.href = this.state.redirUrl
+            } else {
+              message.info('登录失败')
+            }
+          })
+        } else {
+          message.info("请同意相关条款")
+        }
+        return;
+      case "register":
+
+        // console.log(userValue + ' ' + pwValue)
+        params.email = userValue
+        params.password = pwValue
+        params.userName = 
         axios.post(
-          baseUrl + '/api/user/login',
+          baseUrl + '/api/user/signup',
           params,
           {
             headers: {
@@ -117,8 +155,6 @@ export default class LoginRegister extends React.Component {
             message.info('登录失败')
           }
         })
-        return;
-      case "register":
         return;
       case "forgot":
         return;
@@ -148,6 +184,7 @@ export default class LoginRegister extends React.Component {
         <div className="lrInformationCon">
           <div className="lrInformation">
             <div className="lrInformationSec">
+
               <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Username
@@ -158,6 +195,7 @@ export default class LoginRegister extends React.Component {
                   placeholder={'example@gimal.com'}
                   onChange={this.handleChangeUserValue}/>
               </div>
+
               {pageFlag === "register" || pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Identifying code
@@ -167,6 +205,7 @@ export default class LoginRegister extends React.Component {
                   value={IDValue}
                   onChange={this.handleChangeIDValue}/>
               </div> : null}
+
               <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Password
@@ -178,6 +217,7 @@ export default class LoginRegister extends React.Component {
                   onChange={this.handleChangePwValue}
                 />
               </div>
+
               {pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">
                   Confirm Password
@@ -189,15 +229,24 @@ export default class LoginRegister extends React.Component {
                   onChange={this.handleChangeCpwValue}
                 />
               </div> : null}
-              {pageFlag === "forgot" ? <div className="lrTerm">
-                <Checkbox value={this.state.checkboxFlag} onChange={this.handleCheckboxChange}>
+
+              {pageFlag === "login" ? <div className="lrTerm">
+                <Checkbox checked={this.state.loginCheckboxFlag} onChange={this.handleloginCheckboxFlag}>
                   I agree with the terms of use
                 </Checkbox>
-                <div className="lrTermForgot">Forget  password?</div>
+                <div className="lrTermForgot" onClick={this.handleGoFogot}>Forget  password?</div>
               </div> : null}
+
+              {pageFlag === "register" ? <div className="lrTerm">
+                <Checkbox checked={this.state.checkboxFlag} onChange={this.handleregistCheckboxFlag}>
+                  I agree with the terms of use
+                </Checkbox>
+              </div> : null}
+
               <div className="lrInformationButtonItem">
                 <div className="lrInformationButton" onClick={this.handleGoConfirm}>Submit</div>
               </div>
+
             </div>
           </div>
         </div>

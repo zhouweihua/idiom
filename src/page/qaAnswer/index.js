@@ -8,6 +8,7 @@ import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 import IdiomQaItem from "../compnent/IdiomQaItem";
 import BuzzQaItem from "../compnent/BuzzQaItem";
+import { message } from 'antd';
 
 export default class QaAnswer extends React.Component {
   state = {
@@ -24,6 +25,14 @@ export default class QaAnswer extends React.Component {
         pageFlag: 'buzzword',
       })
     }
+  
+    let qaId = query && query.qaId ? query.qaId : null
+    if (qaId) {
+      this.getResoure(pageFlag, qaId)
+    } else {
+      message.error('查询id有误')
+    }
+    
   }
 
   componentDidMount =() =>{
@@ -111,7 +120,6 @@ export default class QaAnswer extends React.Component {
           </div>
         </div>
       )
-      
   }
 
   render() {

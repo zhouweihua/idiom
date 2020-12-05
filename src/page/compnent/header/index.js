@@ -32,6 +32,7 @@ export default class Header extends React.Component {
     this.setState({
       userInfo: null,
     })
+    window.location.href = "./"
   }
   render() {
     const { userInfo } =this.state

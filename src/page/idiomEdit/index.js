@@ -122,7 +122,7 @@ export default class IdiomEdit extends React.Component {
     .then((response) => {console.log(response.data)
       console.log(response.data)
       if (response && response.data && response.data.data) {
-        
+        // todo
       } else {
         message.info('提交候选释义失败')
       }

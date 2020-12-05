@@ -6,6 +6,8 @@ import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
+import { message } from 'antd';
+
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'
@@ -22,7 +24,6 @@ export default class idiomList extends React.Component {
     idiomStyle: "idiomLinkItem act",
     buzzwordStyle: "idiomLinkItem",
     searchValue: '',
-    searchFlag: 1, // 0 搜索中 1 搜索成功 2 搜索失败
     searchRes: [],
     searchTotal: 0
 
@@ -60,6 +61,7 @@ export default class idiomList extends React.Component {
       buzzwordStyle: "idiomLinkItem",
       placeholder: 'Enter Your Idiom',
       searchRes: [],
+      searchFlag: 0, // 1搜索结束 
     })
 
     this.getResoure('idiom', this.state.searchValue,1);
@@ -95,6 +97,9 @@ export default class idiomList extends React.Component {
     } else {
       searchUrl = searchUrl + '/api/idiom/search?limit=10&mode=full&key=' + searchValue + '&page=' +page
     }
+    this.setState({
+      searchFlag: 0
+    })
     // 发起接口
     axios.get(
       searchUrl,
@@ -105,6 +110,9 @@ export default class idiomList extends React.Component {
       }
     })
     .then((response) => {
+      this.setState({
+        searchFlag: 1
+      })
       if (response && response.data) {
         this.setState({
           searchRes: response.data.data,
@@ -128,18 +136,15 @@ export default class idiomList extends React.Component {
   }
 
   getShowSection = () => {
-    const { pageFlag, searchFlag, searchRes } = this.state
-    if (searchFlag === 2) {
-      return <Sorry pageFlag={pageFlag}/>
-    } else if (searchFlag === 1) {
+    const { pageFlag, searchRes, searchFlag } = this.state
+    if (searchRes && searchRes.length > 0 && searchFlag !== 0) {
       if (pageFlag === "buzzword") {
         return (
           <div className="idiomDeatailsCon">
             <div className="idiomDeatails">
-              {searchRes ? 
-                searchRes.map((search, buzzIndex) => {
+              {searchRes.map((search, buzzIndex) => {
                   return <BuzzItem search={search}  key={"buzz" + buzzIndex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
-                }): null}
+                })}
             </div>
           </div>
         )
@@ -147,31 +152,60 @@ export default class idiomList extends React.Component {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            {searchRes ? 
-              searchRes.map((search,idiomInex) => {
+            {searchRes.map((search,idiomInex) => {
                 return <IdiomItem search={search} key={"idiom" + idiomInex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
-              }): null}
+              })}
           </div>
         </div>
       )
       
+    } else if (searchFlag !== 0) {
+      return <Sorry pageFlag={pageFlag} submintResoure={this.submintResoure} />
     } else {
       return  (
-        <div className="idiomSearchingCon">
-          <div className="idiomSearching">
-            Searching
-          </div>
-        </div>
-      )
+      <div className="idiomDeatailsCon">
+        <div className="idiomDeatailEmpty"></div>
+      </div>)
     }
   }
 
+  submintResoure = symbol => {
+    let searchUrl = baseUrl;
+    let params ={}
+    const {pageFlag} = this.state
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/'
+      params.buzzword = symbol
+    } else {
+      searchUrl = searchUrl + '/api/idiom/'
+      params.idiom = symbol
+    }
+    // 发起接口
+    axios.post(
+      searchUrl,
+      params,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {console.log(response.data)
+      console.log(response.data)
+      if (response && response.data && response.data.data) {
+        // todo
+        message.info('提交定义成功')
+      } else {
+        message.info('提交定义失败')
+      }
+    })
+  }
   onPageChange = current => {
     this.getResoure(this.state.pageFlag, this.state.searchValue, current);
   }
 
   render() {
-    const { idiomStyle, buzzwordStyle, searchFlag, searchValue } = this.state
+    const { idiomStyle, buzzwordStyle, searchRes, searchValue, searchFlag } = this.state
     return (
       <div className="idiomListHome">
         <Header />
@@ -187,7 +221,7 @@ export default class idiomList extends React.Component {
           handleSearch={this.handleSearch}
         />
         {this.getShowSection()}
-        {searchFlag === 1 ? (
+        {searchRes && searchRes.length > 0 && searchFlag !== 0 ? (
           <div className="idiomPaginationCon">
             <div className="idiomPagination">
               <Pagination

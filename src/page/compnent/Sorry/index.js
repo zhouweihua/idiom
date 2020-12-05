@@ -4,20 +4,22 @@ import React from 'react'
 export default class Sorry extends React.Component {
   state = {
     reflashFlag: false,
+    symbol: ''
   }
 
   componentDidMount =() =>{
     
   }
 
-  handleChangeIdiom = e => {
+  handleChangeSymbol = e => {
     this.setState({
-      idiom: e.target.value,
+      symbol: e.target.value,
     })
   }
 
   handleSubmit = () => {
-    console.log("idiom -->" + this.state.idiom);
+    console.log("symbol -->" + this.state.symbol);
+    this.props.submintResoure && this.props.submintResoure(this.state.symbol)
   }
 
   render() {
@@ -39,7 +41,7 @@ export default class Sorry extends React.Component {
             
             <div className="sorryItem">
               <div className="sorryMainTitle">{mainTitle}</div>
-              <input className="sorryCont" value={this.state.idiom} onChange={this.handleChangeIdiom}/>
+              <input className="sorryCont" value={this.state.symbol} onChange={this.handleChangeSymbol}/>
             </div>
           </div>
         </div>

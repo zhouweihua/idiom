@@ -14,6 +14,7 @@ export default class IdiomQaItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit()
   }
   render() {
+    const { qa } = this.props
     return (
       <div className="idiomQaItem">
         <div className="editSubTitle">

@@ -119,7 +119,6 @@ export default class LoginRegister extends React.Component {
             }
           })
           .then((response) => {
-            // console.log(response.data)
             if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
               window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
               window.location.href = this.state.redirUrl

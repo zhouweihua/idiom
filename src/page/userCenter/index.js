@@ -142,21 +142,20 @@ export default class UserCenter extends React.Component {
     }
   }
 
-  getAnswerSectionBody = (pageFlag) => {
-    if (pageFlag === "buzzword") {
-      return (
-        <div className="ucAnswerCon">
-          <div className="ucAnswer">
-            <BuzzUcItem />
-          </div>
-        </div>
-      )
-    }
-
+  getAnswerSectionBody = () => {
+    const {answerList} = this.state
     return (
       <div className="ucAnswerCon">
         <div className="ucAnswer">
-          <IdiomUcItem />
+          {answerList && answerList.map((answer,anIndex) => {
+            if(answer.type === "idiom") {
+              return <IdiomUcItem answer={answer}/>
+            } else if(answer.type === "buzzword") {
+              return <BuzzUcItem answer={answer} />
+            } else {
+              return null
+            }
+          })}
         </div>
       </div>
     )
@@ -191,19 +190,31 @@ export default class UserCenter extends React.Component {
               <div className="ucInformationText">
                 <span className="red">*</span> Name:
               </div>
-              <input className="ucInformationInput" value={userInfo && userInfo.userName?userInfo.userName : null}/>
+              <input
+                className="ucInformationInput"
+                value={userInfo && userInfo.userName?userInfo.userName : ''}
+                onChange={this.handleuserName}
+                />
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 Mobile phone:
               </div>
-              <input className="ucInformationInput" value={userInfo && userInfo.tel?userInfo.tel : null}/>
+              <input
+                className="ucInformationInput"
+                value={userInfo && userInfo.tel?userInfo.tel : ''}
+                onChange={this.handletel}
+              />
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 <span className="red">*</span> E-mail:
               </div>
-              <input className="ucInformationInput" value={userInfo && userInfo.email?userInfo.email : null}/>
+              <input
+                className="ucInformationInput"
+                value={userInfo && userInfo.email?userInfo.email : ''}
+                onChange={this.handleemail}
+              />
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
@@ -284,16 +295,17 @@ export default class UserCenter extends React.Component {
         </div>
         {this.getShowSectionBody()}
 
-        <div className="userCenterPaginationCon">
-          <div className="userCenterPagination">
-              <Pagination
-                defaultCurrent={1}
-                total={this.state.searchTotal}
-                showQuickJumper
-                onChange={current => this.onPageChange(current)}
-              />
-          </div>
-        </div>
+        {tabFlag !== "information" ? (
+          <div className="userCenterPaginationCon">
+            <div className="userCenterPagination">
+                <Pagination
+                  defaultCurrent={1}
+                  total={this.state.searchTotal}
+                  showQuickJumper
+                  onChange={current => this.onPageChange(current)}
+                />
+            </div>
+          </div>): null}
         <Footer />
       </div>
     )

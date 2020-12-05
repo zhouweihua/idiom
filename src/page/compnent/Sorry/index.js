@@ -18,7 +18,7 @@ export default class Sorry extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log("symbol -->" + this.state.symbol);
+    // console.log("symbol -->" + this.state.symbol);
     this.props.submintResoure && this.props.submintResoure(this.state.symbol)
   }
 

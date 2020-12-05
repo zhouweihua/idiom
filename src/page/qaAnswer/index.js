@@ -10,10 +10,19 @@ import IdiomQaItem from "../compnent/IdiomQaItem";
 import BuzzQaItem from "../compnent/BuzzQaItem";
 import { message } from 'antd';
 
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
+
 export default class QaAnswer extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'idiom',
+    userInfo:null,
+    qaId:'',
+    symbols: '',
+    pinyin: '',
+    chinese: '',
+    interpretation: '',
   }
 
   componentWillMount =() =>{
@@ -29,10 +38,19 @@ export default class QaAnswer extends React.Component {
     let qaId = query && query.qaId ? query.qaId : null
     if (qaId) {
       this.getResoure(pageFlag, qaId)
+      this.getResoureList(pageFlag, qaId)
     } else {
       message.error('查询id有误')
     }
     
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo && userInfo !=='null') {
+      this.setState({
+        userInfo: JSON.parse(userInfo)
+      })
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+    }
   }
 
   componentDidMount =() =>{
@@ -51,45 +69,140 @@ export default class QaAnswer extends React.Component {
     const { pageFlag } = this.state
     window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
   }
+  getResoureList = (pageFlag, qaId) => {
+    let searchUrl = baseUrl;
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/' + qaId
+    } else {
+      searchUrl = searchUrl + '/api/idiom/' + qaId
+    }
+    // 发起接口
+    axios.get(
+      searchUrl,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      if (response && response.data && response.data.data) {
+        // console.log(response.data)
+        let searchRes = response.data.data
+        if (pageFlag === "buzzword") {
+          this.setState({
+            symbols: searchRes.buzzword,
+            pinyin:searchRes.pinyin,
+            interpretation: searchRes.enInterpretation
+          })
+        } else {
+          this.setState({
+            symbols: searchRes.idiom,
+            pinyin:searchRes.pinyin,
+            chinese: searchRes.chExplanation,
+            interpretation: searchRes.enInterpretation
+          })
+          
+        }
+      } else {
+        message.info('没有查到相关释义')
+      }
+    })
+  }
+  
+  getResoure = (pageFlag, qaId) => {
+    let searchUrl = baseUrl;
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/' + qaId
+    } else {
+      searchUrl = searchUrl + '/api/idiom/' + qaId
+    }
+    // 发起接口
+    axios.get(
+      searchUrl,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      if (response && response.data && response.data.data) {
+        // console.log(response.data)
+        let searchRes = response.data.data
+        if (pageFlag === "buzzword") {
+          this.setState({
+            symbols: searchRes.buzzword,
+            pinyin:searchRes.pinyin,
+            interpretation: searchRes.enInterpretation
+          })
+        } else {
+          this.setState({
+            symbols: searchRes.idiom,
+            pinyin:searchRes.pinyin,
+            chinese: searchRes.chExplanation,
+            interpretation: searchRes.enInterpretation
+          })
+          
+        }
+      } else {
+        message.info('没有查到相关释义')
+      }
+    })
+  }
+  handleChangepinyin= e => {
+    this.setState({
+      pinyin: e.target.value,
+    })
+  }
 
-  getResoure = (pageFlag, searchValue) => {
-    // TODO axios
+  handleChangeChina= e => {
+    this.setState({
+      chinese: e.target.value,
+    })
+  }
+  handleChangeEnglish= e => {
+    this.setState({
+      interpretation: e.target.value,
+    })
   }
 
   getShowSectionTitle = () => {
-    const { pageFlag } = this.state
+    const { pageFlag, userInfo, symbols, pinyin } = this.state
     return (
       <div className="idiomQaAnswerTitleCon">
         <div className="idiomQaAnswerTitle">
           <div className="editName">
-            观察夺目
+            {symbols}
           </div>
           <div className="editQaCon">
             <div className="editSubTitle">
-              观察夺目
+              {symbols}
             </div>
             <div className="editSubUser">
-              User：allisfree4u@gmail.com
+              {userInfo && userInfo.email ? "User：" + userInfo.email: ''}
             </div>
             <div className="editItem">
               <div className="editMainTitle">
                 Chinese phonetic symbols
               </div>
-              <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
+              <input className="editCont" value={pinyin} onChange={this.handleChangepinyin}/>
             </div>
+
             {pageFlag ==="buzzword" ? null : (
               <div className="editItem">
                 <div className="editMainTitle">
                   Chinese explanation
                 </div>
-                <input className="editCont" />
+                <input className="editCont" value={this.state.chinese} onChange={this.handleChangeChina}/>
               </div>
             )}
+
             <div className="editItem">
               <div className="editMainTitle">
                 English interpretation
               </div>
-              <input className="editCont" />
+              <input className="editCont" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
             </div>
             <div className="editItemSubmitCon">
               <div className="editItemSubmit" onClick={this.handleClickSubmit}>

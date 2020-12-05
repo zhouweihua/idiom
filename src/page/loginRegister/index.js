@@ -16,7 +16,7 @@ export default class LoginRegister extends React.Component {
     loginCheckboxFlag: false,
     registCheckboxFlag: false,
     userValue: '', // 用户名 == email
-    IDValue: '', // 验证码
+    verifyCode: '', // 验证码
     pwValue: '', // 密码
     cpwValue: '',// 重复密码
     redirUrl: './?pageFlag=idiom' // 默认首页
@@ -83,10 +83,14 @@ export default class LoginRegister extends React.Component {
       userValue: e.target.value,
     })
   }
-  handleChangeIDValue= e => {
+  handleChangeverifyCode= e => {
     this.setState({
-      IDValue: e.target.value,
+      verifyCode: e.target.value,
     })
+  }
+  sendVerifyCode = () => {
+    // todo
+   message.info("The verification code has been sent to your email, please check and input to complete the registration")
   }
   handleChangePwValue= e => {
     this.setState({
@@ -101,7 +105,7 @@ export default class LoginRegister extends React.Component {
   
   handleGoConfirm = () => {
 
-    const { pageFlag, userValue, IDValue, pwValue, cpwValue, loginCheckboxFlag } = this.state
+    const { pageFlag, userValue, verifyCode, pwValue, cpwValue, loginCheckboxFlag } = this.state
     let params = {}
     switch (pageFlag) {
       case "login":
@@ -163,7 +167,7 @@ export default class LoginRegister extends React.Component {
 
   render() {
 
-    const { pageFlag, userValue, IDValue, pwValue, cpwValue } = this.state
+    const { pageFlag, userValue, verifyCode, pwValue, cpwValue } = this.state
     return (
       <div className="loginRegister">
         <Header />
@@ -200,8 +204,8 @@ export default class LoginRegister extends React.Component {
                 </div>
                 <input
                   className="lrInformationInput" 
-                  value={IDValue}
-                  onChange={this.handleChangeIDValue}/>
+                  value={verifyCode}
+                  onChange={this.handleChangeverifyCode}/>
               </div> : null}
 
               <div className="lrInformationItem">

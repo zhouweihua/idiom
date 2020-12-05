@@ -69,7 +69,7 @@ export default class Qa extends React.Component {
       }
     })
     .then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       if (response && response.data) {
         this.setState({
           searchRes: response.data.data,

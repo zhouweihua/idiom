@@ -3,6 +3,7 @@ import React from 'react'
 import qs from 'qs'
 import { Checkbox, message } from 'antd';
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 
 import axios from 'axios'
@@ -108,7 +109,7 @@ export default class LoginRegister extends React.Component {
           }
         })
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
             window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
             window.location.href = this.state.redirUrl
@@ -200,6 +201,7 @@ export default class LoginRegister extends React.Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

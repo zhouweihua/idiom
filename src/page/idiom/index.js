@@ -3,6 +3,8 @@ import React from 'react'
 import qs from 'qs'
 import { message } from 'antd'
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
+
 import Nav from "../compnent/nav";
 export default class Idiom extends React.Component {
   state = {
@@ -134,6 +136,7 @@ export default class Idiom extends React.Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

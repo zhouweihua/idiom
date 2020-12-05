@@ -1,6 +1,7 @@
 import './index.less'
 import React from 'react'
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import IdiomUcItem from "../compnent/IdiomUcItem";
 import BuzzUcItem from "../compnent/BuzzUcItem";
@@ -283,6 +284,7 @@ export default class UserCenter extends React.Component {
               />
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

@@ -3,6 +3,7 @@ import React from 'react'
 import qs from 'qs'
 import { Pagination } from 'antd';
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
 import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 
@@ -142,6 +143,7 @@ export default class Qa extends React.Component {
               />
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

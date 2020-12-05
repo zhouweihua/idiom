@@ -3,6 +3,7 @@ import React from 'react'
 import { Pagination } from 'antd';
 import qs from 'qs'
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
 
@@ -198,6 +199,7 @@ export default class idiomList extends React.Component {
             </div>
           </div>
         ) : null}
+        <Footer />
       </div>
     )
   }

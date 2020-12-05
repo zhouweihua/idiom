@@ -2,6 +2,7 @@ import './index.less'
 import React from 'react'
 import qs from 'qs'
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
 import IdiomItem from "../compnent/IdiomItem";
@@ -96,6 +97,7 @@ export default class IdiomDetail extends React.Component {
           handleSearch={this.handleSearch}
         />
         {this.getShowSection()}
+        <Footer />
       </div>
     )
   }

@@ -7,6 +7,10 @@ export default class Nav extends React.Component {
   }
 
   componentDidMount =() =>{}
+  
+  handleGoIcon = () => {
+    window.location.href = "./"
+  }
 
   handleGoIdiom = () => {
     this.props.handleGoIdiom && this.props.handleGoIdiom()
@@ -25,7 +29,7 @@ export default class Nav extends React.Component {
     return (
       <div className="idiomNavCon">
         <div className="idiomNav">
-          <div className="idiomIcon" /> 
+          <div className="idiomIcon"  onClick={this.handleGoIcon}/> 
           <div className="idiomLink">
             <div className={idiomStyle || "idiomLinkItem"} onClick={this.handleGoIdiom}>Idiom</div>
             <div className={buzzwordStyle || "idiomLinkItem"} onClick={this.handleGoBuzzword}>Buzzwords</div>

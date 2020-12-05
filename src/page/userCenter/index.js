@@ -19,7 +19,11 @@ export default class UserCenter extends React.Component {
     pageFlag: 'idiom',
     answerList: [],
     questionList: [],
-    searchTotal: 1
+    searchTotal: 1,
+    email: '',
+    tel: '',
+    face: '',
+    profile: '',
   }
 
   componentWillMount = () =>{
@@ -33,8 +37,13 @@ export default class UserCenter extends React.Component {
     }
     let userInfo = window.localStorage.getItem("userInfo")
     if (userInfo && userInfo !=='null') {
+      userInfo = JSON.parse(userInfo)
       this.setState({
-        userInfo: JSON.parse(userInfo)
+        userInfo,
+        email:userInfo.email,
+        tel:userInfo.tel,
+        face:userInfo.face,
+        profile:userInfo.profile,
       })
       this.getUserAnswer(1)
     } else {
@@ -180,7 +189,7 @@ export default class UserCenter extends React.Component {
     )
   }
   getInformationSectionBody = () => {
-    const {userInfo} = this.state
+    const {email, tel, face, profile } = this.state
     return (
       <div className="ucInformationCon">
         <div className="ucInformation">
@@ -188,11 +197,11 @@ export default class UserCenter extends React.Component {
             <div className="ucInformationEdit" onClick={this.handleClickEdit}>Edit</div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
-                <span className="red">*</span> Name:
+                <span className="red">*</span> E-mail:
               </div>
               <input
                 className="ucInformationInput"
-                value={userInfo && userInfo.email?userInfo.email : ''}
+                value={email ? email : ''}
                 onChange={this.handleemail}
                 />
             </div>
@@ -202,31 +211,30 @@ export default class UserCenter extends React.Component {
               </div>
               <input
                 className="ucInformationInput"
-                value={userInfo && userInfo.tel?userInfo.tel : ''}
+                value={tel ? tel : ''}
                 onChange={this.handletel}
-              />
-            </div>
-            <div className="ucInformationItem">
-              <div className="ucInformationText">
-                <span className="red">*</span> E-mail:
-              </div>
-              <input
-                className="ucInformationInput"
-                value={userInfo && userInfo.email?userInfo.email : ''}
-                onChange={this.handleemail}
               />
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 face/ins:
               </div>
-              <input className="ucInformationInput"/>
+              <input
+                className="ucInformationInput"
+                value={face ? face : ''}
+                onChange={this.handleface}
+                />
             </div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 Profile:
               </div>
-              <textarea rows="4" className="ucInformationTexArea"/>
+              <textarea 
+                rows="4"
+                className="ucInformationTexArea"
+                value={profile ? profile : ''}
+                onChange={this.handleprofile}
+              />
             </div>
             <div className="ucInformationButtonItem">
               <div className="ucInformationButton">Cancel</div>
@@ -237,6 +245,27 @@ export default class UserCenter extends React.Component {
       </div>
     )
   }
+  handleemail = e => {
+    this.setState({
+      email: e.target.value,
+    })
+  }
+  handletel = e => {
+    this.setState({
+      tel: e.target.value,
+    })
+  }
+  handleface = e => {
+    this.setState({
+      face: e.target.value,
+    })
+  }
+  handleprofile = e => {
+    this.setState({
+      profile: e.target.value,
+    })
+  }
+
   handleChangeTab = tabFlag => {
     this.setState({
       tabFlag,

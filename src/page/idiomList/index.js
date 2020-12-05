@@ -190,8 +190,8 @@ export default class idiomList extends React.Component {
         'X-Nonce': guid()
       }
     })
-    .then((response) => {console.log(response.data)
-      console.log(response.data)
+    .then((response) => {
+      // console.log(response.data)
       if (response && response.data && response.data.data) {
         // todo
         message.info('提交定义成功')

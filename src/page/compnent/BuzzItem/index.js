@@ -7,7 +7,7 @@ export default class BuzzItem extends React.Component {
   }
   
   componentDidMount =() =>{
-    console.log(this.props.search)
+    // console.log(this.props.search)
   }
   handleClickEdit = itemId =>{
     this.props.handleClickEdit && this.props.handleClickEdit(itemId)

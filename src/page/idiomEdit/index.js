@@ -70,7 +70,7 @@ export default class IdiomEdit extends React.Component {
     })
     .then((response) => {
       if (response && response.data && response.data.data) {
-        console.log(response.data)
+        // console.log(response.data)
         let searchRes = response.data.data
         if (pageFlag === "buzzword") {
           this.setState({
@@ -119,8 +119,8 @@ export default class IdiomEdit extends React.Component {
         'X-Nonce': guid()
       }
     })
-    .then((response) => {console.log(response.data)
-      console.log(response.data)
+    .then((response) => {
+      // console.log(response.data)
       if (response && response.data && response.data.data) {
         // todo
       } else {
@@ -160,8 +160,8 @@ export default class IdiomEdit extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log("explanation -->" + this.state.explanation);
-    console.log("interpretation -->" + this.state.interpretation);
+    // console.log("explanation -->" + this.state.explanation);
+    // console.log("interpretation -->" + this.state.interpretation);
     this.submintResoure()
   }
 

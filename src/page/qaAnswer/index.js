@@ -3,6 +3,7 @@ import React from 'react'
 import qs from 'qs'
 import { Pagination } from 'antd';
 import Header from "../compnent/header";
+import Footer from "../compnent/footer";
 import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 import IdiomQaItem from "../compnent/IdiomQaItem";
@@ -133,6 +134,7 @@ export default class QaAnswer extends React.Component {
         </div>
         {this.getShowSectionTitle()}
         {this.getShowSectionBody()}
+        <Footer />
       </div>
     )
   }

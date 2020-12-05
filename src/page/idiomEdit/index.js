@@ -5,18 +5,25 @@ import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
+import { message } from 'antd';
+
+
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
 
 export default class IdiomEdit extends React.Component {
   state = {
     reflashFlag: false,
-    symbols: '',
-    explanation: '',
-    interpretation: '',
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
     idiomStyle: "idiomLinkItem act",
     buzzwordStyle: "idiomLinkItem",
     searchValue: '',
+    itemId:'',
+    symbols: '',
+    pinyin: '',
+    chinese: '',
+    interpretation: '',
   }
   componentWillMount =() =>{
     let queryObject = window.location.search
@@ -36,22 +43,126 @@ export default class IdiomEdit extends React.Component {
         placeholder: 'Enter Your Buzzwords',
       })
     }
+    let itemId = query && query.itemId ? query.itemId : null
+    if (itemId) {
+      this.getResoure(pageFlag, itemId)
+    } else {
+      message.error('查询id有误')
+    }
+    
+  }
+  
+  getResoure = (pageFlag, itemId) => {
+    let searchUrl = baseUrl;
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/' + itemId
+    } else {
+      searchUrl = searchUrl + '/api/idiom/' + itemId
+    }
+    // 发起接口
+    axios.get(
+      searchUrl,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      if (response && response.data && response.data.data) {
+        console.log(response.data)
+        let searchRes = response.data.data
+        if (pageFlag === "buzzword") {
+          this.setState({
+            symbols: searchRes.buzzword,
+            pinyin:searchRes.pinyin,
+            interpretation: searchRes.enInterpretation
+          })
+        } else {
+          this.setState({
+            symbols: searchRes.idiom,
+            pinyin:searchRes.pinyin,
+            chinese: searchRes.chExplanation,
+            interpretation: searchRes.enInterpretation
+          })
+          
+        }
+      } else {
+        message.info('没有查到相关释义')
+      }
+    })
   }
 
+  submintResoure = () => {
+    let searchUrl = baseUrl;
+    let params ={}
+    const {pageFlag, itemId, pinyin, chinese, interpretation} = this.state
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/' + itemId
+      params.id = itemId
+      params.pinyin = pinyin
+      params.enInterpretation = interpretation
+    } else {
+      searchUrl = searchUrl + '/api/idiom/' + itemId
+      params.id = itemId
+      params.pinyin = pinyin
+      params.chExplanation = chinese
+      params.enInterpretation = interpretation
+    }
+    // 发起接口
+    axios.post(
+      searchUrl,
+      params,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {console.log(response.data)
+      console.log(response.data)
+      if (response && response.data && response.data.data) {
+        
+      } else {
+        message.info('提交候选释义失败')
+      }
+    })
+  }
   componentDidMount =() =>{
     
   }
 
-  handleChangeSymbols = e => {
+  handleChangeChina= e => {
     this.setState({
-      symbols: e.target.value,
+      chinese: e.target.value,
+    })
+  }
+  handleChangeEnglish= e => {
+    this.setState({
+      interpretation: e.target.value,
     })
   }
 
+  handleGoIdiom = () => {
+    window.location.href = "./idiom?pageFlag=idiom"
+  }
+  handleGoBuzzword = () => {
+    window.location.href = "./idiom?pageFlag=buzzword"
+  }
+  handleGoQA = () => {
+    let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
+    let userInfo = window.localStorage.getItem("userInfo")
+    if (userInfo && userInfo !=='null') {
+      window.location.href = qaUrl
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+    }
+  }
+
   handleSubmit = () => {
-    console.log("symbols -->" + this.state.symbols);
     console.log("explanation -->" + this.state.explanation);
     console.log("interpretation -->" + this.state.interpretation);
+    this.submintResoure()
   }
 
   render() {
@@ -64,6 +175,7 @@ export default class IdiomEdit extends React.Component {
           buzzwordStyle={buzzwordStyle}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzword={this.handleGoBuzzword}
+          handleGoQA={this.handleGoQA}
         />
         <HeaderSearch searchValue={searchValue}/>
         <div className="idiomEditCon">
@@ -75,21 +187,21 @@ export default class IdiomEdit extends React.Component {
               <div className="editMainTitle">
                 Chinese phonetic symbols
               </div>
-              <input className="editCont" value={this.state.symbols} onChange={this.handleChangeSymbols}/>
+              <input className="editCont" value={this.state.pinyin + " " + this.state.symbols} disabled/>
             </div>
             {pageFlag ==="buzzword" ? null : (
               <div className="editItem">
                 <div className="editMainTitle">
                   Chinese explanation
                 </div>
-                <input className="editCont" />
+                <input className="editCont" value={this.state.chinese} onChange={this.handleChangeChina}/>
               </div>
             )}
             <div className="editItem">
               <div className="editMainTitle">
                 English interpretation
               </div>
-              <input className="editCont" />
+              <input className="editCont" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
             </div>
           </div>
         </div>

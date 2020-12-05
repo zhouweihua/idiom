@@ -196,7 +196,7 @@ export default class LoginRegister extends React.Component {
 
               {pageFlag === "register" || pageFlag === "forgot" ? <div className="lrInformationItem">
                 <div className="lrInformationText">
-                  Identifying code
+                  Verification code
                 </div>
                 <input
                   className="lrInformationInput" 

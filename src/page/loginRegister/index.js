@@ -135,7 +135,6 @@ export default class LoginRegister extends React.Component {
         // console.log(userValue + ' ' + pwValue)
         params.email = userValue
         params.password = pwValue
-        params.userName = 
         axios.post(
           baseUrl + '/api/user/signup',
           params,
@@ -186,7 +185,7 @@ export default class LoginRegister extends React.Component {
 
               <div className="lrInformationItem">
                 <div className="lrInformationText">
-                  Username
+                  email
                 </div>
                 <input
                   className="lrInformationInput"

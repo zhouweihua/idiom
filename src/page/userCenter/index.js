@@ -192,8 +192,8 @@ export default class UserCenter extends React.Component {
               </div>
               <input
                 className="ucInformationInput"
-                value={userInfo && userInfo.userName?userInfo.userName : ''}
-                onChange={this.handleuserName}
+                value={userInfo && userInfo.email?userInfo.email : ''}
+                onChange={this.handleemail}
                 />
             </div>
             <div className="ucInformationItem">

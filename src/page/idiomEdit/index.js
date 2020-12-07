@@ -19,7 +19,7 @@ export default class IdiomEdit extends React.Component {
     idiomStyle: "idiomLinkItem act",
     buzzwordStyle: "idiomLinkItem",
     searchValue: '',
-    itemId:'',
+    itemId:null,
     symbols: '',
     pinyin: '',
     chinese: '',
@@ -46,6 +46,9 @@ export default class IdiomEdit extends React.Component {
     let itemId = query && query.itemId ? query.itemId : null
     if (itemId) {
       this.getResoure(pageFlag, itemId)
+      this.setState({
+        itemId: parseInt(itemId)
+      })
     } else {
       message.error('查询id有误')
     }

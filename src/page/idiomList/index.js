@@ -6,7 +6,7 @@ import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 
 
 import axios from 'axios'
@@ -193,8 +193,10 @@ export default class idiomList extends React.Component {
     .then((response) => {
       // console.log(response.data)
       if (response && response.data && response.data.data) {
-        // todo
-        message.info('提交定义成功')
+        Modal.info({
+          title: '',
+          content: 'Thank you for your supplement.Administrators and other users will help you complete it.',
+        });
       } else {
         message.info('提交定义失败')
       }

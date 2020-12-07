@@ -193,9 +193,10 @@ export default class idiomList extends React.Component {
     .then((response) => {
       // console.log(response.data)
       if (response && response.data && response.data.data) {
-        Modal.info({
-          title: '',
+        let modalDefine = Modal.info({
+          title: 'Info',
           content: 'Thank you for your supplement.Administrators and other users will help you complete it.',
+          onOk:()=>{modalDefine.destroy()}
         });
       } else {
         message.info('提交定义失败')

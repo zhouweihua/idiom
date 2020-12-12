@@ -1,14 +1,13 @@
 import './index.less'
 import React from 'react'
 import qs from 'qs'
-import { Pagination } from 'antd';
 import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 import IdiomQaItem from "../compnent/IdiomQaItem";
 import BuzzQaItem from "../compnent/BuzzQaItem";
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'
@@ -37,6 +36,7 @@ export default class QaAnswer extends React.Component {
   
     let qaId = query && query.qaId ? query.qaId : null
     if (qaId) {
+      this.setState({qaId})
       this.getResoure(pageFlag, qaId)
       this.getResoureList(pageFlag, qaId)
     } else {
@@ -213,6 +213,49 @@ export default class QaAnswer extends React.Component {
         </div>
       </div>
     )
+  }
+  handleClickSubmit = () => {
+    this.submintResoure()
+  }
+
+  submintResoure = () => {
+    let searchUrl = baseUrl;
+    let params ={}
+    const {pageFlag, qaId, pinyin, chinese, interpretation} = this.state
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/' + qaId
+      params.id = qaId
+      params.pinyin = pinyin
+      params.enInterpretation = interpretation
+    } else {
+      searchUrl = searchUrl + '/api/idiom/' + qaId
+      params.id = qaId
+      params.pinyin = pinyin
+      params.chExplanation = chinese
+      params.enInterpretation = interpretation
+    }
+    // 发起接口
+    axios.post(
+      searchUrl,
+      params,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      // console.log(response.data)
+      if (response && response.data && response.data.data) {
+        let modalAnswer = Modal.info({
+          title: 'Info',
+          content: 'Thank you for your answer. If it is approved, we will upload  to the website',
+          onOk:()=>{modalAnswer.destroy()}
+        });
+      } else {
+        message.info('提交候选释义失败')
+      }
+    })
   }
 
   getShowSectionBody = () => {

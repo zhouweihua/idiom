@@ -1,7 +1,7 @@
 import './index.less'
 import React from 'react'
 import qs from 'qs'
-import { Checkbox, message } from 'antd';
+import { Checkbox, message, Modal } from 'antd';
 import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
@@ -88,10 +88,6 @@ export default class LoginRegister extends React.Component {
       verifyCode: e.target.value,
     })
   }
-  sendVerifyCode = () => {
-    // todo
-   message.info("The verification code has been sent to your email, please check and input to complete the registration")
-  }
   handleChangePwValue= e => {
     this.setState({
       pwValue: e.target.value,
@@ -103,6 +99,14 @@ export default class LoginRegister extends React.Component {
     })
   }
   
+  handleSendVer = () => {
+    let modalVerifyCode = Modal.info({
+      title: 'Info',
+      content: 'The verification code has been sent to your email, please check and input to complete the registration',
+      onOk:()=>{modalVerifyCode.destroy()}
+    });
+  }
+
   handleGoConfirm = () => {
 
     const { pageFlag, userValue, verifyCode, pwValue, cpwValue, loginCheckboxFlag } = this.state
@@ -198,15 +202,19 @@ export default class LoginRegister extends React.Component {
                   onChange={this.handleChangeUserValue}/>
               </div>
 
-              {pageFlag === "register" || pageFlag === "forgot" ? <div className="lrInformationItem">
-                <div className="lrInformationText">
-                  Verification code
-                </div>
-                <input
-                  className="lrInformationInput" 
-                  value={verifyCode}
-                  onChange={this.handleChangeverifyCode}/>
-              </div> : null}
+              {pageFlag === "register" || pageFlag === "forgot" ?
+                <div className="lrInformationItem">
+                  <div className="lrInformationText">
+                    Verification code
+                  </div>
+                  <div className="lrInformationVerCont">
+                    <input
+                      className="lrInformationVerInput" 
+                      value={verifyCode}
+                      onChange={this.handleChangeverifyCode}/>
+                    <div className="lrInformationButton" onClick={this.handleSendVer}>Send</div>
+                  </div>
+                </div> : null}
 
               <div className="lrInformationItem">
                 <div className="lrInformationText">

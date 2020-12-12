@@ -24,6 +24,7 @@ export default class UserCenter extends React.Component {
     tel: '',
     face: '',
     profile: '',
+    editShow: true
   }
 
   componentWillMount = () =>{
@@ -158,9 +159,9 @@ export default class UserCenter extends React.Component {
         <div className="ucAnswer">
           {answerList && answerList.map((answer,anIndex) => {
             if(answer.type === "idiom") {
-              return <IdiomUcItem answer={answer}/>
+              return <IdiomUcItem answer={answer} key={"idiom" + anIndex}/>
             } else if(answer.type === "buzzword") {
-              return <BuzzUcItem answer={answer} />
+              return <BuzzUcItem answer={answer}  key={"buzz" + anIndex}/>
             } else {
               return null
             }
@@ -170,6 +171,21 @@ export default class UserCenter extends React.Component {
     )
   }
 
+  handleInfoEdit =() =>{
+    this.setState({
+      editShow: false
+    })
+  }
+
+  handleInfoCancel =() =>{
+    this.setState({
+      editShow: true
+    })
+  }
+
+  handleInfoSubmit =() =>{
+    
+  }
 
   getQuestionSectionBody = () => {
     const { questionList } = this.state
@@ -189,17 +205,18 @@ export default class UserCenter extends React.Component {
     )
   }
   getInformationSectionBody = () => {
-    const {email, tel, face, profile } = this.state
+    const {email, tel, face, profile, editShow } = this.state
     return (
       <div className="ucInformationCon">
         <div className="ucInformation">
           <div className="ucInformationSec">
-            <div className="ucInformationEdit" onClick={this.handleClickEdit}>Edit</div>
+            <div className="ucInformationEdit" onClick={this.handleInfoEdit}>Edit</div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 <span className="red">*</span> E-mail:
               </div>
               <input
+                disabled={editShow}
                 className="ucInformationInput"
                 value={email ? email : ''}
                 onChange={this.handleemail}
@@ -210,6 +227,7 @@ export default class UserCenter extends React.Component {
                 Mobile phone:
               </div>
               <input
+                disabled={editShow}
                 className="ucInformationInput"
                 value={tel ? tel : ''}
                 onChange={this.handletel}
@@ -220,6 +238,7 @@ export default class UserCenter extends React.Component {
                 face/ins:
               </div>
               <input
+                disabled={editShow}
                 className="ucInformationInput"
                 value={face ? face : ''}
                 onChange={this.handleface}
@@ -231,15 +250,16 @@ export default class UserCenter extends React.Component {
               </div>
               <textarea 
                 rows="4"
+                disabled={editShow}
                 className="ucInformationTexArea"
                 value={profile ? profile : ''}
                 onChange={this.handleprofile}
               />
             </div>
-            <div className="ucInformationButtonItem">
-              <div className="ucInformationButton">Cancel</div>
-              <div className="ucInformationButton act">Submit</div>
-            </div>
+            {editShow ? null : <div className="ucInformationButtonItem">
+              <div className="ucInformationButton" onClick={this.handleInfoCancel}>Cancel</div>
+              <div className="ucInformationButton act" onClick={this.handleInfoSubmit}>Submit</div>
+            </div>}
           </div>
         </div>
       </div>

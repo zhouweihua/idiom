@@ -5,7 +5,7 @@ import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import HeaderSearch from "../compnent/headerSearch";
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 
 
 import axios from 'axios'
@@ -125,7 +125,11 @@ export default class IdiomEdit extends React.Component {
     .then((response) => {
       // console.log(response.data)
       if (response && response.data && response.data.data) {
-        // todo
+        let modalAnswer = Modal.info({
+          title: 'Info',
+          content: 'Thank you for your answer. If it is approved, we will upload  to the website',
+          onOk:()=>{modalAnswer.destroy()}
+        });
       } else {
         message.info('提交候选释义失败')
       }

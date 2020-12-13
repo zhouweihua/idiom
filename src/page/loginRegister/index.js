@@ -17,10 +17,13 @@ export default class LoginRegister extends React.Component {
     registCheckboxFlag: false,
     userValue: '', // 用户名 == email
     verifyCode: '', // 验证码
+    verifyFlag: true,
+    verifyText:'Send',
     pwValue: '', // 密码
     cpwValue: '',// 重复密码
     redirUrl: './?pageFlag=idiom' // 默认首页
   }
+  countDown = 6
 
   componentWillMount =() =>{
     let queryObject = window.location.search
@@ -100,16 +103,42 @@ export default class LoginRegister extends React.Component {
   }
   
   handleSendVer = () => {
-    let modalVerifyCode = Modal.info({
-      title: 'Info',
-      content: 'The verification code has been sent to your email, please check and input to complete the registration',
-      onOk:()=>{modalVerifyCode.destroy()}
-    });
+    let self = this
+    const {verifyText, verifyFlag} = this.state
+    if (verifyFlag) {
+
+      let modalVerifyCode = Modal.info({
+        title: 'Info',
+        content: 'The verification code has been sent to your email, please check and input to complete the registration',
+        onOk:()=>{modalVerifyCode.destroy()}
+      });
+  
+      this.intervalId = setInterval(() => {
+        if (self.countDown <= 0) {
+          clearInterval(self.intervalId)
+          self.setState({
+            verifyFlag: true,
+            verifyText: 'Send'
+          })
+          self.countDown = 6
+        } else {
+          self.setState({
+            verifyFlag: false,
+            verifyText: self.countDown + 's'
+          })
+          self.countDown--
+        }
+      }, 1000)
+      this.setState({verifyFlag: true})
+    } else {
+      message.info("正在倒计时")
+    }
+
   }
 
   handleGoConfirm = () => {
 
-    const { pageFlag, userValue, verifyCode, pwValue, cpwValue, loginCheckboxFlag } = this.state
+    const { pageFlag, userValue, verifyCode,verifyFlag, verifyText, pwValue, cpwValue, loginCheckboxFlag } = this.state
     let params = {}
     switch (pageFlag) {
       case "login":
@@ -171,7 +200,7 @@ export default class LoginRegister extends React.Component {
 
   render() {
 
-    const { pageFlag, userValue, verifyCode, pwValue, cpwValue } = this.state
+    const { pageFlag, userValue, verifyCode, verifyText, pwValue, cpwValue } = this.state
     return (
       <div className="loginRegister">
         <Header />
@@ -212,7 +241,7 @@ export default class LoginRegister extends React.Component {
                       className="lrInformationVerInput" 
                       value={verifyCode}
                       onChange={this.handleChangeverifyCode}/>
-                    <div className="lrInformationButton" onClick={this.handleSendVer}>Send</div>
+                    <div className="lrInformationButton" onClick={this.handleSendVer}>{verifyText}</div>
                   </div>
                 </div> : null}
 

@@ -23,7 +23,7 @@ export default class LoginRegister extends React.Component {
     cpwValue: '',// 重复密码
     redirUrl: './?pageFlag=idiom' // 默认首页
   }
-  countDown = 6
+  countDown = 60
 
   componentWillMount =() =>{
     let queryObject = window.location.search
@@ -120,7 +120,7 @@ export default class LoginRegister extends React.Component {
             verifyFlag: true,
             verifyText: 'Send'
           })
-          self.countDown = 6
+          self.countDown = 60
         } else {
           self.setState({
             verifyFlag: false,

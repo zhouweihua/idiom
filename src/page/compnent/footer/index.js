@@ -13,14 +13,14 @@ export default class Footer extends React.Component {
     return (
     <div className="footer">
       <div className="footerContain">
-        <div className="footerItem">
+        <div className="footerItem footerItemFirst">
           <div className="footerTitle">About Us
           </div>
           <div className="footerSection">
             Our aim is to build a platform for us to learn Chinese idioms together. If we do the same thing together, we will surely succeed. 
           </div>
         </div>
-        <div className="footerItem">
+        <div className="footerItem footerItemSecond">
           <div className="footerTitle">Get In Touch
           </div>
           <div className="footerSection">
@@ -28,7 +28,7 @@ export default class Footer extends React.Component {
             <p>ur address goes here,street.</p>
           </div>
         </div>
-        <div className="footerItem">
+        <div className="footerItem footerItemSecond">
           <div className="footerTitle">Important
           </div>
           <div className="footerSection">

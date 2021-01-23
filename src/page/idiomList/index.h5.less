@@ -1,3 +1,40 @@
-.test{
-  background-color: red;
+@comWidth: 100%;
+
+.idiomListHome {
+  width: 100%;
+  .idiomDeatailsCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.8rem;
+    padding-bottom: 1.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    .idiomDeatails {
+      width: @comWidth;
+      display: flex;
+      flex-direction: column;
+      border-bottom: solid 1px #e9e9e9;
+      &:first-child {
+        border-top: solid 1px #14b1bb;
+        background: #eee;
+      }
+    }
+    .idiomDeatailEmpty {
+      padding-top: 1.8rem;
+      padding-bottom: 1.8rem;
+    }
+  }
+  .idiomPaginationCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.8rem;
+    .idiomPagination {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

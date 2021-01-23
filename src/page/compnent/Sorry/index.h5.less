@@ -1,3 +1,68 @@
-.test{
-  background-color: red;
+@comWidth: 100%;
+
+.idiomSorryCon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+  padding-bottom: 1.8rem;
+  .idiomSorry {
+    width: @comWidth;
+    display: flex;
+    flex-direction: column;
+    .sorryMainDes {
+      font-size: 2.8rem;
+      color: #4b5a6a;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .sorrySubDes {
+      font-size: 1.2rem;
+      line-height: 1.9rem;
+      color: #4b5a6a;
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    .sorryItem {
+      margin-top: 3rem;
+      .sorryMainTitle {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4b5a6a;
+      }
+      .sorryCont {
+        width: 100%;
+        margin-top: 1.2rem;
+        height: 3.5rem;
+        background-color: #ffffff;
+        border: solid 1px #e9e9e9;
+      }
+    }
+  }
+}
+.idiomSubmitCon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+  padding-bottom: 1.8rem;
+  .idiomSubmit {
+    width: @comWidth;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .submitButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      width: 21rem;
+      height: 3.6rem;
+      background-color: #14b1bb;
+
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+  }
 }

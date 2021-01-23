@@ -1,3 +1,217 @@
-.test{
-  background-color: red;
+@comWidth: 100%;
+
+.userCenter {
+  width: 100%;
+  .userCenterTitleCon {
+    width: 100%;
+    height: 19rem;
+    display: flex;
+    justify-content: center;
+    background: url("./img/user-center1.jpg") no-repeat;
+    background-size: cover;
+    .userCenterTitle {
+      position: relative;
+      width: @comWidth;
+      .ucTitleText {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        margin-top: 6.7rem;
+        font-size: 3rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+      .ucTitleHead {
+        position: absolute;
+        width: 10rem;
+        height: 10rem;
+        background: url("./img/user-center2.png") no-repeat;
+        background-size: cover;
+        left: 50%;
+        margin-left: -5rem;
+        bottom: 0;
+        margin-bottom: -5rem;
+      }
+    }
+  }
+
+  .userCenterDiffCon {
+    width: 100%;
+    margin-top: 5.5rem;
+    height: 7.4rem;
+    display: flex;
+    justify-content: center;
+    .userCenterDiff {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .ucDiff, .ucDiffMarg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 13rem;
+        height: 3.4rem;
+        background-color: #eaeaea;
+        border-radius: 1.7rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #4b5a6a;
+        
+        &.act {
+          background-color: #14b1bb;
+          color: #fff;
+        }
+      }
+      .ucDiffMarg {
+        margin-left: 5rem;
+      }
+    }
+  }
+
+  .ucAnswerCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.8rem;
+    .ucAnswer {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-bottom: solid 1px #e9e9e9;
+    }
+  }
+  .ucQuestionCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.8rem;
+    .ucQuestion {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .ucQuestionListSec {
+        width: 100%;
+        border-bottom: solid 1px #e9e9e9;
+        .ucQuestionSecItem {
+          width: 100%;
+          display: flex;
+          align-items: center;
+
+          height: 5rem;
+          padding-left: 1.6rem;
+          
+          border-top: solid 1px #e9e9e9;
+          border-left: solid 1px #e9e9e9;
+          border-right: solid 1px #e9e9e9;
+          .ucQuestionSecText {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4b5a6a;
+          }
+          .ucQuestionSecLink {
+            margin-left: 3rem;
+            font-size: 1.2rem;
+            color: #cfcfcf;
+            &.act {
+              color: #14b1bb;
+
+            }
+          }
+        }
+      }
+    }
+  }
+  .ucInformationCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.8rem;
+
+    .ucInformation {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .ucInformationSec {
+        width: 100%;
+        border: solid 1px #e9e9e9;
+        padding: 3rem;
+        .ucInformationEdit {
+          display: flex;
+          justify-content: flex-end;
+          font-size: 1.3rem;
+          color: #14b1bb;
+        }
+        .ucInformationItem {
+          display: flex;
+          justify-content: center;
+          padding-top: 0.7rem;
+          padding-bottom: 0.7rem;
+          align-items: center;
+          .ucInformationText {
+            width: 25%;
+            display: flex;
+            justify-content: flex-end;
+
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4b5a6a;
+            .red {
+              margin-right: 1rem;
+              color: red;
+            }
+          }
+          .ucInformationInput, .ucInformationTexArea {
+            width: 70%;
+            height: 3.4rem;
+            margin-left: 1rem;
+            border: solid 1px #e9e9e9;
+          }
+          .ucInformationTexArea {
+            height: 8.4rem;
+          }
+        }
+        .ucInformationButtonItem {
+          display: flex;
+          justify-content: center;
+          margin-top: 1rem;
+          .ucInformationButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 117rem;
+            height: 3.6rem;
+            font-size: 1.5rem;
+            background-color: #eaeaea;
+            color: #4b5a6a;
+            &.act {
+              margin-left: 7.7rem;
+              background-color: #14b1bb;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .userCenterPaginationCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.8rem;
+    .userCenterPagination {
+      width: @comWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

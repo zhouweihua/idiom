@@ -126,7 +126,7 @@ export default class Idiom extends React.Component {
                 ABCList.map((item, index) => {
                   return (
                     <div className="ABCItem" onClick={() => this.handleABCClick(item)} key={"abc" + index}>
-                      <div className="ABCItemCon act">
+                      <div className="ABCItemCon">
                         {item}
                       </div>
                     </div>

@@ -1,7 +1,7 @@
 import './index.less'
 import React from 'react'
 import qs from 'qs'
-import { Pagination } from 'antd';
+import { Pagination, message } from 'antd';
 import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 import HeaderSearch from "../compnent/headerSearch";
@@ -71,12 +71,14 @@ export default class Qa extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
-      if (response && response.data) {
+      if (response && response.data && response.data.code ==='000') {
         this.setState({
           searchRes: response.data.data,
           searchTotal:response.data.total,
           current: response.data.page,
         })
+      } else {
+        message.info(response.data.message)
       }
     })
   }

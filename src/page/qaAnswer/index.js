@@ -86,7 +86,7 @@ export default class QaAnswer extends React.Component {
       }
     })
     .then((response) => {
-      if (response && response.data && response.data.data) {
+      if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
         if (pageFlag === "buzzword") {
@@ -105,7 +105,7 @@ export default class QaAnswer extends React.Component {
           
         }
       } else {
-        message.info('没有查到相关释义')
+        message.info(response.data.message)
       }
     })
   }
@@ -127,7 +127,7 @@ export default class QaAnswer extends React.Component {
       }
     })
     .then((response) => {
-      if (response && response.data && response.data.data) {
+      if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
         if (pageFlag === "buzzword") {
@@ -146,7 +146,7 @@ export default class QaAnswer extends React.Component {
           
         }
       } else {
-        message.info('没有查到相关释义')
+        message.info(response.data.message)
       }
     })
   }
@@ -246,14 +246,14 @@ export default class QaAnswer extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
-      if (response && response.data && response.data.code) {
+      if (response && response.data && response.data.code ==='000') {
         let modalAnswer = Modal.info({
           title: 'Info',
           content: 'Thank you for your answer. If it is approved, we will upload  to the website',
           onOk:()=>{modalAnswer.destroy()}
         });
       } else {
-        message.info('提交候选释义失败')
+        message.info(response.data.message)
       }
     })
   }

@@ -6,7 +6,7 @@ import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import IdiomUcItem from "../compnent/IdiomUcItem";
 import BuzzUcItem from "../compnent/BuzzUcItem";
-import { Pagination } from 'antd';
+import { Pagination, message } from 'antd';
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'
@@ -91,12 +91,14 @@ export default class UserCenter extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
-      if (response && response.data) {
+      if (response && response.data && response.data.code ==='000') {
         this.setState({
           questionList: response.data.data,
           searchTotal:response.data.total,
           current:response.data.page
         })
+      } else {
+        message.info(response.data.message)
       }
     })
   }
@@ -112,11 +114,13 @@ export default class UserCenter extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
-      if (response && response.data) {
+      if (response && response.data && response.data.code ==='000') {
         this.setState({
           answerList: response.data.data,
           searchTotal:response.data.total
         })
+      } else {
+        message.info(response.data.message)
       }
     })
   }

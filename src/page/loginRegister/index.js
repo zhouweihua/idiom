@@ -144,14 +144,14 @@ export default class LoginRegister extends React.Component {
           })
           .then((response) => {
             // console.log(response.data)
-            if (response && response.data && response.data.code) {
+            if (response && response.data && response.data.code ==='000') {
               let modalAnswer = Modal.info({
                 title: 'Info',
                 content: '发送验证码成功',
                 onOk:()=>{modalAnswer.destroy()}
               });
             } else {
-              message.info('发送验证码失败')
+              message.info(response.data.message)
             }
           })
           this.setState({verifyFlag: true})
@@ -185,11 +185,11 @@ export default class LoginRegister extends React.Component {
             }
           })
           .then((response) => {
-            if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
+            if (response && response.data && response.data.code ==='000') {
               window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
               window.location.href = this.state.redirUrl
             } else {
-              message.info('登录失败')
+              message.info(response.data.message)
             }
           })
         } else {
@@ -220,7 +220,7 @@ export default class LoginRegister extends React.Component {
               message.info('注册成功')
               window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
             } else {
-              message.info('注册失败')
+              message.info(response.data.message)
             }
           })
         } else {

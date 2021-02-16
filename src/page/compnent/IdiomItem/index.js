@@ -14,9 +14,13 @@ export default class IdiomItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit()
   }
   render() {
-    const { search } = this.props
+    const { search, index } = this.props
+    let style = "idiomDeatailItem"
+    if (index === 0) {
+      style = style + " first"
+    }
     return (
-      <div className="idiomDeatailItem">
+      <div className={style}>
         <div className="idiomSymbols">
           <div className="textLeft">Chinese phonetic symbols：</div>
           <div className="textRight">

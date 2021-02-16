@@ -147,7 +147,7 @@ export default class idiomList extends React.Component {
           <div className="idiomDeatailsCon">
             <div className="idiomDeatails">
               {searchRes.map((search, buzzIndex) => {
-                  return <BuzzItem search={search}  key={"buzz" + buzzIndex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
+                  return <BuzzItem search={search} index={buzzIndex} key={"buzz" + buzzIndex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
                 })}
             </div>
           </div>
@@ -157,7 +157,7 @@ export default class idiomList extends React.Component {
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
             {searchRes.map((search,idiomInex) => {
-                return <IdiomItem search={search} key={"idiom" + idiomInex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
+                return <IdiomItem search={search} index={idiomInex} key={"idiom" + idiomInex} handleClickEdit={() => this.handleClickEdit(search.id)}/>
               })}
           </div>
         </div>

@@ -68,7 +68,8 @@ export default class Idiom extends React.Component {
     if (searchValue) {
       window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
-      message.info("请输入需要查询的内容")
+      // message.info("请输入需要查询的内容")
+      window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue="
     }
   }
 

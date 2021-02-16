@@ -99,32 +99,66 @@ export default class LoginRegister extends React.Component {
   
   handleSendVer = () => {
     let self = this
-    const {verifyText, verifyFlag} = this.state
+    const {verifyText, verifyFlag, userValue} = this.state
+    if (userValue === null || userValue === "") {
+      message.info('邮箱不能为空')
+      return
+    }
     if (verifyFlag) {
 
       let modalVerifyCode = Modal.info({
         title: 'Info',
         content: 'The verification code has been sent to your email, please check and input to complete the registration',
-        onOk:()=>{modalVerifyCode.destroy()}
+        onOk:()=>{
+          modalVerifyCode.destroy()
+        
+        // 倒计时
+        this.intervalId = setInterval(() => {
+          if (self.countDown <= 0) {
+            clearInterval(self.intervalId)
+            self.setState({
+              verifyFlag: true,
+              verifyText: 'Send'
+            })
+            self.countDown = 60
+          } else {
+            self.setState({
+              verifyFlag: false,
+              verifyText: self.countDown + 's'
+            })
+            self.countDown--
+          }
+        }, 1000)
+        
+          // 发起验证码接口
+          let params = {}
+          params.email = userValue
+          axios.post(
+            baseUrl + '/api/user/sendcode',
+            params,
+            {
+              headers: {
+              'X-Timestamp': Date.parse( new Date() ).toString(),
+              'X-Nonce': guid()
+            }
+          })
+          .then((response) => {
+            // console.log(response.data)
+            if (response && response.data && response.data.code) {
+              let modalAnswer = Modal.info({
+                title: 'Info',
+                content: '发送验证码成功',
+                onOk:()=>{modalAnswer.destroy()}
+              });
+            } else {
+              message.info('发送验证码失败')
+            }
+          })
+          this.setState({verifyFlag: true})
+
+        }
       });
   
-      this.intervalId = setInterval(() => {
-        if (self.countDown <= 0) {
-          clearInterval(self.intervalId)
-          self.setState({
-            verifyFlag: true,
-            verifyText: 'Send'
-          })
-          self.countDown = 60
-        } else {
-          self.setState({
-            verifyFlag: false,
-            verifyText: self.countDown + 's'
-          })
-          self.countDown--
-        }
-      }, 1000)
-      this.setState({verifyFlag: true})
     } else {
       message.info("正在倒计时")
     }
@@ -133,7 +167,7 @@ export default class LoginRegister extends React.Component {
 
   handleGoConfirm = () => {
 
-    const { pageFlag, userValue, verifyCode,verifyFlag, verifyText, pwValue, cpwValue, loginCheckboxFlag } = this.state
+    const { pageFlag, userValue, verifyCode,verifyFlag, verifyText, pwValue, cpwValue, loginCheckboxFlag, registCheckboxFlag } = this.state
     let params = {}
     switch (pageFlag) {
       case "login":
@@ -165,26 +199,32 @@ export default class LoginRegister extends React.Component {
       case "register":
 
         // console.log(userValue + ' ' + pwValue)
-        params.email = userValue
-        params.password = pwValue
-        axios.post(
-          baseUrl + '/api/user/signup',
-          params,
-          {
-            headers: {
-            'X-Timestamp': Date.parse( new Date() ).toString(),
-            'X-Nonce': guid()
-          }
-        })
-        .then((response) => {
-          // console.log(response.data)
-          if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
-            window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
-            window.location.href = this.state.redirUrl
-          } else {
-            message.info('登录失败')
-          }
-        })
+
+        if (registCheckboxFlag) {
+          params.email = userValue
+          params.password = pwValue
+          params.code = verifyCode
+          axios.post(
+            baseUrl + '/api/user/signup',
+            params,
+            {
+              headers: {
+              'X-Timestamp': Date.parse( new Date() ).toString(),
+              'X-Nonce': guid()
+            }
+          })
+          .then((response) => {
+            // console.log(response.data)
+            if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
+              window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
+              window.location.href = this.state.redirUrl
+            } else {
+              message.info('注册失败')
+            }
+          })
+        } else {
+          message.info("请同意相关注册条款")
+        }
         return;
       case "forgot":
         return;
@@ -266,14 +306,14 @@ export default class LoginRegister extends React.Component {
 
               {pageFlag === "login" ? <div className="lrTerm">
                 <Checkbox checked={this.state.loginCheckboxFlag} onChange={this.handleloginCheckboxFlag}>
-                  I agree with the terms of use
+                  I agree with the terms of use the login agreements
                 </Checkbox>
                 <div className="lrTermForgot" onClick={this.handleGoFogot}>Forget  password?</div>
               </div> : null}
 
               {pageFlag === "register" ? <div className="lrTerm">
-                <Checkbox checked={this.state.checkboxFlag} onChange={this.handleregistCheckboxFlag}>
-                  I agree with the terms of use
+                <Checkbox checked={this.state.registCheckboxFlag} onChange={this.handleregistCheckboxFlag}>
+                  I agree with the terms of use the register agreements
                 </Checkbox>
               </div> : null}
 

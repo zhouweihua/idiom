@@ -31,7 +31,8 @@ export default class HeaderSearch extends React.Component {
     if (searchValue) {
       this.props.handleSearch && this.props.handleSearch(searchValue)
     } else {
-      message.info("请输入需要查询的内容")
+      // message.info("请输入需要查询的内容")
+      this.props.handleSearch && this.props.handleSearch("")
     }
   }
 

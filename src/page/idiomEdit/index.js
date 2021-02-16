@@ -113,7 +113,7 @@ export default class IdiomEdit extends React.Component {
       params.enInterpretation = interpretation
     }
     // 发起接口
-    axios.post(
+    axios.put(
       searchUrl,
       params,
       {
@@ -124,7 +124,7 @@ export default class IdiomEdit extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
-      if (response && response.data && response.data.data) {
+      if (response && response.data && response.data.code) {
         let modalAnswer = Modal.info({
           title: 'Info',
           content: 'Thank you for your answer. If it is approved, we will upload  to the website',

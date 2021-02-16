@@ -13,11 +13,13 @@ export default class Nav extends React.Component {
   }
 
   handleGoIdiom = () => {
+    // window.location.href = "/idiomList?pageFlag=idiom&searchValue="
     this.props.handleGoIdiom && this.props.handleGoIdiom()
   }
 
   handleGoBuzzword = () => {
-    this.props.handleGoBuzzword && this.props.handleGoBuzzword()
+    window.location.href = "/idiomList?pageFlag=buzzword&searchValue="
+    // this.props.handleGoBuzzword && this.props.handleGoBuzzword()
   }
 
   handleGoQA = () => {

@@ -13,9 +13,13 @@ export default class BuzzItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit(itemId)
   }
   render() {
-    const { search } = this.props
+    const { search, index } = this.props
+    let style = "buzzDeatailItem"
+    if (index === 0) {
+      style = style + " first"
+    }
     return (
-      <div className="buzzDeatailItem">
+      <div className={style}>
         <div className="buzzTitle">
           {search? search.pinyin + ' ' + search.buzzword : ''}
         </div>

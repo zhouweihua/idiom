@@ -77,6 +77,11 @@ export default class Qa extends React.Component {
           searchTotal:response.data.total,
           current: response.data.page,
         })
+        window.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth'
+        })
       } else {
         message.info(response.data.message)
       }

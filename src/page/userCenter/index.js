@@ -97,6 +97,11 @@ export default class UserCenter extends React.Component {
           searchTotal:response.data.total,
           current:response.data.page
         })
+        window.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth'
+        })
       } else {
         message.info(response.data.message)
       }
@@ -118,6 +123,11 @@ export default class UserCenter extends React.Component {
         this.setState({
           answerList: response.data.data,
           searchTotal:response.data.total
+        })
+        window.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth'
         })
       } else {
         message.info(response.data.message)

@@ -166,7 +166,6 @@ export default class LoginRegister extends React.Component {
   }
 
   handleGoConfirm = () => {
-
     const { pageFlag, userValue, verifyCode,verifyFlag, verifyText, pwValue, cpwValue, loginCheckboxFlag, registCheckboxFlag } = this.state
     let params = {}
     switch (pageFlag) {
@@ -197,9 +196,6 @@ export default class LoginRegister extends React.Component {
         }
         return;
       case "register":
-
-        // console.log(userValue + ' ' + pwValue)
-
         if (registCheckboxFlag) {
           params.email = userValue
           params.userName = userValue
@@ -228,12 +224,39 @@ export default class LoginRegister extends React.Component {
         }
         return;
       case "forgot":
+        if (cpwValue !== pwValue) {
+          message.info("两次输入密码不一致")
+        }
+        params.email = userValue
+        params.newPassword = pwValue
+        params.code = verifyCode
+        axios.post(
+          baseUrl + '/api/user/resetpwd',
+          params,
+          {
+            headers: {
+            'X-Timestamp': Date.parse( new Date() ).toString(),
+            'X-Nonce': guid()
+          }
+        })
+        .then((response) => {
+          // console.log(response.data)
+          if (response && response.data && response.data.code ==='000') {
+            message.info('重置成功')
+            window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+          } else {
+            message.info(response.data.message)
+          }
+        })
         return;
       default:
         return;
     }
   }
 
+  handleGoRegister = () => {
+    window.location.href = "./loginRegister?pageFlag=register"
+  }
   render() {
 
     const { pageFlag, userValue, verifyCode, verifyText, pwValue, cpwValue } = this.state
@@ -318,10 +341,19 @@ export default class LoginRegister extends React.Component {
                 </Checkbox>
               </div> : null}
 
-              <div className="lrInformationButtonItem">
-                <div className="lrInformationButton" onClick={this.handleGoConfirm}>Submit</div>
-              </div>
+              {pageFlag === "login" ? <div className="lrInformationButtonItem">
+                <div className="lrInformationButton" onClick={this.handleGoConfirm}>LOGIN</div>
+                <div className="lrInformationRegistButton" onClick={this.handleGoRegister}>Register</div>
+              </div> : null}
 
+              {pageFlag === "register" ? <div className="lrInformationButtonItem">
+                <div className="lrInformationButton" onClick={this.handleGoConfirm}>Register</div>
+              </div> : null}
+
+
+              {pageFlag === "forgot" ? <div className="lrInformationButtonItem">
+                <div className="lrInformationButton" onClick={this.handleGoConfirm}>Reset</div>
+              </div> : null}
             </div>
           </div>
         </div>

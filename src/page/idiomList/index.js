@@ -24,6 +24,7 @@ export default class idiomList extends React.Component {
     idiomStyle: "idiomLinkItem act",
     buzzwordStyle: "idiomLinkItem",
     searchValue: '',
+    searchMode: 'full',
     searchRes: [],
     searchTotal: 0,
     current:1,
@@ -33,9 +34,10 @@ export default class idiomList extends React.Component {
     let queryObject = window.location.search
     let query = qs.parse(queryObject.slice(1))
     let searchValue = query && query.searchValue ? query.searchValue : ''
+    let searchMode = query && query.searchMode ? query.searchMode : 'full'
     if (searchValue) {
       this.setState({
-        searchValue
+        searchValue,searchMode
       })
     }
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
@@ -88,10 +90,11 @@ export default class idiomList extends React.Component {
 
   getResoure = (pageFlag, searchValue, page) => {
     let searchUrl = baseUrl;
+    let searchMode = this.state.searchMode
     if (pageFlag === "buzzword") {
-      searchUrl = searchUrl + '/api/buzzword/search?limit=10&mode=full&key='+searchValue + '&page=' +page
+      searchUrl = searchUrl + '/api/buzzword/search?limit=10&mode='+searchMode+'&key='+searchValue + '&page=' +page
     } else {
-      searchUrl = searchUrl + '/api/idiom/search?limit=10&mode=full&key=' + searchValue + '&page=' +page
+      searchUrl = searchUrl + '/api/idiom/search?limit=10&mode='+searchMode+'&key=' + searchValue + '&page=' +page
     }
     this.setState({
       searchFlag: 0
@@ -114,6 +117,11 @@ export default class idiomList extends React.Component {
           searchRes: response.data.data,
           searchTotal:response.data.total,
           current: response.data.page
+        })
+        window.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth'
         })
       } else {
         message.info(response.data.message)

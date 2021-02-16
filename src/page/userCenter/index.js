@@ -20,6 +20,7 @@ export default class UserCenter extends React.Component {
     answerList: [],
     questionList: [],
     searchTotal: 1,
+    current:1,
     email: '',
     tel: '',
     face: '',
@@ -62,12 +63,7 @@ export default class UserCenter extends React.Component {
 
   handleGoQA = () => {
     let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
-    let userInfo = window.localStorage.getItem("userInfo")
-    if (userInfo && userInfo !=='null') {
-      window.location.href = qaUrl
-    } else {
-      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
-    }
+    window.location.href = qaUrl
   }
 
   getUserInfo = () => {
@@ -98,7 +94,8 @@ export default class UserCenter extends React.Component {
       if (response && response.data) {
         this.setState({
           questionList: response.data.data,
-          searchTotal:response.data.total
+          searchTotal:response.data.total,
+          current:response.data.page
         })
       }
     })
@@ -348,8 +345,8 @@ export default class UserCenter extends React.Component {
           <div className="userCenterPaginationCon">
             <div className="userCenterPagination">
                 <Pagination
-                  defaultCurrent={1}
                   total={this.state.searchTotal}
+                  current={this.state.current}
                   showQuickJumper
                   onChange={current => this.onPageChange(current)}
                 />

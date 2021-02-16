@@ -17,8 +17,8 @@ export default class Qa extends React.Component {
     idiomStyle: "qaListTitleIdiom act",
     buzzwordStyle: "qaListTitleBuzz",
     searchRes: [],
-    searchTotal: 0
-    
+    searchTotal: 0,
+    current:1
   }
 
   componentWillMount =() =>{
@@ -74,7 +74,8 @@ export default class Qa extends React.Component {
       if (response && response.data) {
         this.setState({
           searchRes: response.data.data,
-          searchTotal:response.data.total
+          searchTotal:response.data.total,
+          current: response.data.page,
         })
       }
     })
@@ -136,8 +137,8 @@ export default class Qa extends React.Component {
         <div className="idiomPaginationCon">
           <div className="idiomPagination">
               <Pagination
-                defaultCurrent={1}
                 total={this.state.searchTotal}
+                current={this.state.current}
                 showQuickJumper
                 onChange={current => this.onPageChange(current)}
               />

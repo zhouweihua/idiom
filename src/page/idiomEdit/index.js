@@ -156,14 +156,16 @@ export default class IdiomEdit extends React.Component {
   handleGoBuzzword = () => {
     window.location.href = "./idiom?pageFlag=buzzword"
   }
+  
   handleGoQA = () => {
     let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
-    let userInfo = window.localStorage.getItem("userInfo")
-    if (userInfo && userInfo !=='null') {
-      window.location.href = qaUrl
-    } else {
-      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
-    }
+    window.location.href = qaUrl
+    // let userInfo = window.localStorage.getItem("userInfo")
+    // if (userInfo && userInfo !=='null') {
+    //   window.location.href = qaUrl
+    // } else {
+    //   window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+    // }
   }
 
   handleSubmit = () => {

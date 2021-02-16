@@ -25,7 +25,8 @@ export default class idiomList extends React.Component {
     buzzwordStyle: "idiomLinkItem",
     searchValue: '',
     searchRes: [],
-    searchTotal: 0
+    searchTotal: 0,
+    current:1,
 
   }
   componentWillMount =() =>{
@@ -82,12 +83,7 @@ export default class idiomList extends React.Component {
 
   handleGoQA = () => {
     let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
-    let userInfo = window.localStorage.getItem("userInfo")
-    if (userInfo && userInfo !=='null') {
-      window.location.href = qaUrl
-    } else {
-      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
-    }
+    window.location.href = qaUrl
   }
 
   getResoure = (pageFlag, searchValue, page) => {
@@ -116,7 +112,8 @@ export default class idiomList extends React.Component {
       if (response && response.data) {
         this.setState({
           searchRes: response.data.data,
-          searchTotal:response.data.total
+          searchTotal:response.data.total,
+          current: response.data.page
         })
       }
     })
@@ -228,8 +225,8 @@ export default class idiomList extends React.Component {
           <div className="idiomPaginationCon">
             <div className="idiomPagination">
               <Pagination
-                defaultCurrent={1}
                 total={this.state.searchTotal}
+                current={this.state.current}
                 showQuickJumper
                 onChange={current => this.onPageChange(current)}
               />

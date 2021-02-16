@@ -257,6 +257,7 @@ export default class LoginRegister extends React.Component {
   handleGoRegister = () => {
     window.location.href = "./loginRegister?pageFlag=register"
   }
+  
   render() {
 
     const { pageFlag, userValue, verifyCode, verifyText, pwValue, cpwValue } = this.state

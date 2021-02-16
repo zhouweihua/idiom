@@ -202,6 +202,7 @@ export default class LoginRegister extends React.Component {
 
         if (registCheckboxFlag) {
           params.email = userValue
+          params.userName = userValue
           params.password = pwValue
           params.code = verifyCode
           axios.post(

@@ -121,7 +121,14 @@ export default class idiomList extends React.Component {
 
   handleClickEdit = itemId => {
     const { pageFlag } = this.state
-    window.location.href = "/idiomEdit?pageFlag="+ pageFlag +"&itemId=" + itemId
+    let qaUrl = "/idiomEdit?pageFlag="+ pageFlag +"&itemId=" + itemId
+    let userInfo = window.localStorage.getItem("userInfo")
+    // debugger
+    if (userInfo && userInfo !=='null') {
+      window.location.href = qaUrl
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+    }
   }
   
   handleSearch = (searchValue) => {

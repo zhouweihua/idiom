@@ -47,12 +47,6 @@ export default class LoginRegister extends React.Component {
   handleGoQA = () => {
     let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
     window.location.href = qaUrl
-    // let userInfo = window.localStorage.getItem("userInfo")
-    // if (userInfo && userInfo !=='null') {
-    //   window.location.href = qaUrl
-    // } else {
-    //   window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
-    // }
   }
 
   getLrText = () => {

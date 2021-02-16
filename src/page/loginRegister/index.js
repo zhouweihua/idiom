@@ -216,9 +216,9 @@ export default class LoginRegister extends React.Component {
           })
           .then((response) => {
             // console.log(response.data)
-            if (response && response.data && response.data.code ==='000' && response.data.data && response.data.data.id) {
-              window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
-              window.location.href = this.state.redirUrl
+            if (response && response.data && response.data.code ==='000') {
+              message.info('注册成功')
+              window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
             } else {
               message.info('注册失败')
             }

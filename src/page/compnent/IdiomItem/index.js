@@ -35,7 +35,7 @@ export default class IdiomItem extends React.Component {
           <div className="textLeft">English interpretation：</div>
           <div className="textRight">{search ? search.enInterpretation: ''}</div>
         </div>
-        <div className="idiomEdit" onClick={this.handleClickEdit}>Edit</div>
+        <div className="idiomEdit hoverMo" onClick={this.handleClickEdit}>Edit</div>
       </div> 
     )
   }

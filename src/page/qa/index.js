@@ -77,11 +77,13 @@ export default class Qa extends React.Component {
           searchTotal:response.data.total,
           current: response.data.page,
         })
-        window.scrollTo({
+        if (page !== 1) {
+          window.scrollTo({
             left: 0,
             top: 0,
             behavior: 'smooth'
-        })
+          })
+        }
       } else {
         message.info(response.data.message)
       }
@@ -114,7 +116,7 @@ export default class Qa extends React.Component {
       <div className="idiomListHome">
         <Header />
         <Nav
-          qaStyle={"idiomLinkItem act"}
+          qaStyle={"idiomLinkItem act hoverMo"}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzword={this.handleGoBuzzword}
         />
@@ -133,7 +135,7 @@ export default class Qa extends React.Component {
               {searchRes ? searchRes.map((search, searchIndex) => {
                   return (<div className="qaSecItem" key={pageFlag + searchIndex}>
                             <div className="qaListTitleIdiom">{search.idiom || search.buzzword}</div>
-                            <div className="qaListTitleBuzz" onClick={() => this.hanldeGoAnswer(search.id)}>I want to answer</div>
+                            <div className="qaListTitleBuzz hoverMo" onClick={() => this.hanldeGoAnswer(search.id)}>I want to answer</div>
                           </div>
                           )
                 }): null}

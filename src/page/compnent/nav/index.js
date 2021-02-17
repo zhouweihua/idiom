@@ -31,11 +31,11 @@ export default class Nav extends React.Component {
     return (
       <div className="idiomNavCon">
         <div className="idiomNav">
-          <div className="idiomIcon"  onClick={this.handleGoIcon}/> 
+          <div className="idiomIcon hoverMo"  onClick={this.handleGoIcon}/> 
           <div className="idiomLink">
-            <div className={idiomStyle || "idiomLinkItem"} onClick={this.handleGoIdiom}>Idiom</div>
-            <div className={buzzwordStyle || "idiomLinkItem"} onClick={this.handleGoBuzzword}>Buzzwords</div>
-            <div className={qaStyle || "idiomLinkItem"} onClick={this.handleGoQA}>Q and A list</div>
+            <div className={idiomStyle || "idiomLinkItem hoverMo"} onClick={this.handleGoIdiom}>Idiom</div>
+            <div className={buzzwordStyle || "idiomLinkItem hoverMo"} onClick={this.handleGoBuzzword}>Buzzwords</div>
+            <div className={qaStyle || "idiomLinkItem hoverMo"} onClick={this.handleGoQA}>Q and A list</div>
           </div>
         </div>
       </div>

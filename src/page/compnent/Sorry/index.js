@@ -48,7 +48,7 @@ export default class Sorry extends React.Component {
 
         <div className="idiomSubmitCon">
           <div className="idiomSubmit">
-            <div className="submitButton" onClick={this.handleSubmit}>
+            <div className="submitButton hoverMo" onClick={this.handleSubmit}>
               SUBMIT
             </div>
           </div>

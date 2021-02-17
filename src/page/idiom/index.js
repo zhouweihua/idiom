@@ -11,8 +11,8 @@ export default class Idiom extends React.Component {
     reflashFlag: false,
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
-    idiomStyle: "idiomLinkItem act",
-    buzzwordStyle: "idiomLinkItem",
+    idiomStyle: "idiomLinkItem act hoverMo",
+    buzzwordStyle: "idiomLinkItem hoverMo",
     searchValue: '',
     ABCList: ['A', 'B', 'C', 'D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z',]
   }
@@ -44,8 +44,8 @@ export default class Idiom extends React.Component {
     // console.log("idiom")
     this.setState({
       pageFlag: 'idiom',
-      idiomStyle: "idiomLinkItem act",
-      buzzwordStyle: "idiomLinkItem",
+      idiomStyle: "idiomLinkItem act hoverMo",
+      buzzwordStyle: "idiomLinkItem hoverMo",
       placeholder: 'Enter Your Idiom',
     })
   }
@@ -73,16 +73,16 @@ export default class Idiom extends React.Component {
   handleSearch = () => {
     const { searchValue, pageFlag } = this.state
     if (searchValue) {
-      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
+      window.location.href = "/idiomList?searchMode=first&pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
       // message.info("请输入需要查询的内容")
-      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
+      window.location.href = "/idiomList?searchMode=first&pageFlag="+ pageFlag +"&searchValue="
     }
   }
 
   handleABCClick = item => {
     const { pageFlag } = this.state
-    window.location.href = "/idiomList?searchMode=first&pageFlag="+ pageFlag +"&searchValue=" + item
+    window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + item
   }
 
   render() {
@@ -110,7 +110,7 @@ export default class Idiom extends React.Component {
                 value={searchValue}
                 onChange={this.handleChangeSearchValue}
               />
-              <div className="searchButton" onClick={this.handleSearch}>
+              <div className="searchButton hoverMo" onClick={this.handleSearch}>
                 Serch
               </div>
             </div>
@@ -128,7 +128,7 @@ export default class Idiom extends React.Component {
               {
                 ABCList.map((item, index) => {
                   return (
-                    <div className="ABCItem" onClick={() => this.handleABCClick(item)} key={"abc" + index}>
+                    <div className="ABCItem hoverMo" onClick={() => this.handleABCClick(item)} key={"abc" + index}>
                       <div className="ABCItemCon">
                         {item}
                       </div>

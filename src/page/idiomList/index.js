@@ -21,8 +21,8 @@ export default class idiomList extends React.Component {
     reflashFlag: false,
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
-    idiomStyle: "idiomLinkItem act",
-    buzzwordStyle: "idiomLinkItem",
+    idiomStyle: "idiomLinkItem act hoverMo",
+    buzzwordStyle: "idiomLinkItem hoverMo",
     searchValue: '',
     searchMode: 'full',
     searchRes: [],
@@ -58,16 +58,18 @@ export default class idiomList extends React.Component {
 
   handleGoIdiom = () => {
     // console.log("idiom")
-    this.setState({
-      pageFlag: 'idiom',
-      idiomStyle: "idiomLinkItem act",
-      buzzwordStyle: "idiomLinkItem",
-      placeholder: 'Enter Your Idiom',
-      searchRes: [],
-      searchFlag: 0, // 1搜索结束 
-    })
+    // this.setState({
+    //   pageFlag: 'idiom',
+    //   idiomStyle: "idiomLinkItem act hoverMo",
+    //   buzzwordStyle: "idiomLinkItem hoverMo",
+    //   placeholder: 'Enter Your Idiom',
+    //   searchRes: [],
+    //   searchFlag: 0, // 1搜索结束 
+    // })
 
-    this.getResoure('idiom', this.state.searchValue,1);
+    // this.getResoure('idiom', this.state.searchValue,1);
+
+    window.location.href = "./?pageFlag=idiom"
   }
   
   handleGoBuzzword = () => {
@@ -118,11 +120,13 @@ export default class idiomList extends React.Component {
           searchTotal:response.data.total,
           current: response.data.page
         })
-        window.scrollTo({
+        if (page !== 1) {
+          window.scrollTo({
             left: 0,
             top: 0,
             behavior: 'smooth'
-        })
+          })
+        }
       } else {
         message.info(response.data.message)
       }

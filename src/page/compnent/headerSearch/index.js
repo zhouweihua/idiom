@@ -49,7 +49,7 @@ export default class HeaderSearch extends React.Component {
               value={searchValue}
               onChange={this.handleChangeSearchValue}
             />
-            <div className="searchButton" onClick={this.handleSearch}>
+            <div className="searchButton hoverMo" onClick={this.handleSearch}>
               Serch
             </div>
           </div>

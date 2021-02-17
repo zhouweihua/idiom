@@ -205,7 +205,7 @@ export default class QaAnswer extends React.Component {
               <input className="editCont" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
             </div>
             <div className="editItemSubmitCon">
-              <div className="editItemSubmit" onClick={this.handleClickSubmit}>
+              <div className="editItemSubmit hoverMo" onClick={this.handleClickSubmit}>
                 Submit
               </div>
             </div>
@@ -283,7 +283,7 @@ export default class QaAnswer extends React.Component {
       <div className="idiomListHome">
         <Header />
         <Nav
-          qaStyle={"idiomLinkItem act"}
+          qaStyle={"idiomLinkItem act hoverMo"}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzword={this.handleGoBuzzword}
         />

@@ -13,8 +13,8 @@ export default class IdiomDetail extends React.Component {
     reflashFlag: false,
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
-    idiomStyle: "idiomLinkItem act",
-    buzzwordStyle: "idiomLinkItem",
+    idiomStyle: "idiomLinkItem act hoverMo",
+    buzzwordStyle: "idiomLinkItem hoverMo",
     searchValue: ''
   }
   componentWillMount =() =>{

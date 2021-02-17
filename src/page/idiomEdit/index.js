@@ -16,8 +16,8 @@ export default class IdiomEdit extends React.Component {
     reflashFlag: false,
     pageFlag: 'idiom',
     placeholder: 'Enter Your Idiom',
-    idiomStyle: "idiomLinkItem act",
-    buzzwordStyle: "idiomLinkItem",
+    idiomStyle: "idiomLinkItem act hoverMo",
+    buzzwordStyle: "idiomLinkItem hoverMo",
     searchValue: '',
     itemId:null,
     symbols: '',
@@ -211,7 +211,7 @@ export default class IdiomEdit extends React.Component {
 
         <div className="idiomSubmitCon">
           <div className="idiomSubmit">
-            <div className="submitButton" onClick={this.handleSubmit}>
+            <div className="submitButton hoverMo" onClick={this.handleSubmit}>
               SUBMIT
             </div>
           </div>

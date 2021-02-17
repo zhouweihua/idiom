@@ -97,11 +97,13 @@ export default class UserCenter extends React.Component {
           searchTotal:response.data.total,
           current:response.data.page
         })
-        window.scrollTo({
+        if (page !== 1) {
+          window.scrollTo({
             left: 0,
             top: 0,
             behavior: 'smooth'
-        })
+          })
+        }
       } else {
         message.info(response.data.message)
       }
@@ -124,11 +126,13 @@ export default class UserCenter extends React.Component {
           answerList: response.data.data,
           searchTotal:response.data.total
         })
-        window.scrollTo({
+        if (page !== 1) {
+          window.scrollTo({
             left: 0,
             top: 0,
             behavior: 'smooth'
-        })
+          })
+        }
       } else {
         message.info(response.data.message)
       }
@@ -221,7 +225,7 @@ export default class UserCenter extends React.Component {
       <div className="ucInformationCon">
         <div className="ucInformation">
           <div className="ucInformationSec">
-            <div className="ucInformationEdit" onClick={this.handleInfoEdit}>Edit</div>
+            <div className="ucInformationEdit hoverMo" onClick={this.handleInfoEdit}>Edit</div>
             <div className="ucInformationItem">
               <div className="ucInformationText">
                 <span className="red">*</span> E-mail:
@@ -268,8 +272,8 @@ export default class UserCenter extends React.Component {
               />
             </div>
             {editShow ? null : <div className="ucInformationButtonItem">
-              <div className="ucInformationButton" onClick={this.handleInfoCancel}>Cancel</div>
-              <div className="ucInformationButton act" onClick={this.handleInfoSubmit}>Submit</div>
+              <div className="ucInformationButton hoverMo" onClick={this.handleInfoCancel}>Cancel</div>
+              <div className="ucInformationButton act hoverMo" onClick={this.handleInfoSubmit}>Submit</div>
             </div>}
           </div>
         </div>
@@ -315,9 +319,9 @@ export default class UserCenter extends React.Component {
   }
   render() {
     const { tabFlag } = this.state
-    let questionStyle = "ucDiff"
-    let answerStyle = "ucDiffMarg"
-    let informationStyle = "ucDiffMarg"
+    let questionStyle = "ucDiff  hoverMo"
+    let answerStyle = "ucDiffMarg hoverMo"
+    let informationStyle = "ucDiffMarg hoverMo"
 
     switch (tabFlag) {
       case "answer":

@@ -26,7 +26,7 @@ export default class BuzzItem extends React.Component {
         <div className="buzzExplanation">
           {search ? search.enInterpretation : ''}
         </div>
-        <div className="buzzEdit" onClick={() => this.handleClickEdit(search.id)}>Edit</div>
+        <div className="buzzEdit hoverMo" onClick={() => this.handleClickEdit(search.id)}>Edit</div>
       </div>
     )
   }

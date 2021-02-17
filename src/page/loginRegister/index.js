@@ -301,7 +301,7 @@ export default class LoginRegister extends React.Component {
                       className="lrInformationVerInput" 
                       value={verifyCode}
                       onChange={this.handleChangeverifyCode}/>
-                    <div className="lrInformationButton" onClick={this.handleSendVer}>{verifyText}</div>
+                    <div className="lrInformationButton hoverMo" onClick={this.handleSendVer}>{verifyText}</div>
                   </div>
                 </div> : null}
 
@@ -333,7 +333,7 @@ export default class LoginRegister extends React.Component {
                 <Checkbox checked={this.state.loginCheckboxFlag} onChange={this.handleloginCheckboxFlag}>
                   I agree with the terms of use the login agreements
                 </Checkbox>
-                <div className="lrTermForgot" onClick={this.handleGoFogot}>Forget  password?</div>
+                <div className="lrTermForgot hoverMo" onClick={this.handleGoFogot}>Forget  password?</div>
               </div> : null}
 
               {pageFlag === "register" ? <div className="lrTerm">
@@ -343,17 +343,17 @@ export default class LoginRegister extends React.Component {
               </div> : null}
 
               {pageFlag === "login" ? <div className="lrInformationButtonItem">
-                <div className="lrInformationButton" onClick={this.handleGoConfirm}>LOGIN</div>
-                <div className="lrInformationRegistButton" onClick={this.handleGoRegister}>Register</div>
+                <div className="lrInformationButton hoverMo" onClick={this.handleGoConfirm}>LOGIN</div>
+                <div className="lrInformationRegistButton hoverMo" onClick={this.handleGoRegister}>Register</div>
               </div> : null}
 
               {pageFlag === "register" ? <div className="lrInformationButtonItem">
-                <div className="lrInformationButton" onClick={this.handleGoConfirm}>Register</div>
+                <div className="lrInformationButton hoverMo" onClick={this.handleGoConfirm}>Register</div>
               </div> : null}
 
 
               {pageFlag === "forgot" ? <div className="lrInformationButtonItem">
-                <div className="lrInformationButton" onClick={this.handleGoConfirm}>Reset</div>
+                <div className="lrInformationButton hoverMo" onClick={this.handleGoConfirm}>Reset</div>
               </div> : null}
             </div>
           </div>

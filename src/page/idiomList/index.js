@@ -49,7 +49,11 @@ export default class idiomList extends React.Component {
         placeholder: 'Enter Your Buzzwords',
       })
     }
-    this.getResoure(pageFlag, searchValue,1)
+    // console.log(searchMode)
+    setTimeout(()=>{
+      this.getResoure(pageFlag, searchValue,1)
+    },10)
+
   }
 
   componentDidMount =() =>{
@@ -148,9 +152,12 @@ export default class idiomList extends React.Component {
   handleSearch = (searchValue) => {
     const { pageFlag } = this.state
     this.setState({
-      searchValue
+      searchValue,
+      searchMode: 'full'
     })
-    this.getResoure(pageFlag, searchValue, 1);
+    setTimeout(()=>{
+      this.getResoure(pageFlag, searchValue,1)
+    },10)
   }
 
   getShowSection = () => {

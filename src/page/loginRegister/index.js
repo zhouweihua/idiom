@@ -289,7 +289,7 @@ export default class LoginRegister extends React.Component {
                 <input
                   className="lrInformationInput"
                   value={userValue}
-                  placeholder={'example@gimal.com'}
+                  placeholder={'example@gmall.com'}
                   onChange={this.handleChangeUserValue}/>
               </div>
 
@@ -302,6 +302,7 @@ export default class LoginRegister extends React.Component {
                     <input
                       className="lrInformationVerInput" 
                       value={verifyCode}
+                      placeholder={'code'}
                       onChange={this.handleChangeverifyCode}/>
                     <div className="lrInformationButton hoverMo" onClick={this.handleSendVer}>{verifyText}</div>
                   </div>
@@ -314,6 +315,7 @@ export default class LoginRegister extends React.Component {
                 <input
                   className="lrInformationInput"
                   type="password"
+                  placeholder={'password'}
                   value={pwValue}
                   onChange={this.handleChangePwValue}
                 />

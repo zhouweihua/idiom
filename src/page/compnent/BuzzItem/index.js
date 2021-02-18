@@ -21,10 +21,10 @@ export default class BuzzItem extends React.Component {
     return (
       <div className={style}>
         <div className="buzzTitle">
-          {search? search.pinyin + ' ' + search.buzzword : ''}
+          {search && search.pinyin? search.pinyin + ' ' + search.buzzword : ''}
         </div>
         <div className="buzzExplanation">
-          {search ? search.enInterpretation : ''}
+          {search && search.enInterpretation ? search.enInterpretation : ''}
         </div>
         <div className="buzzEdit hoverMo" onClick={() => this.handleClickEdit(search.id)}>Edit</div>
       </div>

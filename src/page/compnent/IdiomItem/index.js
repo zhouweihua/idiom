@@ -24,16 +24,16 @@ export default class IdiomItem extends React.Component {
         <div className="idiomSymbols">
           <div className="textLeft">Chinese phonetic symbols：</div>
           <div className="textRight">
-           {search ? search.pinyin + " " + search.idiom : ''}
+           {search && search.pinyin ? search.pinyin + " " + search.idiom : ''}
           </div>
         </div>
         <div className="idiomExplanation">
           <div className="textLeft">Chinese explanation：</div>
-          <div className="textRight">{search ? search.chExplanation: ''}</div>
+          <div className="textRight">{search && search.chExplanation ? search.chExplanation: ''}</div>
         </div>
         <div className="idiomInterpret">
           <div className="textLeft">English interpretation：</div>
-          <div className="textRight">{search ? search.enInterpretation: ''}</div>
+          <div className="textRight">{search && search.enInterpretation ? search.enInterpretation: ''}</div>
         </div>
         <div className="idiomEdit hoverMo" onClick={this.handleClickEdit}>Edit</div>
       </div> 

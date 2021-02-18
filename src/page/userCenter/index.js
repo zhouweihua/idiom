@@ -236,7 +236,15 @@ export default class UserCenter extends React.Component {
       }
     })
   }
-
+  handleGoDetail =(questionIndex) => {
+    const { questionList } = this.state
+    let question = questionList[questionIndex]
+    if (question.type === 'idiom') {
+      window.location.href = "./idiomDetail?pageFlag=idiom&searchId=" + question.id
+    } else if (question.type === 'buzzword') {
+      window.location.href = "./idiomDetail?pageFlag=buzzword&searchId=" + question.id
+    }
+  }
   getQuestionSectionBody = () => {
     const { questionList } = this.state
     return (
@@ -246,7 +254,7 @@ export default class UserCenter extends React.Component {
           {questionList ? questionList.map((question, questionIndex) => {
                   return (<div className="ucQuestionSecItem" key={"question" + questionIndex}>
                             <div className="ucQuestionSecText">{question.name}</div>
-                            <div className="ucQuestionSecLink">View explanation</div>
+                            <div className="ucQuestionSecLink hoverMo act" onClick={()=>this.handleGoDetail(questionIndex)}>View explanation</div>
                           </div>)
                   }): null}
         </div>

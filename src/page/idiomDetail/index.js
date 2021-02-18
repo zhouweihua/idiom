@@ -8,6 +8,11 @@ import HeaderSearch from "../compnent/headerSearch";
 import IdiomItem from "../compnent/IdiomItem";
 import BuzzItem from "../compnent/BuzzItem";
 
+import { message, Modal } from 'antd';
+
+import axios from 'axios'
+import { guid, baseUrl } from '../../util/commonUtil'
+
 export default class IdiomDetail extends React.Component {
   state = {
     reflashFlag: false,
@@ -15,17 +20,13 @@ export default class IdiomDetail extends React.Component {
     placeholder: 'Enter Your Idiom',
     idiomStyle: "idiomLinkItem act hoverMo",
     buzzwordStyle: "idiomLinkItem hoverMo",
-    searchValue: ''
+    searchValue: '',
+    searchId: 0,
+    searchRes:{}
   }
   componentWillMount =() =>{
     let queryObject = window.location.search
     let query = qs.parse(queryObject.slice(1))
-    let searchValue = query && query.searchValue ? query.searchValue : ''
-    if (searchValue) {
-      this.setState({
-        searchValue
-      })
-    }
     let pageFlag = query && query.pageFlag ? query.pageFlag : 'idiom'
     if (pageFlag ==="buzzword") {
       this.setState({
@@ -35,27 +36,81 @@ export default class IdiomDetail extends React.Component {
         placeholder: 'Enter Your Buzzwords',
       })
     }
+
+
+    let searchId = query && query.searchId ? query.searchId : ''
+    if (searchId) {
+      this.setState({
+        searchId
+      })
+    }
+    setTimeout(()=>{
+      this.getResoure(pageFlag,searchId)
+    },10)
   }
 
+  getResoure = (pageFlag, searchId) => {
+    let searchUrl = baseUrl;
+    if (pageFlag === "buzzword") {
+      searchUrl = searchUrl + '/api/buzzword/' + searchId
+    } else {
+      searchUrl = searchUrl + '/api/idiom/' + searchId
+    }
+    // 发起接口
+    axios.get(
+      searchUrl,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      if (response && response.data && response.data.code ==='000') {
+        // console.log(response.data)
+        let searchRes = response.data.data
+        if (!searchRes) {
+          message.info("未查询到该数据")
+          return
+        }
+        this.setState({
+          searchRes
+        })
+      } else {
+        message.info(response.data.message)
+      }
+    })
+  }
+  handleClickEdit=()=>{
+    const { pageFlag, searchId } = this.state
+    let qaUrl = "/idiomEdit?pageFlag="+ pageFlag +"&itemId=" + searchId
+    let userInfo = window.localStorage.getItem("userInfo")
+    // debugger
+    if (userInfo && userInfo !=='null') {
+      window.location.href = qaUrl
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+      return
+    }
+  }
   getShowSection = () => {
-    const { pageFlag } = this.state
+    const { pageFlag, searchRes } = this.state
     if (pageFlag === "buzzword") {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            <BuzzItem />
+            <BuzzItem search={searchRes} index={0} handleClickEdit={this.handleClickEdit}/>
           </div>
         </div>
       )
-      }
-      return (
-        <div className="idiomDeatailsCon">
-          <div className="idiomDeatails">
-            <IdiomItem />
-          </div>
+    }
+    return (
+      <div className="idiomDeatailsCon">
+        <div className="idiomDeatails">
+          <IdiomItem search={searchRes} index={0} handleClickEdit={this.handleClickEdit}/>
         </div>
-      )
-      
+      </div>
+    )
   }
 
   handleGoIdiom = () => {

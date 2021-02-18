@@ -38,7 +38,7 @@ export default class QaAnswer extends React.Component {
     if (qaId) {
       this.setState({qaId})
       this.getResoure(pageFlag, qaId)
-      this.getResoureList(pageFlag, qaId)
+      // this.getResoureList(pageFlag, qaId)
     } else {
       message.error('查询id有误')
     }
@@ -94,6 +94,11 @@ export default class QaAnswer extends React.Component {
       if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
+
+        if (!searchRes) {
+          message.info("未查询到该数据")
+          return
+        }
         if (pageFlag === "buzzword") {
           this.setState({
             symbols: searchRes.buzzword,
@@ -135,6 +140,10 @@ export default class QaAnswer extends React.Component {
       if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
+        if (!searchRes) {
+          message.info("未查询到该数据")
+          return
+        }
         if (pageFlag === "buzzword") {
           this.setState({
             symbols: searchRes.buzzword,
@@ -155,6 +164,7 @@ export default class QaAnswer extends React.Component {
       }
     })
   }
+  
   handleChangepinyin= e => {
     this.setState({
       pinyin: e.target.value,
@@ -265,22 +275,23 @@ export default class QaAnswer extends React.Component {
 
   getShowSectionBody = () => {
     const { pageFlag } = this.state
+
+    // <BuzzQaItem /> <IdiomQaItem />
     if (pageFlag === "buzzword") {
       return (
         <div className="idiomQaAnswerCon">
           <div className="idiomQaAnswer">
-            <BuzzQaItem />
+            
           </div>
         </div>
       )
-      }
-      return (
-        <div className="idiomQaAnswerCon">
-          <div className="idiomQaAnswer">
-            <IdiomQaItem />
-          </div>
+    }
+    return (
+      <div className="idiomQaAnswerCon">
+        <div className="idiomQaAnswer">
         </div>
-      )
+      </div>
+    )
   }
 
   render() {

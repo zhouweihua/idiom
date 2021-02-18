@@ -24,6 +24,7 @@ export default class IdiomEdit extends React.Component {
     pinyin: '',
     chinese: '',
     interpretation: '',
+    searchRes: {}
   }
   componentWillMount =() =>{
     let queryObject = window.location.search
@@ -83,16 +84,17 @@ export default class IdiomEdit extends React.Component {
           this.setState({
             symbols: searchRes.buzzword,
             pinyin:searchRes.pinyin,
-            interpretation: searchRes.enInterpretation
+            interpretation: searchRes.enInterpretation,
+            searchRes
           })
         } else {
           this.setState({
             symbols: searchRes.idiom,
             pinyin:searchRes.pinyin,
             chinese: searchRes.chExplanation,
-            interpretation: searchRes.enInterpretation
+            interpretation: searchRes.enInterpretation,
+            searchRes
           })
-          
         }
       } else {
         message.info(response.data.message)
@@ -103,18 +105,27 @@ export default class IdiomEdit extends React.Component {
   submintResoure = () => {
     let searchUrl = baseUrl;
     let params ={}
-    const {pageFlag, itemId, pinyin, chinese, interpretation} = this.state
+    const {pageFlag, itemId, pinyin, chinese, interpretation,searchRes } = this.state
+    
     if (pageFlag === "buzzword") {
       searchUrl = searchUrl + '/api/buzzword/' + itemId
       params.id = itemId
       params.pinyin = pinyin
       params.enInterpretation = interpretation
+      if (pinyin === searchRes.pinyin && interpretation === searchRes.enInterpretation) {
+        message.info("Please revise before submitting")
+        return
+      }
     } else {
       searchUrl = searchUrl + '/api/idiom/' + itemId
       params.id = itemId
       params.pinyin = pinyin
       params.chExplanation = chinese
       params.enInterpretation = interpretation
+      if (pinyin === searchRes.pinyin && chinese === searchRes.chExplanation && interpretation === searchRes.enInterpretation) {
+        message.info("Please revise before submitting")
+        return
+      }
     }
     // 发起接口
     axios.put(

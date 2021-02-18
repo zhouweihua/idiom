@@ -18,10 +18,11 @@ export default class BuzzItem extends React.Component {
     if (index === 0) {
       style = style + " first"
     }
+    
     return (
       <div className={style}>
         <div className="buzzTitle">
-          {search && search.pinyin? search.pinyin + ' ' + search.buzzword : ''}
+          {search && search.pinyin ? search.pinyin + ' ' + search.buzzword : ''}
         </div>
         <div className="buzzExplanation">
           {search && search.enInterpretation ? search.enInterpretation : ''}

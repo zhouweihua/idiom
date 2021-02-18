@@ -146,6 +146,7 @@ export default class idiomList extends React.Component {
       window.location.href = qaUrl
     } else {
       window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(qaUrl)
+      return
     }
   }
   
@@ -194,6 +195,15 @@ export default class idiomList extends React.Component {
   }
 
   submintResoure = symbol => {
+    let userInfo = window.localStorage.getItem("userInfo")
+    // debugger
+    if (userInfo && userInfo !=='null') {
+      // todo
+    } else {
+      window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+      return
+    }
+
     let searchUrl = baseUrl;
     let params ={}
     const {pageFlag} = this.state
@@ -204,6 +214,7 @@ export default class idiomList extends React.Component {
       searchUrl = searchUrl + '/api/idiom/'
       params.idiom = symbol
     }
+
     // 发起接口
     axios.post(
       searchUrl,

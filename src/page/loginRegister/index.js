@@ -215,6 +215,7 @@ export default class LoginRegister extends React.Component {
             if (response && response.data && response.data.code ==='000') {
               message.info('注册成功')
               window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+              return
             } else {
               message.info(response.data.message)
             }
@@ -244,6 +245,7 @@ export default class LoginRegister extends React.Component {
           if (response && response.data && response.data.code ==='000') {
             message.info('重置成功')
             window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+            return
           } else {
             message.info(response.data.message)
           }

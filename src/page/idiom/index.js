@@ -73,16 +73,16 @@ export default class Idiom extends React.Component {
   handleSearch = () => {
     const { searchValue, pageFlag } = this.state
     if (searchValue) {
-      window.location.href = "/idiomList?searchMode=first&pageFlag="+ pageFlag +"&searchValue=" + searchValue
+      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
       // message.info("请输入需要查询的内容")
-      window.location.href = "/idiomList?searchMode=first&pageFlag="+ pageFlag +"&searchValue="
+      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
     }
   }
 
   handleABCClick = item => {
     const { pageFlag } = this.state
-    window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + item
+    window.location.href = "/idiomList?searchMode=first&pageFlag="+ pageFlag +"&searchValue=" + item
   }
 
   render() {

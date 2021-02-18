@@ -6,7 +6,7 @@ import Footer from "../compnent/footer";
 import Nav from "../compnent/nav";
 import IdiomUcItem from "../compnent/IdiomUcItem";
 import BuzzUcItem from "../compnent/BuzzUcItem";
-import { Pagination, message } from 'antd';
+import { Pagination, message, Modal } from 'antd';
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'
@@ -77,9 +77,17 @@ export default class UserCenter extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
+      if (response && response.data && response.data.code ==='000') {
+        this.setState({
+          tel: response.data.data.telephone,
+          face:response.data.data.faceins,
+          profile:response.data.data.profile
+        })
+      } else {
+        message.info(response.data.message)
+      }
     })
   }
-
   getUserQuestion = page => {
     axios.get(
       baseUrl + '/api/user/questions?limit=10&page=' +page,
@@ -199,7 +207,34 @@ export default class UserCenter extends React.Component {
   }
 
   handleInfoSubmit =() =>{
-    
+    const {email, tel, face, profile } = this.state
+    let searchUrl = baseUrl + '/api/user/update'
+    let params ={}
+    params.email = email
+    params.profile = profile
+    params.telephone = tel
+    params.faceins = face
+    axios.put(
+      searchUrl,
+      params,
+      {
+        headers: {
+        'X-Timestamp': Date.parse( new Date() ).toString(),
+        'X-Nonce': guid()
+      }
+    })
+    .then((response) => {
+      console.log(response.data)
+      if (response && response.data && response.data.code ==='000') {
+        let modalAnswer = Modal.info({
+          title: 'Info',
+          content: 'update your info success',
+          onOk:()=>{modalAnswer.destroy()}
+        });
+      } else {
+        message.info(response.data.message)
+      }
+    })
   }
 
   getQuestionSectionBody = () => {
@@ -314,6 +349,7 @@ export default class UserCenter extends React.Component {
         this.getUserQuestion(1);
         return;
       default:
+        this.getUserInfo();
         return null;
     }
   }

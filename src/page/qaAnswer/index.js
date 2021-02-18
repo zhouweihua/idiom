@@ -37,8 +37,8 @@ export default class QaAnswer extends React.Component {
     let qaId = query && query.qaId ? query.qaId : null
     if (qaId) {
       this.setState({qaId})
-      this.getResoure(pageFlag, qaId)
-      // this.getResoureList(pageFlag, qaId)
+      // this.getResoure(pageFlag, qaId)
+      this.getResoureList(pageFlag, qaId)
     } else {
       message.error('查询id有误')
     }
@@ -77,9 +77,9 @@ export default class QaAnswer extends React.Component {
   getResoureList = (pageFlag, qaId) => {
     let searchUrl = baseUrl;
     if (pageFlag === "buzzword") {
-      searchUrl = searchUrl + '/api/buzzword/' + qaId
+      searchUrl = searchUrl + '/api/buzzword/candidate/' + qaId
     } else {
-      searchUrl = searchUrl + '/api/idiom/' + qaId
+      searchUrl = searchUrl + '/api/idiom/candidate/' + qaId
     }
     // 发起接口
     axios.get(
@@ -286,14 +286,14 @@ export default class QaAnswer extends React.Component {
   }
 
   getShowSectionBody = () => {
-    const { pageFlag } = this.state
-
-    // <BuzzQaItem /> <IdiomQaItem />
+    const { pageFlag, searchRes } = this.state
     if (pageFlag === "buzzword") {
       return (
         <div className="idiomQaAnswerCon">
           <div className="idiomQaAnswer">
-            
+            {searchRes && searchRes.length > 0 && searchRes.map((search, buzzIndex) => {
+              return <BuzzQaItem  search={search} key={"buzz" + buzzIndex} /> 
+            })}
           </div>
         </div>
       )
@@ -301,6 +301,9 @@ export default class QaAnswer extends React.Component {
     return (
       <div className="idiomQaAnswerCon">
         <div className="idiomQaAnswer">
+        {searchRes && searchRes.length > 0 && searchRes.map((search,idiomInex) => {
+            return <IdiomQaItem search={search} key={"idio" + idiomInex} /> 
+          })}
         </div>
       </div>
     )

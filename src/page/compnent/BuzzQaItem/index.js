@@ -13,19 +13,20 @@ export default class BuzzQaItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit()
   }
   render() {
+    const { search } = this.props
     return (
       <div className="buzzQaItemItem">
         <div className="editSubTitle">
-          观察夺目
+          {search && search.buzzword ? search.buzzword : ''}
         </div>
         <div className="editSubUser">
           User：allisfree4u@gmail.com
         </div>
         <div className="buzzTitle">
-          niú bī  牛逼
+        {search && search.pinyin ? search.pinyin + ' ' + search.buzzword : ''}
         </div>
         <div className="buzzExplanation">
-          Niubi is an attitude, a complete lack of concern over what other people think of you. It is knowing exactly what you’re capable of, making the decision to act, and to hell with the consequences. niubi has an inverse side– an excess of niubi leads to self-importance, arrogance, imperiousness.
+          {search && search.enInterpretation ? search.enInterpretation : ''}
         </div>
       </div>
     )

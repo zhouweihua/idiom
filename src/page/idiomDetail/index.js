@@ -100,6 +100,7 @@ export default class IdiomDetail extends React.Component {
   
   getShowSection = () => {
     const { pageFlag, searchRes } = this.state
+    // console.log(searchRes)
     if (pageFlag === "buzzword") {
       return (
         <div className="idiomDeatailsCon">

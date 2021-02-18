@@ -118,6 +118,10 @@ export default class idiomList extends React.Component {
       this.setState({
         searchFlag: 1
       })
+      if (response && response.data && response.data.code ==='112') {
+        window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+        return
+      }
       if (response && response.data && response.data.code ==='000') {
         this.setState({
           searchRes: response.data.data,
@@ -227,6 +231,10 @@ export default class idiomList extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
+      if (response && response.data && response.data.code ==='112') {
+        window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+        return
+      }
       if (response && response.data && response.data.code ==='000') {
         let modalDefine = Modal.info({
           title: 'Info',

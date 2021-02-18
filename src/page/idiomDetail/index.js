@@ -66,6 +66,10 @@ export default class IdiomDetail extends React.Component {
       }
     })
     .then((response) => {
+      if (response && response.data && response.data.code ==='112') {
+        window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+        return
+      }
       if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
@@ -93,6 +97,7 @@ export default class IdiomDetail extends React.Component {
       return
     }
   }
+  
   getShowSection = () => {
     const { pageFlag, searchRes } = this.state
     if (pageFlag === "buzzword") {

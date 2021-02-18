@@ -72,6 +72,10 @@ export default class IdiomEdit extends React.Component {
       }
     })
     .then((response) => {
+      if (response && response.data && response.data.code ==='112') {
+        window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+        return
+      }
       if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
@@ -124,6 +128,10 @@ export default class IdiomEdit extends React.Component {
     })
     .then((response) => {
       // console.log(response.data)
+      if (response && response.data && response.data.code ==='112') {
+        window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+        return
+      }
       if (response && response.data && response.data.code ==='000') {
         let modalAnswer = Modal.info({
           title: 'Info',

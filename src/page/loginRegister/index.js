@@ -144,6 +144,10 @@ export default class LoginRegister extends React.Component {
           })
           .then((response) => {
             // console.log(response.data)
+            if (response && response.data && response.data.code ==='112') {
+              window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+              return
+            }
             if (response && response.data && response.data.code ==='000') {
               let modalAnswer = Modal.info({
                 title: 'Info',
@@ -184,6 +188,10 @@ export default class LoginRegister extends React.Component {
             }
           })
           .then((response) => {
+            if (response && response.data && response.data.code ==='112') {
+              window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+              return
+            }
             if (response && response.data && response.data.code ==='000') {
               window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
               window.location.href = this.state.redirUrl
@@ -212,6 +220,10 @@ export default class LoginRegister extends React.Component {
           })
           .then((response) => {
             // console.log(response.data)
+            if (response && response.data && response.data.code ==='112') {
+              window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+              return
+            }
             if (response && response.data && response.data.code ==='000') {
               message.info('注册成功')
               window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
@@ -242,6 +254,10 @@ export default class LoginRegister extends React.Component {
         })
         .then((response) => {
           // console.log(response.data)
+          if (response && response.data && response.data.code ==='112') {
+            window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+            return
+          }
           if (response && response.data && response.data.code ==='000') {
             message.info('重置成功')
             window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)

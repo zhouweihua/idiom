@@ -197,14 +197,14 @@ export default class IdiomEdit extends React.Component {
                 <div className="editMainTitle">
                   Chinese explanation
                 </div>
-                <input className="editCont" value={this.state.chinese} onChange={this.handleChangeChina}/>
+                <textarea rows={2} className="editText" value={this.state.chinese} onChange={this.handleChangeChina}/>
               </div>
             )}
             <div className="editItem">
               <div className="editMainTitle">
                 English interpretation
               </div>
-              <input className="editCont" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
+              <textarea rows={2} className="editText" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
             </div>
           </div>
         </div>

@@ -45,7 +45,11 @@ export default class Qa extends React.Component {
   
   handleSearch = (searchValue) => {
     const { pageFlag } = this.state
-    window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
+    if (searchValue) {
+      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
+    } else {
+      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
+    }
   }
 
   hanldeGoAnswer= (qaId) => {

@@ -67,7 +67,12 @@ export default class QaAnswer extends React.Component {
   
   handleSearch = (searchValue) => {
     const { pageFlag } = this.state
-    window.location.href = "/idiomList?pageFlag="+ pageFlag +"&searchValue=" + searchValue
+    if (searchValue) {
+      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
+    } else {
+      // message.info("请输入需要查询的内容")
+      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
+    }
   }
   getResoureList = (pageFlag, qaId) => {
     let searchUrl = baseUrl;
@@ -194,7 +199,7 @@ export default class QaAnswer extends React.Component {
                 <div className="editMainTitle">
                   Chinese explanation
                 </div>
-                <input className="editCont" value={this.state.chinese} onChange={this.handleChangeChina}/>
+                <textarea rows={2} className="editText" value={this.state.chinese} onChange={this.handleChangeChina}/>
               </div>
             )}
 
@@ -202,7 +207,7 @@ export default class QaAnswer extends React.Component {
               <div className="editMainTitle">
                 English interpretation
               </div>
-              <input className="editCont" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
+              <textarea rows={2} className="editText" value={this.state.interpretation} onChange={this.handleChangeEnglish}/>
             </div>
             <div className="editItemSubmitCon">
               <div className="editItemSubmit hoverMo" onClick={this.handleClickSubmit}>

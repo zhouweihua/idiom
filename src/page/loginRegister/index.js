@@ -99,7 +99,7 @@ export default class LoginRegister extends React.Component {
   
   handleSendVer = () => {
     let self = this
-    const {verifyText, verifyFlag, userValue} = this.state
+    const {verifyFlag, userValue} = this.state
     if (userValue === null || userValue === "") {
       message.info('邮箱不能为空')
       return
@@ -170,7 +170,7 @@ export default class LoginRegister extends React.Component {
   }
 
   handleGoConfirm = () => {
-    const { pageFlag, userValue, verifyCode,verifyFlag, verifyText, pwValue, cpwValue, loginCheckboxFlag, registCheckboxFlag } = this.state
+    const { pageFlag, userValue, verifyCode, pwValue, cpwValue, loginCheckboxFlag, registCheckboxFlag } = this.state
     let params = {}
     switch (pageFlag) {
       case "login":

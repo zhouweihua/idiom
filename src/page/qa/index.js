@@ -52,9 +52,9 @@ export default class Qa extends React.Component {
     }
   }
 
-  hanldeGoAnswer= (qaId) => {
+  hanldeGoAnswer= (qaId, qaText) => {
     const { pageFlag } = this.state
-    window.location.href = "/qaAnswer?pageFlag="+ pageFlag +"&qaId=" + qaId
+    window.location.href = "/qaAnswer?pageFlag="+ pageFlag +"&qaId=" + qaId + "&qaText=" + qaText
   }
 
   getResoure = (pageFlag, page) => {
@@ -143,7 +143,7 @@ export default class Qa extends React.Component {
               {searchRes ? searchRes.map((search, searchIndex) => {
                   return (<div className="qaSecItem" key={pageFlag + searchIndex}>
                             <div className="qaListTitleIdiom">{search.idiom || search.buzzword}</div>
-                            <div className="qaListTitleBuzz hoverMo" onClick={() => this.hanldeGoAnswer(search.id)}>I want to answer</div>
+                            <div className="qaListTitleBuzz hoverMo" onClick={() => this.hanldeGoAnswer(search.id, search.idiom || search.buzzword)}>I want to answer</div>
                           </div>
                           )
                 }): null}

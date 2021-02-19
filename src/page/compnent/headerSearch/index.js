@@ -1,6 +1,6 @@
 import './index.less'
 import React from 'react'
-import { message } from 'antd'
+// import { message } from 'antd'
 
 export default class HeaderSearch extends React.Component {
   state = {

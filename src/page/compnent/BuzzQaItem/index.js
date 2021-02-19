@@ -19,11 +19,11 @@ export default class BuzzQaItem extends React.Component {
         <div className="editSubTitle">
           {search && search.buzzword ? search.buzzword : ''}
         </div>
-        <div className="editSubUser">
+        {/* <div className="editSubUser">
           User：allisfree4u@gmail.com
-        </div>
+        </div> */}
         <div className="buzzTitle">
-        {search && search.pinyin ? search.pinyin + ' ' + search.buzzword : ''}
+        {search && search.pinyin ? search.pinyin : ''}
         </div>
         <div className="buzzExplanation">
           {search && search.enInterpretation ? search.enInterpretation : ''}

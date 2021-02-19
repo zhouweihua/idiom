@@ -14,19 +14,19 @@ export default class IdiomQaItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit()
   }
   render() {
-    const { search, index } = this.props
+    const { search } = this.props
     return (
       <div className="idiomQaItem">
         <div className="editSubTitle">
         {search && search.idiom ? search.idiom : ''}
         </div>
-        <div className="editSubUser">
+        {/* <div className="editSubUser">
           User：allisfree4u@gmail.com
-        </div>
+        </div> */}
         <div className="idiomSymbols">
           <div className="textLeft">Chinese phonetic symbols：</div>
           <div className="textRight">
-            {search && search.pinyin ? search.pinyin + " " + search.idiom : ''}
+            {search && search.pinyin ? search.pinyin : ''}
           </div>
         </div>
         <div className="idiomExplanation">

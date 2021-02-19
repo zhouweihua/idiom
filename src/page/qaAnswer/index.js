@@ -18,6 +18,7 @@ export default class QaAnswer extends React.Component {
     pageFlag: 'idiom',
     userInfo:null,
     qaId:'',
+    qaText: '',
     symbols: '',
     pinyin: '',
     chinese: '',
@@ -35,9 +36,9 @@ export default class QaAnswer extends React.Component {
     }
   
     let qaId = query && query.qaId ? query.qaId : null
+    let qaText = query && query.qaText ? query.qaText : null
     if (qaId) {
-      this.setState({qaId})
-      // this.getResoure(pageFlag, qaId)
+      this.setState({qaId, qaText})
       this.getResoureList(pageFlag, qaId)
     } else {
       message.error('查询id有误')
@@ -99,73 +100,23 @@ export default class QaAnswer extends React.Component {
         // console.log(response.data)
         let searchRes = response.data.data
 
-        if (!searchRes) {
+        if (!searchRes || searchRes.length === 0) {
           message.info("未查询到该数据")
           return
-        }
-        if (pageFlag === "buzzword") {
-          this.setState({
-            symbols: searchRes.buzzword,
-            pinyin:searchRes.pinyin,
-            interpretation: searchRes.enInterpretation
-          })
         } else {
-          this.setState({
-            symbols: searchRes.idiom,
-            pinyin:searchRes.pinyin,
-            chinese: searchRes.chExplanation,
-            interpretation: searchRes.enInterpretation
-          })
-          
-        }
-      } else {
-        message.info(response.data.message)
-      }
-    })
-  }
-  
-  getResoure = (pageFlag, qaId) => {
-    let searchUrl = baseUrl;
-    if (pageFlag === "buzzword") {
-      searchUrl = searchUrl + '/api/buzzword/' + qaId
-    } else {
-      searchUrl = searchUrl + '/api/idiom/' + qaId
-    }
-    // 发起接口
-    axios.get(
-      searchUrl,
-      {
-        headers: {
-        'X-Timestamp': Date.parse( new Date() ).toString(),
-        'X-Nonce': guid()
-      }
-    })
-    .then((response) => {
-      if (response && response.data && response.data.code ==='112') {
-        window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
-        return
-      }
-      if (response && response.data && response.data.code ==='000') {
-        // console.log(response.data)
-        let searchRes = response.data.data
-        if (!searchRes) {
-          message.info("未查询到该数据")
-          return
-        }
-        if (pageFlag === "buzzword") {
-          this.setState({
-            symbols: searchRes.buzzword,
-            pinyin:searchRes.pinyin,
-            interpretation: searchRes.enInterpretation
-          })
-        } else {
-          this.setState({
-            symbols: searchRes.idiom,
-            pinyin:searchRes.pinyin,
-            chinese: searchRes.chExplanation,
-            interpretation: searchRes.enInterpretation
-          })
-          
+
+          if (pageFlag === "buzzword") {
+            this.setState({
+              symbols: searchRes[0].buzzword,
+              searchRes
+            })
+          } else {
+            this.setState({
+              symbols: searchRes[0].idiom,
+              searchRes
+            })
+            
+          }
         }
       } else {
         message.info(response.data.message)
@@ -191,12 +142,12 @@ export default class QaAnswer extends React.Component {
   }
 
   getShowSectionTitle = () => {
-    const { pageFlag, userInfo, symbols, pinyin } = this.state
+    const { pageFlag, userInfo, symbols, pinyin, qaText } = this.state
     return (
       <div className="idiomQaAnswerTitleCon">
         <div className="idiomQaAnswerTitle">
           <div className="editName">
-            {symbols}
+            {qaText}
           </div>
           <div className="editQaCon">
             <div className="editSubTitle">
@@ -309,6 +260,11 @@ export default class QaAnswer extends React.Component {
     )
   }
 
+  handleGoQA = () => {
+    let qaUrl = "./qa?pageFlag=" + this.state.pageFlag
+    window.location.href = qaUrl
+  }
+
   render() {
     return (
       <div className="idiomListHome">
@@ -317,6 +273,7 @@ export default class QaAnswer extends React.Component {
           qaStyle={"idiomLinkItem act hoverMo"}
           handleGoIdiom={this.handleGoIdiom}
           handleGoBuzzword={this.handleGoBuzzword}
+          handleGoQA={this.handleGoQA}
         />
         <HeaderSearch
           handleSearch={this.handleSearch}

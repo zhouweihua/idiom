@@ -8,7 +8,7 @@ import HeaderSearch from "../compnent/headerSearch";
 import IdiomItem from "../compnent/IdiomItem";
 import BuzzItem from "../compnent/BuzzItem";
 
-import { message, Modal } from 'antd';
+import { message } from 'antd';
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'

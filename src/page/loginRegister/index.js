@@ -151,7 +151,7 @@ export default class LoginRegister extends React.Component {
             if (response && response.data && response.data.code ==='000') {
               let modalAnswer = Modal.info({
                 title: 'Info',
-                content: '发送验证码成功',
+                content: 'Verification code sent successfully, please go to the mailbox to check',
                 onOk:()=>{modalAnswer.destroy()}
               });
             } else {
@@ -225,8 +225,10 @@ export default class LoginRegister extends React.Component {
               return
             }
             if (response && response.data && response.data.code ==='000') {
-              message.info('注册成功')
-              window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+              message.info(userValue + ' successfully registered')
+              setTimeout(() => {
+                window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+              },100);
               return
             } else {
               message.info(response.data.message)

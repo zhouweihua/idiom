@@ -201,12 +201,22 @@ export default class QaAnswer extends React.Component {
       params.id = qaId
       params.pinyin = pinyin
       params.enInterpretation = interpretation
+      if (pinyin !== '' && interpretation!== '') {
+      } else {
+        message.info("Please revise before submitting")
+        return
+      }
     } else {
       searchUrl = searchUrl + '/api/idiom/' + qaId
       params.id = qaId
       params.pinyin = pinyin
       params.chExplanation = chinese
       params.enInterpretation = interpretation
+      if (pinyin !== '' && chinese !== '' && interpretation!== '') {
+      } else {
+        message.info("Please revise before submitting")
+        return
+      }
     }
     // 发起接口
     axios.put(

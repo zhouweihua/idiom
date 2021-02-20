@@ -21,7 +21,7 @@ export default class IdiomQaItem extends React.Component {
         {qaText}
         </div>
         <div className="editSubUser">
-        {search && search.email ? search.email : ''}
+        {search && search.email ? 'user: ' + search.email : ''}
         </div>
         <div className="idiomSymbols">
           <div className="textLeft">Chinese phonetic symbols：</div>

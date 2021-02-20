@@ -20,7 +20,7 @@ export default class BuzzQaItem extends React.Component {
           {qaText}
         </div>
         <div className="editSubUser">
-          {search && search.email ? search.email : ''}
+          {search && search.email ? 'user: ' + search.email : ''}
         </div>
         <div className="buzzTitle">
         {search && search.pinyin ? search.pinyin + " " + qaText : ''}

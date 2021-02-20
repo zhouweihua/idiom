@@ -41,8 +41,8 @@ export default class Header extends React.Component {
         <div className="headerContain"> 
           {userInfo ? (
             <div className="login">
-              <div className="userHeader"/>
-          <div className="email hoverMo" onClick={this.handleGoUserCenter}>{userInfo.email}</div>/
+              <div className="userHeader hoverMo" onClick={this.handleGoUserCenter}/>
+              <div className="email hoverMo" onClick={this.handleGoUserCenter}>{userInfo.email}</div>/
               <div className="userLogout hoverMo" onClick={this.handleLogout}> Sign out</div>
             </div>
           ) : (

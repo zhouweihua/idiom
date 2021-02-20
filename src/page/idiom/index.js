@@ -37,7 +37,7 @@ export default class Idiom extends React.Component {
       if (e && e.keyCode === 13) { //回车键的键值为13
         this.handleSearch()
       }
-  };
+    };
   }
 
   handleGoIdiom = () => {

@@ -185,7 +185,7 @@ export default class QaAnswer extends React.Component {
       params.id = qaId
       params.pinyin = pinyin
       params.enInterpretation = interpretation
-      if (pinyin !== '' && interpretation!== '') {
+      if (pinyin && pinyin !== '' && interpretation && interpretation!== '') {
       } else {
         message.info("Please revise before submitting")
         return
@@ -196,7 +196,7 @@ export default class QaAnswer extends React.Component {
       params.pinyin = pinyin
       params.chExplanation = chinese
       params.enInterpretation = interpretation
-      if (pinyin !== '' && chinese !== '' && interpretation!== '') {
+      if (pinyin && pinyin !== '' && chinese && chinese !== '' && interpretation && interpretation!== '') {
       } else {
         message.info("Please revise before submitting")
         return

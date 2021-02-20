@@ -13,7 +13,7 @@ export default class BuzzItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit(itemId)
   }
   render() {
-    const { search, index } = this.props
+    const { search, index, noEdit } = this.props
     let style = "buzzDeatailItem"
     if (index === 0) {
       style = style + " first"
@@ -27,7 +27,7 @@ export default class BuzzItem extends React.Component {
         <div className="buzzExplanation">
           {search && search.enInterpretation ? search.enInterpretation : ''}
         </div>
-        <div className="buzzEdit hoverMo" onClick={() => this.handleClickEdit(search.id)}>Edit</div>
+        {noEdit ? null : <div className="buzzEdit hoverMo" onClick={() => this.handleClickEdit(search.id)}>Edit</div>}
       </div>
     )
   }

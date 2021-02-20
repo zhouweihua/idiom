@@ -14,7 +14,7 @@ export default class IdiomItem extends React.Component {
     this.props.handleClickEdit && this.props.handleClickEdit()
   }
   render() {
-    const { search, index } = this.props
+    const { search, index,noEdit } = this.props
     let style = "idiomDeatailItem"
     if (index === 0) {
       style = style + " first"
@@ -35,7 +35,7 @@ export default class IdiomItem extends React.Component {
           <div className="textLeft">English interpretation：</div>
           <div className="textRight">{search && search.enInterpretation ? search.enInterpretation: ''}</div>
         </div>
-        <div className="idiomEdit hoverMo" onClick={this.handleClickEdit}>Edit</div>
+        {noEdit ? null : <div className="idiomEdit hoverMo" onClick={this.handleClickEdit}>Edit</div>}
       </div> 
     )
   }

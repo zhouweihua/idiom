@@ -16,7 +16,13 @@ export default class HeaderSearch extends React.Component {
     }
   }
   componentDidMount =() =>{
-    
+    //回车事件
+    document.onkeydown = (event) => {
+      var e = event || window.event;
+      if (e && e.keyCode === 13) { //回车键的键值为13
+        this.handleSearch()
+      }
+    };
   }
 
   handleChangeSearchValue = e => {

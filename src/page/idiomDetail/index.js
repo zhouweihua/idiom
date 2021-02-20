@@ -105,7 +105,7 @@ export default class IdiomDetail extends React.Component {
       return (
         <div className="idiomDeatailsCon">
           <div className="idiomDeatails">
-            <BuzzItem search={searchRes} index={0} handleClickEdit={this.handleClickEdit}/>
+            <BuzzItem search={searchRes} index={0} noEdit handleClickEdit={this.handleClickEdit}/>
           </div>
         </div>
       )
@@ -113,7 +113,7 @@ export default class IdiomDetail extends React.Component {
     return (
       <div className="idiomDeatailsCon">
         <div className="idiomDeatails">
-          <IdiomItem search={searchRes} index={0} handleClickEdit={this.handleClickEdit}/>
+          <IdiomItem search={searchRes} index={0} noEdit handleClickEdit={this.handleClickEdit}/>
         </div>
       </div>
     )

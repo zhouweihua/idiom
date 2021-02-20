@@ -44,8 +44,8 @@ export default class idiomList extends React.Component {
     if (pageFlag ==="buzzword") {
       this.setState({
         pageFlag: 'buzzword',
-        idiomStyle: "idiomLinkItem",
-        buzzwordStyle: "idiomLinkItem act",
+        idiomStyle: "idiomLinkItem hoverMo",
+        buzzwordStyle: "idiomLinkItem act hoverMo",
         placeholder: 'Enter Your Buzzwords',
       })
     }
@@ -61,18 +61,6 @@ export default class idiomList extends React.Component {
   }
 
   handleGoIdiom = () => {
-    // console.log("idiom")
-    // this.setState({
-    //   pageFlag: 'idiom',
-    //   idiomStyle: "idiomLinkItem act hoverMo",
-    //   buzzwordStyle: "idiomLinkItem hoverMo",
-    //   placeholder: 'Enter Your Idiom',
-    //   searchRes: [],
-    //   searchFlag: 0, // 1搜索结束 
-    // })
-
-    // this.getResoure('idiom', this.state.searchValue,1);
-
     window.location.href = "./?pageFlag=idiom"
   }
   
@@ -80,8 +68,8 @@ export default class idiomList extends React.Component {
     // console.log("buzzword")
     this.setState({
       pageFlag: 'buzzword',
-      idiomStyle: "idiomLinkItem",
-      buzzwordStyle: "idiomLinkItem act",
+      idiomStyle: "idiomLinkItem hoverMo",
+      buzzwordStyle: "idiomLinkItem act hoverMo",
       placeholder: 'Enter Your Buzzwords',
       searchRes: [],
     })

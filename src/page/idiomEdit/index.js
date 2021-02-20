@@ -39,8 +39,8 @@ export default class IdiomEdit extends React.Component {
     if (pageFlag ==="buzzword") {
       this.setState({
         pageFlag: 'buzzword',
-        idiomStyle: "idiomLinkItem",
-        buzzwordStyle: "idiomLinkItem act",
+        idiomStyle: "idiomLinkItem hoverMo",
+        buzzwordStyle: "idiomLinkItem act hoverMo",
         placeholder: 'Enter Your Buzzwords',
       })
     }

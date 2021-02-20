@@ -99,25 +99,9 @@ export default class QaAnswer extends React.Component {
       if (response && response.data && response.data.code ==='000') {
         // console.log(response.data)
         let searchRes = response.data.data
-
-        if (!searchRes || searchRes.length === 0) {
-          message.info("未查询到该数据")
-          return
-        } else {
-
-          if (pageFlag === "buzzword") {
-            this.setState({
-              symbols: searchRes[0].buzzword,
-              searchRes
-            })
-          } else {
-            this.setState({
-              symbols: searchRes[0].idiom,
-              searchRes
-            })
-            
-          }
-        }
+        this.setState({
+          searchRes
+        })
       } else {
         message.info(response.data.message)
       }
@@ -142,7 +126,7 @@ export default class QaAnswer extends React.Component {
   }
 
   getShowSectionTitle = () => {
-    const { pageFlag, userInfo, symbols, pinyin, qaText } = this.state
+    const { pageFlag, userInfo, pinyin, qaText } = this.state
     return (
       <div className="idiomQaAnswerTitleCon">
         <div className="idiomQaAnswerTitle">
@@ -151,7 +135,7 @@ export default class QaAnswer extends React.Component {
           </div>
           <div className="editQaCon">
             <div className="editSubTitle">
-              {symbols}
+              {qaText}
             </div>
             <div className="editSubUser">
               {userInfo && userInfo.email ? "User：" + userInfo.email: ''}
@@ -247,13 +231,13 @@ export default class QaAnswer extends React.Component {
   }
 
   getShowSectionBody = () => {
-    const { pageFlag, searchRes } = this.state
+    const { pageFlag, searchRes, qaText } = this.state
     if (pageFlag === "buzzword") {
       return (
         <div className="idiomQaAnswerCon">
           <div className="idiomQaAnswer">
             {searchRes && searchRes.length > 0 && searchRes.map((search, buzzIndex) => {
-              return <BuzzQaItem  search={search} key={"buzz" + buzzIndex} /> 
+              return <BuzzQaItem  search={search} qaText={qaText} key={"buzz" + buzzIndex} /> 
             })}
           </div>
         </div>
@@ -263,7 +247,7 @@ export default class QaAnswer extends React.Component {
       <div className="idiomQaAnswerCon">
         <div className="idiomQaAnswer">
         {searchRes && searchRes.length > 0 && searchRes.map((search,idiomInex) => {
-            return <IdiomQaItem search={search} key={"idio" + idiomInex} /> 
+            return <IdiomQaItem search={search} qaText={qaText} key={"idio" + idiomInex} /> 
           })}
         </div>
       </div>

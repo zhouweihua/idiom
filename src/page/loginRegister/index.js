@@ -227,7 +227,29 @@ export default class LoginRegister extends React.Component {
             if (response && response.data && response.data.code ==='000') {
               message.info(userValue + ' successfully registered')
               setTimeout(() => {
-                window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+                params.email = userValue
+                params.password = pwValue
+                axios.post(
+                  baseUrl + '/api/user/login',
+                  params,
+                  {
+                    headers: {
+                    'X-Timestamp': Date.parse( new Date() ).toString(),
+                    'X-Nonce': guid()
+                  }
+                })
+                .then((response) => {
+                  if (response && response.data && response.data.code ==='112') {
+                    window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(window.location.href)
+                    return
+                  }
+                  if (response && response.data && response.data.code ==='000') {
+                    window.localStorage.setItem("userInfo", JSON.stringify(response.data.data))
+                    window.location.href = this.state.redirUrl
+                  } else {
+                    message.info(response.data.message)
+                  }
+                })
               },100);
               return
             } else {

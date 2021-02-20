@@ -250,7 +250,7 @@ export default class LoginRegister extends React.Component {
                     message.info(response.data.message)
                   }
                 })
-              },100);
+              },2000);
               return
             } else {
               message.info(response.data.message)

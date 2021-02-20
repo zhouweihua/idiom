@@ -14,8 +14,8 @@ export default class Qa extends React.Component {
   state = {
     reflashFlag: false,
     pageFlag: 'idiom',
-    idiomStyle: "qaListTitleIdiom act",
-    buzzwordStyle: "qaListTitleBuzz",
+    idiomStyle: "qaListTitleIdiom act hoverMo",
+    buzzwordStyle: "qaListTitleBuzz hoverMo",
     searchRes: [],
     searchTotal: 0,
     current:1
@@ -28,8 +28,8 @@ export default class Qa extends React.Component {
     if (pageFlag ==="buzzword") {
       this.setState({
         pageFlag: 'buzzword',
-        idiomStyle: "qaListTitleIdiom",
-        buzzwordStyle: "qaListTitleBuzz act",
+        idiomStyle: "qaListTitleIdiom hoverMo",
+        buzzwordStyle: "qaListTitleBuzz act hoverMo",
       })
     }
     this.getResoure(pageFlag, 1)
@@ -101,14 +101,14 @@ export default class Qa extends React.Component {
     if (pageFlag ==="buzzword") {
       this.setState({
         pageFlag: 'buzzword',
-        idiomStyle: "qaListTitleIdiom",
-        buzzwordStyle: "qaListTitleBuzz act",
+        idiomStyle: "qaListTitleIdiom hoverMo",
+        buzzwordStyle: "qaListTitleBuzz act hoverMo",
       })
     } else {
       this.setState({
         pageFlag: 'idiom',
-        idiomStyle: "qaListTitleIdiom act",
-        buzzwordStyle: "qaListTitleBuzz",
+        idiomStyle: "qaListTitleIdiom act hoverMo",
+        buzzwordStyle: "qaListTitleBuzz hoverMo",
       })
     }
     this.getResoure(pageFlag, 1)

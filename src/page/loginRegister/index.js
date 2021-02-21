@@ -396,7 +396,7 @@ export default class LoginRegister extends React.Component {
 
 
               {pageFlag === "forgot" ? <div className="lrInformationButtonItem">
-                <div className="lrInformationButton hoverMo" onClick={this.handleGoConfirm}>Reset</div>
+                <div className="lrInformationButton hoverMo" onClick={this.handleGoConfirm}>Submit</div>
               </div> : null}
             </div>
           </div>

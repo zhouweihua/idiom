@@ -1,6 +1,6 @@
 import './index.less'
 import React from 'react'
-// import { message } from 'antd'
+import { message } from 'antd'
 
 export default class HeaderSearch extends React.Component {
   state = {
@@ -37,8 +37,7 @@ export default class HeaderSearch extends React.Component {
     if (searchValue) {
       this.props.handleSearch && this.props.handleSearch(searchValue)
     } else {
-      // message.info("请输入需要查询的内容")
-      this.props.handleSearch && this.props.handleSearch("")
+      message.info("Please enter what you are looking for")
     }
   }
 

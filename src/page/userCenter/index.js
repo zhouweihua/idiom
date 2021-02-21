@@ -419,7 +419,7 @@ export default class UserCenter extends React.Component {
           <div className="userCenterDiff">
             <div className={questionStyle} onClick={() => this.handleChangeTab("question")}>My question</div>
             <div className={answerStyle} onClick={() => this.handleChangeTab("answer")}>My answer</div>
-            <div className={informationStyle} onClick={() => this.handleChangeTab("information")}>My information</div>
+            <div className={informationStyle} onClick={() => this.handleChangeTab("information")}>My info</div>
           </div>
         </div>
         {this.getShowSectionBody()}

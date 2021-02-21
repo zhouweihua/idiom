@@ -136,8 +136,7 @@ export default class IdiomDetail extends React.Component {
     if (searchValue) {
       window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
-      // message.info("请输入需要查询的内容")
-      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
+      message.info("Please enter what you are looking for")
     }
   }
 

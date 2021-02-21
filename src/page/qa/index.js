@@ -48,7 +48,7 @@ export default class Qa extends React.Component {
     if (searchValue) {
       window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
-      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
+      message.info("Please enter what you are looking for")
     }
   }
 

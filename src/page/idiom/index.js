@@ -1,7 +1,7 @@
 import './index.less'
 import React from 'react'
 import qs from 'qs'
-// import { message } from 'antd'
+import { message } from 'antd'
 import Header from "../compnent/header";
 import Footer from "../compnent/footer";
 
@@ -75,8 +75,7 @@ export default class Idiom extends React.Component {
     if (searchValue) {
       window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue=" + searchValue
     } else {
-      // message.info("请输入需要查询的内容")
-      window.location.href = "/idiomList?searchMode=full&pageFlag="+ pageFlag +"&searchValue="
+      message.info("Please enter what you are looking for")
     }
   }
 

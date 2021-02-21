@@ -101,11 +101,10 @@ export default class LoginRegister extends React.Component {
     let self = this
     const {verifyFlag, userValue} = this.state
     if (userValue === null || userValue === "") {
-      message.info('邮箱不能为空')
+      message.info('Mailbox cannot be empty')
       return
     }
     if (verifyFlag) {
-
       let modalVerifyCode = Modal.info({
         title: 'Info',
         content: 'The verification code has been sent to your email, please check and input to complete the registration',
@@ -163,8 +162,6 @@ export default class LoginRegister extends React.Component {
         }
       });
   
-    } else {
-      message.info("正在倒计时")
     }
 
   }
@@ -200,7 +197,7 @@ export default class LoginRegister extends React.Component {
             }
           })
         } else {
-          message.info("请同意相关条款")
+          message.info("Please agree to the terms")
         }
         return;
       case "register":
@@ -257,17 +254,17 @@ export default class LoginRegister extends React.Component {
             }
           })
         } else {
-          message.info("请同意相关注册条款")
+          message.info("Please agree to the terms")
         }
         return;
       case "forgot":
         if (cpwValue !== pwValue) {
-          message.info("两次输入密码不一致")
+          message.info("The passwords you entered are inconsistent",2000)
         }
         params.email = userValue
         params.newPassword = pwValue
         params.code = verifyCode
-        axios.post(
+        axios.put(
           baseUrl + '/api/user/resetpwd',
           params,
           {
@@ -283,8 +280,10 @@ export default class LoginRegister extends React.Component {
             return
           }
           if (response && response.data && response.data.code ==='000') {
-            message.info('重置成功')
-            window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+            message.info('Password reset successfully, please log in',2000)
+            setTimeout(()=>{
+              window.location.href = "./loginRegister?pageFlag=login&redirUrl="+encodeURIComponent(this.state.redirUrl)
+            },2000)
             return
           } else {
             message.info(response.data.message)

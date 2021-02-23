@@ -219,7 +219,7 @@ export default class IdiomEdit extends React.Component {
             
             <div className="editItem">
               <div className="editMainTitle">
-                Chinese phonetic symbols
+                Chinese characters and Pinyin
               </div>
               <input className="editCont" value={this.state.pinyin + " " + this.state.symbols} disabled/>
             </div>

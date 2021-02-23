@@ -22,7 +22,7 @@ export default class IdiomItem extends React.Component {
     return (
       <div className={style}>
         <div className="idiomSymbols">
-          <div className="textLeft">Chinese phonetic symbols：</div>
+          <div className="textLeft">Chinese characters and Pinyin：</div>
           <div className="textRight">
            {search && search.pinyin ? search.pinyin + " " + search.idiom : ''}
           </div>

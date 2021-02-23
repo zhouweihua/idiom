@@ -141,7 +141,7 @@ export default class QaAnswer extends React.Component {
             </div>
             <div className="editItem">
               <div className="editMainTitle">
-                Chinese phonetic symbols
+                Pinyin of Chinese characters
               </div>
               <input className="editCont" value={pinyin} onChange={this.handleChangepinyin}/>
             </div>

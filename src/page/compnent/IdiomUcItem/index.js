@@ -21,7 +21,7 @@ export default class IdiomUcItem extends React.Component {
           {answer.name}
         </div>
         <div className="idiomSymbols">
-          <div className="textLeft">Chinese phonetic symbols：</div>
+          <div className="textLeft">Chinese characters and Pinyin：</div>
           <div className="textRight">
             {answer.pinyin + " " + answer.name}
           </div>

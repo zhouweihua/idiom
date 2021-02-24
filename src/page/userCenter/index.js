@@ -25,7 +25,8 @@ export default class UserCenter extends React.Component {
     tel: '',
     face: '',
     profile: '',
-    editShow: true
+    editShow: true,
+    limit:10
   }
 
   componentWillMount = () =>{
@@ -93,8 +94,9 @@ export default class UserCenter extends React.Component {
     })
   }
   getUserQuestion = page => {
+    let limit= this.state.limit
     axios.get(
-      baseUrl + '/api/user/questions?limit=10&page=' +page,
+      baseUrl + '/api/user/questions?limit='+limit+'&page=' +page,
       {
         headers: {
         'X-Timestamp': Date.parse( new Date() ).toString(),
@@ -127,8 +129,9 @@ export default class UserCenter extends React.Component {
   }
 
   getUserAnswer = page => {
+    let limit= this.state.limit
     axios.get(
-      baseUrl + '/api/user/answers?limit=10&page=' +page,
+      baseUrl + '/api/user/answers?limit='+limit+'&page=' +page,
       {
         headers: {
         'X-Timestamp': Date.parse( new Date() ).toString(),
@@ -171,6 +174,18 @@ export default class UserCenter extends React.Component {
       default:
         return null;
     }
+  }
+
+  onShowSizeChange=(current, pageSize)=> {
+    // console.log(current, pageSize);
+    // onShowSizeChange={this.onShowSizeChange}
+    this.setState({
+      limit:pageSize,
+      current:1
+    })
+    setTimeout(()=>{
+      this.onPageChange(1);
+    },100)
   }
 
   getShowSectionBody = () => {
@@ -430,7 +445,8 @@ export default class UserCenter extends React.Component {
                 <Pagination
                   total={this.state.searchTotal}
                   current={this.state.current}
-                  showQuickJumper
+                  pageSize={this.state.limit}
+                  showSizeChanger={false}
                   onChange={current => this.onPageChange(current)}
                 />
             </div>

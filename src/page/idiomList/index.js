@@ -28,7 +28,7 @@ export default class idiomList extends React.Component {
     searchRes: [],
     searchTotal: 0,
     current:1,
-
+    limit:10
   }
   componentWillMount =() =>{
     let queryObject = window.location.search
@@ -85,10 +85,11 @@ export default class idiomList extends React.Component {
   getResoure = (pageFlag, searchValue, page) => {
     let searchUrl = baseUrl;
     let searchMode = this.state.searchMode
+    let limit= this.state.limit
     if (pageFlag === "buzzword") {
-      searchUrl = searchUrl + '/api/buzzword/search?limit=10&mode='+searchMode+'&key='+searchValue + '&page=' +page
+      searchUrl = searchUrl + '/api/buzzword/search?limit='+limit+'&mode='+searchMode+'&key='+searchValue + '&page=' +page
     } else {
-      searchUrl = searchUrl + '/api/idiom/search?limit=10&mode='+searchMode+'&key=' + searchValue + '&page=' +page
+      searchUrl = searchUrl + '/api/idiom/search?limit='+limit+'&mode='+searchMode+'&key=' + searchValue + '&page=' +page
     }
     this.setState({
       searchFlag: 0
@@ -237,6 +238,18 @@ export default class idiomList extends React.Component {
     this.getResoure(this.state.pageFlag, this.state.searchValue, current);
   }
 
+  onShowSizeChange=(current, pageSize)=> {
+    // console.log(current, pageSize);
+    // onShowSizeChange={this.onShowSizeChange}
+    this.setState({
+      limit:pageSize,
+      current:1
+    })
+    setTimeout(()=>{
+      this.getResoure(this.state.pageFlag, this.state.searchValue, 1);
+    },100)
+  }
+
   render() {
     const { idiomStyle, buzzwordStyle, searchRes, searchValue, searchFlag } = this.state
     return (
@@ -260,7 +273,7 @@ export default class idiomList extends React.Component {
               <Pagination
                 total={this.state.searchTotal}
                 current={this.state.current}
-                showQuickJumper
+                showSizeChanger={false}
                 onChange={current => this.onPageChange(current)}
               />
             </div>

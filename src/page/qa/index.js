@@ -18,7 +18,8 @@ export default class Qa extends React.Component {
     buzzwordStyle: "qaListTitleBuzz hoverMo",
     searchRes: [],
     searchTotal: 0,
-    current:1
+    current:1,
+    limit:10
   }
 
   componentWillMount =() =>{
@@ -59,10 +60,11 @@ export default class Qa extends React.Component {
 
   getResoure = (pageFlag, page) => {
     let searchUrl = baseUrl;
+    let limit= this.state.limit
     if (pageFlag === "buzzword") {
-      searchUrl = searchUrl + '/api/buzzword/questions?limit=10&page=' + page
+      searchUrl = searchUrl + '/api/buzzword/questions?limit='+limit+'&page=' + page
     } else {
-      searchUrl = searchUrl + '/api/idiom/questions?limit=10&page=' + page
+      searchUrl = searchUrl + '/api/idiom/questions?limit='+limit+'&page=' + page
     }
     // 发起接口
     axios.get(
@@ -117,6 +119,17 @@ export default class Qa extends React.Component {
   onPageChange = current => {
     this.getResoure(this.state.pageFlag, current);
   }
+  onShowSizeChange=(current, pageSize)=> {
+    // onShowSizeChange={this.onShowSizeChange}
+    // console.log(current, pageSize);
+    this.setState({
+      limit:pageSize,
+      current:1
+    })
+    setTimeout(()=>{
+      this.getResoure(this.state.pageFlag, 1);
+    },100)
+  }
 
   render() {
     const { idiomStyle, buzzwordStyle, pageFlag, searchRes } = this.state
@@ -156,7 +169,8 @@ export default class Qa extends React.Component {
               <Pagination
                 total={this.state.searchTotal}
                 current={this.state.current}
-                showQuickJumper
+                pageSize={this.state.limit}
+                showSizeChanger={false}
                 onChange={current => this.onPageChange(current)}
               />
           </div>

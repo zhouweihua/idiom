@@ -7,7 +7,7 @@ import HeaderSearch from "../compnent/headerSearch";
 import Nav from "../compnent/nav";
 import IdiomQaItem from "../compnent/IdiomQaItem";
 import BuzzQaItem from "../compnent/BuzzQaItem";
-import { message, Modal } from 'antd';
+import { Pagination, message, Modal } from 'antd';
 
 import axios from 'axios'
 import { guid, baseUrl } from '../../util/commonUtil'
@@ -23,6 +23,9 @@ export default class QaAnswer extends React.Component {
     pinyin: '',
     chinese: '',
     interpretation: '',
+    searchTotal: 0,
+    current:1,
+    limit:5
   }
 
   componentWillMount =() =>{
@@ -39,7 +42,7 @@ export default class QaAnswer extends React.Component {
     let qaText = query && query.qaText ? query.qaText : null
     if (qaId) {
       this.setState({qaId, qaText})
-      this.getResoureList(pageFlag, qaId)
+      this.getResoureList(pageFlag, qaId, 1)
     } else {
       message.error('查询id有误')
     }
@@ -74,12 +77,13 @@ export default class QaAnswer extends React.Component {
       message.info("Please enter what you are looking for")
     }
   }
-  getResoureList = (pageFlag, qaId) => {
+  getResoureList = (pageFlag, qaId, page) => {
     let searchUrl = baseUrl;
+    let limit= this.state.limit
     if (pageFlag === "buzzword") {
-      searchUrl = searchUrl + '/api/buzzword/candidate/' + qaId
+      searchUrl = searchUrl + '/api/buzzword/candidate/' + qaId + '?limit='+limit+'&page=' + page
     } else {
-      searchUrl = searchUrl + '/api/idiom/candidate/' + qaId
+      searchUrl = searchUrl + '/api/idiom/candidate/' + qaId + '?limit='+limit+'&page=' + page
     }
     // 发起接口
     axios.get(
@@ -99,7 +103,9 @@ export default class QaAnswer extends React.Component {
         // console.log(response.data)
         let searchRes = response.data.data
         this.setState({
-          searchRes
+          searchRes,
+          searchTotal:response.data.total,
+          current: response.data.page,
         })
       } else {
         message.info(response.data.message)
@@ -258,6 +264,9 @@ export default class QaAnswer extends React.Component {
     window.location.href = qaUrl
   }
 
+  onPageChange = current => {
+    this.getResoureList(this.state.pageFlag, this.state.qaId,current);
+  }
   render() {
     return (
       <div className="idiomListHome">
@@ -279,6 +288,19 @@ export default class QaAnswer extends React.Component {
         </div>
         {this.getShowSectionTitle()}
         {this.getShowSectionBody()}
+
+
+        <div className="qaAnswerPaginationCon">
+          <div className="qaAnswerPagination">
+              <Pagination
+                total={this.state.searchTotal}
+                current={this.state.current}
+                pageSize={this.state.limit}
+                showSizeChanger={false}
+                onChange={current => this.onPageChange(current)}
+              />
+          </div>
+        </div>
         <Footer />
       </div>
     )

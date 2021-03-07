@@ -273,6 +273,7 @@ export default class idiomList extends React.Component {
               <Pagination
                 total={this.state.searchTotal}
                 current={this.state.current}
+                pageSize={this.state.limit}
                 showSizeChanger={false}
                 onChange={current => this.onPageChange(current)}
               />
